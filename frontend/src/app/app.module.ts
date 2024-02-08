@@ -3,11 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './component/account/login/login.component';
-import { CreateAccountComponent } from './component/account/create-account/create-account.component';
-import { HomeComponent } from './component/home/home.component';
-import { AuthenticationComponent } from './component/authentication/authentication.component';
+import { LoginComponent } from './account/login/login.component';
+import { CreateAccountComponent } from './account/create-account/create-account.component';
+import { HomeComponent } from './layout/home/home.component';
+import { AuthenticationComponent } from './layout/authentication/authentication.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +18,7 @@ import { AuthenticationComponent } from './component/authentication/authenticati
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
