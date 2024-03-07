@@ -48,18 +48,18 @@
   
   .input-login{
     width:80%;
-    margin-left: 10%; /* Adicione margem para espaçamento */
-    margin-right: 10%; /* Adicione margem para espaçamento */
-    margin-bottom: 5%; /* Adicione margem para espaçamento */
-    margin-top: 2.5%; /* Adicione margem para espaçamento */
+    margin-left: 10%; 
+    margin-right: 10%;
+    margin-bottom: 5%;
+    margin-top: 2.5%; 
   }
   
   .div-checkbox{
     display: flex;
     flex-direction: row;
     justify-content: left;
-    margin-left: 10%; /* Adicione margem para espaçamento */
-    margin-right: 10%; /* Adicione margem para espaçamento */
+    margin-left: 10%;
+    margin-right: 10%;
     color: #747474;
     margin-bottom: 5%;
   }
@@ -69,6 +69,8 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 8%;
+    margin-right: 10%;
+    margin-left: 10%;
   }
   .link{
     text-decoration: none;
@@ -111,11 +113,11 @@
   }
   
   .line-text:before {
-    margin-right: 1em;
-    margin-left: 4em;
+    margin-right: 2%;
+    margin-left: 10%;
   }
   
   .line-text:after {
-    margin-right: 4em;
-    margin-left: 1em;
+    margin-right: 10%;
+    margin-left: 2%;
   }

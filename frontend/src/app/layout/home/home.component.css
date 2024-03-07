@@ -1,0 +1,16 @@
+.background{
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 70%, rgba(74,66,124,1) 90%, rgba(74,66,124,1) 100%);
+    background-repeat: no-repeat;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-top: 50px;
+}
+
+.navbar {
+    &.bg-purple {
+      background-color: #800080; 
+    }
+}
+  
