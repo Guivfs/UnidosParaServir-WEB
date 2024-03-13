@@ -1,6 +1,12 @@
 <div class="container">
   <div class="div-logo">
-    <img src="../../../assets/logo.png" alt="logo" class="logo"/>
+    <img
+      src="../../../assets/logo.png"
+      alt="logo"
+      width="10%"
+      height="10%"
+      class="logo"
+    />
   </div>
 
   <div class="div-login">
@@ -9,33 +15,63 @@
         <h5 class="escrita">Entrar com</h5>
       </div>
       <div class="div-login-botoes">
-        <button class="botao-login"><img src="../../../assets/google.png" width="25px"></button>
-        <button class="botao-login"><img src="../../../assets/facebook.png" width="25px"></button>
-        <button class="botao-login"><img src="../../../assets/apple.png" width="26px" style="padding-bottom: 1px;"></button>
+        <button class="botao-login">
+          <img src="../../../assets/google.png" width="25px" />
+        </button>
+        <button class="botao-login">
+          <img src="../../../assets/facebook.png" width="25px" />
+        </button>
+        <button class="botao-login">
+          <img
+            src="../../../assets/apple.png"
+            width="26px"
+            style="padding-bottom: 1px"
+          />
+        </button>
       </div>
 
-      <div class="line-text"><span><b class="escrita">ou</b></span></div>
-
-      <div class="input-group input-login">
-        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-        <input type="text" class="form-control border" placeholder="Usuario" aria-label="Usuario">
-      </div>
-      <div class="input-group input-login">
-        <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-        <input type="text" class="form-control border" placeholder="Senha" aria-label="Senha">
+      <div class="line-text">
+        <span><b class="escrita">ou</b></span>
       </div>
 
-      <div class="div-checkbox">
-        <input type="checkbox" style="margin-right: 2%;">
-        <label>Termos e condições</label>
-      </div>
+      <form [formGroup]="formLogin">
+        <div class="input-group input-login">
+          <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+          <input
+            type="text"
+            class="form-control border"
+            placeholder="Usuario"
+            aria-label="Usuario"
+            formControlName="username"
+          />
+          <div class="form-text text-danger col-12" *ngIf="isFormControlInvalid('username')">O usuário deve conter pelo menos 6 caracteres.</div>
+        </div>
+        <div class="input-group input-login">
+          <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+          <input
+            type="text"
+            class="form-control border"
+            placeholder="Senha"
+            aria-label="Senha"
+            formControlName="password"
+          />
+          <div class="form-text text-danger col-12" *ngIf="isFormControlInvalid('password')">A senha deve conter pelo menos 6 caracteres.</div>
+        </div>
 
-      <div class="d-grid d-md-block div-botao-login text-center">
-        <a href=""><button class="btn btn-color" type="button">Entrar</button></a>
-      </div>
+        <div class="div-checkbox">
+            <input type="checkbox" style="margin-right: 2%" formControlName="termsConditions"/>
+            <label>Termos e condições</label>
+          </div>
+          <div class="form-text text-danger col-12 div-checkbox" *ngIf="isFormControlInvalid('termsConditions')">É necessario aceitar os termos e condições.</div>
+        <div class="d-grid d-md-block div-botao-login text-center">
+          <button class="btn btn-color" type="button" [disabled]="!formLogin.valid">Entrar</button>
+        </div>
+      </form>
 
       <div class="div-criar-conta">
-        <p>Não tem uma conta? <a href="" class="link"><b>Criar uma conta</b></a></p>
+        <p>
+          Não tem uma conta? <a href="" class="link"><b>Criar uma conta</b></a>
+        </p>
       </div>
     </div>
   </div>
