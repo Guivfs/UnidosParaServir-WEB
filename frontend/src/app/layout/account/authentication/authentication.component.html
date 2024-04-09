@@ -1,12 +1,12 @@
+<img
+  src="../../../assets/logo.png"
+  alt="logo"
+  width="10%"
+  height="10%"
+  class="logo"
+/>
 <div class="container">
   <div class="div-logo">
-    <img
-      src="../../../assets/logo.png"
-      alt="logo"
-      width="10%"
-      height="10%"
-      class="logo"
-    />
   </div>
 
   <div class="div-login">
@@ -38,39 +38,34 @@
         <div class="input-group input-login">
           <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
           <input
-            type="text"
+            type="email"
             class="form-control border"
-            placeholder="Usuario"
-            aria-label="Usuario"
-            formControlName="username"
+            placeholder="Email"
+            aria-label="Email"
+            formControlName="email"
           />
-          <div class="form-text text-danger col-12" *ngIf="isFormControlInvalid('username')">O usuário deve conter pelo menos 6 caracteres.</div>
+          <div class="form-text text-danger col-12" *ngIf="isFormControlInvalid('email')">O usuário deve conter pelo menos 6 caracteres.</div>
         </div>
         <div class="input-group input-login">
           <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
           <input
-            type="text"
+            type="password"
             class="form-control border"
             placeholder="Senha"
             aria-label="Senha"
-            formControlName="password"
+            formControlName="senha"
           />
-          <div class="form-text text-danger col-12" *ngIf="isFormControlInvalid('password')">A senha deve conter pelo menos 6 caracteres.</div>
+          <div class="form-text text-danger col-12" *ngIf="isFormControlInvalid('senha')">A senha deve conter pelo menos 6 caracteres.</div>
         </div>
-
-        <div class="div-checkbox">
-            <input type="checkbox" style="margin-right: 2%" formControlName="termsConditions"/>
-            <label>Termos e condições</label>
-          </div>
           <div class="form-text text-danger col-12 div-checkbox" *ngIf="isFormControlInvalid('termsConditions')">É necessario aceitar os termos e condições.</div>
         <div class="d-grid d-md-block div-botao-login text-center">
-          <button class="btn btn-color" type="button" [disabled]="!formLogin.valid">Entrar</button>
+          <button class="btn btn-color" type="button" [disabled]="!formLogin.valid" (click)="submitForm()">Entrar</button>
         </div>
       </form>
 
       <div class="div-criar-conta">
         <p>
-          Não tem uma conta? <a href="" class="link"><b>Criar uma conta</b></a>
+          Não tem uma conta? <a href="criar-conta" class="link"><b>Criar uma conta</b></a>
         </p>
       </div>
     </div>

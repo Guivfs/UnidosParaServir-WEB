@@ -23,6 +23,7 @@
     width: 40%;
     background-color: white;
     border-radius: 10px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0.4, 0.4);
   }
   
   
@@ -33,6 +34,7 @@
     align-items: center;
     justify-content: center;
     padding-top: 8%;
+    padding-bottom: 8%;
   }
   .div-login-botoes{
     display: flex;
