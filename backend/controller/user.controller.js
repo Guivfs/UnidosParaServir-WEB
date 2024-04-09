@@ -1,6 +1,7 @@
 const { config } = require("dotenv");
 const mysql = require("mysql2/promise");
 const user = require("../model/User");
+const { checkarToken } = require("../middleware/authMiddleware.ts");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -62,7 +63,7 @@ class UserController {
       nomeUsuario,
       userUsuario,
       emailUsuario,
-      senhaUsuario,
+      passwordHash,
       cepUsuario,
     ];
 
@@ -77,43 +78,39 @@ class UserController {
   async loginUsuario(req, res) {
     const { emailUsuario, senhaUsuario } = req.body;
 
-    if (!emailUsuario) {
-      res.status(422).json({ msg: "O e-mail é obrigatório" });
-    }
-    if (!senhaUsuario) {
-      res.status(422).json({ msg: "A senha é obrigatória" });
-    }
+    console.log("Dados recebidos no login:", { emailUsuario, senhaUsuario });
 
-    //checkar se o usuario existe
-    const [rows] = await clientDB.query(
-      "SELECT * FROM usuario WHERE emailUsuario = ?",
-      [emailUsuario]
-    );
-    if (rows.length === 0) {
-      return res.status(422).json({ msg: "E-mail incorreto!" });
-    }
-    const user = rows[0];
-
-    // Verificar se a senha está correta
-    if (senhaUsuario !== user.senhaUsuario) {
-      return res.status(401).json({ msg: "Senha incorreta!" });
+    if (!emailUsuario || !senhaUsuario) {
+      return res.status(422).json({ msg: "E-mail e senha são obrigatórios" });
     }
 
     try {
-      const secret = process.env.SECRET;
-
-      const token = jwt.sign(
-        {
-          id: user._id,
-        },
-        secret
+      const [rows] = await clientDB.query(
+        "SELECT * FROM usuario WHERE emailUsuario = ?",
+        [emailUsuario]
       );
+      if (rows.length === 0) {
+        return res.status(422).json({ msg: "E-mail incorreto!" });
+      }
+      const user = rows[0];
 
+      const senhaCorreta = await bcrypt.compare(
+        senhaUsuario,
+        user.senhaUsuario
+      );
+      if (!senhaCorreta) {
+        return res.status(401).json({ msg: "Senha incorreta!" });
+      }
+
+      const secret = process.env.SECRET;
+      const token = jwt.sign({ id: user.idUsuario }, secret);
+      
       res.status(200).json({ msg: "Login bem sucedido!", token });
     } catch (error) {
-      res.status(500).json({ msg: error });
-      console.log(error)
+      console.error(error);
+      res.status(500).json({ msg: "Erro ao realizar login" });
     }
+
   }
 }
 
