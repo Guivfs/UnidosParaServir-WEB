@@ -24,6 +24,8 @@ class UserController {
       cepUsuario,
       emailUsuario,
     } = req.body;
+
+    console.log("Dados recebidos na criação de conta: ",{nomeUsuario,userUsuario,senhaUsuario,cepUsuario,emailUsuario})
     if (!nomeUsuario) {
       res.status(422).json({ msg: "O nome é obrigatório" });
     }
