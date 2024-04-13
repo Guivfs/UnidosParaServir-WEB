@@ -12,6 +12,10 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateAccountComponent } from './layout/account/create-account/create-account.component';
+import { LogoutConfirmationComponent } from './layout/navbar/logout-confirmation/logout-confirmation.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'; // Importe o MatDialogModule
+
 
 @NgModule({
   declarations: [
@@ -19,7 +23,8 @@ import { CreateAccountComponent } from './layout/account/create-account/create-a
     HomeComponent,
     AuthenticationComponent,
     NavbarComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    LogoutConfirmationComponent
   ],
   imports: [
     BrowserModule,
@@ -28,9 +33,12 @@ import { CreateAccountComponent } from './layout/account/create-account/create-a
     ToastrModule.forRoot(), // ToastrModule added
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { LogoutConfirmationComponent } from './logout-confirmation/logout-confirmation.component';
+
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +13,7 @@ export class NavbarComponent {
 
   loggedIn = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public dialog: MatDialog) {
     this.isLogged();
   }
 
@@ -28,6 +31,18 @@ export class NavbarComponent {
       this.loggedIn = false;
       console.log("O usuário está deslogado");
     }
+  }
+
+  openLogoutConfirmation(): void {
+    const dialogRef = this.dialog.open(LogoutConfirmationComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'confirm') {
+        this.logout();
+      }
+    });
   }
 
   logout() {

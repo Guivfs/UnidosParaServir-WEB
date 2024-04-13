@@ -34,7 +34,7 @@
       </ul>
       <div class="navbar-brand mr-5">
         <button class="btn btn-outline btn-color"  *ngIf="!loggedIn" (click)="goToLogin()">Entrar</button>
-        <button class="btn btn-outline btn-color" *ngIf="loggedIn" (click)="logout()"><i class="fa-solid fa-right-to-bracket"></i></button>
+        <button class="btn btn-outline btn-color" *ngIf="loggedIn" (click)="openLogoutConfirmation()"><i class="fa-solid fa-right-to-bracket"></i></button>
 
       </div>
     </div>

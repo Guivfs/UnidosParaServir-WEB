@@ -1,0 +1,15 @@
+.confirm{
+    background-color: #c16747;
+    color: white;
+}
+.cancel{
+    background-color: grey;
+    color: white;
+}
+.col-12{
+    margin-bottom: 10px;
+}
+.background{
+    background-color: white;
+    border: none;
+}
