@@ -1,6 +1,6 @@
 const { config } = require("dotenv");
 const mysql = require("mysql2/promise");
-const user = require("../model/User");
+const UserModel = require("../model/User");
 const { checkarToken } = require("../middleware/authMiddleware.ts");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -16,16 +16,10 @@ const clientDB = mysql.createPool({
 
 class UserController {
   async registroUsuario(req, res) {
-    const {
-      idUsuario,
-      nomeUsuario,
-      userUsuario,
-      senhaUsuario,
-      cepUsuario,
-      emailUsuario,
-    } = req.body;
+    const {nomeUsuario, userUsuario, senhaUsuario, cepUsuario, emailUsuario} = req.body;
 
-    console.log("Dados recebidos na criação de conta: ",{nomeUsuario,userUsuario,senhaUsuario,cepUsuario,emailUsuario})
+    console.log("Dados recebidos na criação de conta: ",{nomeUsuario, userUsuario, senhaUsuario, cepUsuario, emailUsuario});
+    
     if (!nomeUsuario) {
       res.status(422).json({ msg: "O nome é obrigatório" });
     }
@@ -47,35 +41,28 @@ class UserController {
       "SELECT * FROM usuario WHERE emailUsuario = ?",
       [emailUsuario]
     );
-
     if (rows.length > 0) {
       return res
         .status(422)
         .json({ msg: "E-mail em uso! Por favor, utilize outro e-mail!" });
     }
-
-    //create password
-    const salt = await bcrypt.genSalt(12);
-    const passwordHash = await bcrypt.hash(senhaUsuario, salt);
-
-    //create user
-    const query =
-      "INSERT INTO usuario (nomeUsuario, userUsuario, emailUsuario, senhaUsuario, cepUsuario) VALUES (?, ?, ?, ?, ?)";
-    const values = [
-      nomeUsuario,
-      userUsuario,
-      emailUsuario,
-      passwordHash,
-      cepUsuario,
-    ];
-
+    
     try {
-      await clientDB.query(query, values);
+      //create password
+      const salt = await bcrypt.genSalt(12);
+      const passwordHash = await bcrypt.hash(senhaUsuario, salt);
+
+      //create user
+      const novoUsuario = new UserModel(nomeUsuario, userUsuario, passwordHash, cepUsuario, emailUsuario);
+
+      await clientDB.query("INSERT INTO usuario SET ?", novoUsuario);
       res.status(201).json({ msg: "Usuário criado com sucesso!" });
     } catch (error) {
-      res.status(500).json({ msg: error });
+      res.status(500).json({ msg: "Erro interno do servidor ao criar usuário" });
+      console.log(error)
     }
-  }
+}
+
 
   async loginUsuario(req, res) {
     const { emailUsuario, senhaUsuario } = req.body;
@@ -110,7 +97,7 @@ class UserController {
       res.status(200).json({ msg: "Login bem sucedido!", token });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ msg: "Erro ao realizar login" });
+      res.status(500).json({ msg: "Erro interno no servidor ao realizar login!" });
     }
 
   }

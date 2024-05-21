@@ -5,7 +5,7 @@ const loginRoutes = express.Router();
 
 const userController = new UserController();
 
-loginRoutes.post("/registro", userController.registroUsuario);
-loginRoutes.post("/login", userController.loginUsuario);
+loginRoutes.post("/registro-usuario", userController.registroUsuario);
+loginRoutes.post("/login-usuario", userController.loginUsuario);
 
 module.exports = loginRoutes;

@@ -1,6 +1,5 @@
-class User {
-    constructor(idUsuario, nomeUsuario, userUsuario, senhaUsuario, cepUsuario, emailUsuario) {
-      this.idUsuario = idUsuario;
+class UserModel {
+    constructor(nomeUsuario, userUsuario, senhaUsuario, cepUsuario, emailUsuario) {
       this.nomeUsuario = nomeUsuario;
       this.userUsuario = userUsuario;
       this.senhaUsuario = senhaUsuario;
@@ -9,4 +8,4 @@ class User {
     }
   }
   
-  module.exports = User;  
+  module.exports = UserModel;  

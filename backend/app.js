@@ -1,7 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-const swaggerUi = require('swagger-ui-express');
+
+//Futuramente descomentar para documentação do swagger
+// const swaggerUi = require('swagger-ui-express');
 // const swaggerDocs = require('./swagger.json');
+// const outputFile = './swagger_output.json'
+
 const jwt = require('jsonwebtoken');
 const allRoutes = require('./routes/index.routes.js');
 const mysql = require('mysql2');
@@ -30,11 +34,11 @@ clientDB.connect((erro) => {
     console.log("Conectado ao banco: " + process.env.DATABASE);
 });
 
-// Descomente para usar a forma padrão 
+// atualmente rota padrão 
  app.use("/", (req, res) => {
     return res.status(200).json({ msg: "Bem-vindo à rota padrão!" })});
 
-// Descomente para incluir a rota Swagger
+// futuramente do rota Swagger
 // app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use(allRoutes);
