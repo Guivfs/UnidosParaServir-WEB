@@ -31,8 +31,12 @@ import { CreateAccountCompanyComponent } from './layout/account/create-account-c
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

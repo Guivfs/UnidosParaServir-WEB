@@ -18,7 +18,7 @@ const clientDB = mysql.createPool({
 class EmpresaController {
     async registroEmpresa(req, res) {
         const { nomeEmpresa, emailEmpresa, senhaEmpresa, descEmpresa, CNPJEmpresa, razaoSocialEmpresa, areaAtuacaoEmpresa, numeroFuncionariosEmpresa, ramoEmpresa } = req.body;
-
+        console.log("dados recebidos no cadastro de empresa",nomeEmpresa, emailEmpresa, senhaEmpresa, descEmpresa, CNPJEmpresa, razaoSocialEmpresa, areaAtuacaoEmpresa, numeroFuncionariosEmpresa, ramoEmpresa)
         // Verificar se todos os campos foram fornecidos
         if (!nomeEmpresa || !emailEmpresa || !senhaEmpresa || !descEmpresa || !CNPJEmpresa || !razaoSocialEmpresa || !areaAtuacaoEmpresa || !numeroFuncionariosEmpresa || !ramoEmpresa) {
             return res.status(422).json({ msg: "Todos os campos são obrigatórios!" });
