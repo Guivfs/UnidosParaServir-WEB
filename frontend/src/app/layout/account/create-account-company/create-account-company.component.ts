@@ -51,4 +51,8 @@ export class CreateAccountCompanyComponent implements OnInit {
       this.toastr.error('Formulário inválido.');
     }
   }
+
+  public isFormControlInvalid(controlName:string):boolean{
+    return !!(this.empresaForm.get(controlName)?.invalid && this.empresaForm.get(controlName)?.touched)
+  }
 }

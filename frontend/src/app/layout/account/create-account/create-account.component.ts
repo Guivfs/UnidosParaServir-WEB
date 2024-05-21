@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
   styleUrls: ["./create-account.component.css"],
 })
 export class CreateAccountComponent implements OnInit {
-  form: FormGroup;
+  formUsuario: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -18,7 +18,7 @@ export class CreateAccountComponent implements OnInit {
     private route: Router,
     private toast: ToastrService
   ) {
-    this.form = this.fb.group({
+    this.formUsuario = this.fb.group({
       nomeCompleto: ["", Validators.required],
       cep: ["", [Validators.required]],
       usuario: ["", [Validators.required, Validators.minLength(6)]],
@@ -30,8 +30,8 @@ export class CreateAccountComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    if (this.form.valid) {
-      this.createAccountService.cadastrarUsuario(this.form.value).subscribe(
+    if (this.formUsuario.valid) {
+      this.createAccountService.cadastrarUsuario(this.formUsuario.value).subscribe(
         (response) => {
           console.log("Dados enviados com sucesso:", response);
           this.toast.success("Usuário criado com sucesso!");
@@ -45,5 +45,9 @@ export class CreateAccountComponent implements OnInit {
     } else {
       console.error("Formulário inválido. Verifique os campos.");
     }
+  }
+
+  public isFormControlInvalid(controlName:string):boolean{
+    return !!(this.formUsuario.get(controlName)?.invalid && this.formUsuario.get(controlName)?.touched)
   }
 }

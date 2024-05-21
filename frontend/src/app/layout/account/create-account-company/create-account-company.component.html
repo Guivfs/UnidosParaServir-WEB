@@ -47,6 +47,7 @@
                   formControlName="senhaEmpresa"
                   required
                 />
+                <div class="form-text text-danger col-12" *ngIf="isFormControlInvalid('senhaEmpresa')">A senha deve conter pelo menos 6 caracteres.</div>
               </div>
               <div class="mb-4">
                 <textarea
