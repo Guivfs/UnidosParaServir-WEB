@@ -1,0 +1,67 @@
+<img
+  src="../../../assets/logo.png"
+  alt="logo"
+  class="logo"
+/>
+<div class="container">
+  <div class="div-logo"></div>
+  <br />
+  <div class="row">
+    <div class="col-2 alinhar-centro"></div>
+    <div class="col-8 alinhar-centro caixa-branca">
+      <div class="container d-flex justify-content-center pb-3 pt-2">
+        <h5 class="cor-text"><b>Cadastro para Empresas</b></h5>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-6 alinhar-centro border-direita vertical">
+            <form style="width: 80%">
+              <div class="mb-4">
+                <input type="text" class="form-control" placeholder="Nome da empresa*" ngModel required>
+              </div>
+              <div class="mb-4">
+                <input type="text" class="form-control" placeholder="Área de atuação*" ngModel required>
+              </div>
+              <div class="mb-4">
+                <input type="email" class="form-control" placeholder="Email corporativo*" ngModel required>
+              </div>
+              <div class="mb-4">
+                <input type="password" class="form-control" placeholder="Senha*" ngModel required>
+              </div>
+              <div class="mb-4">
+                <textarea type="text" class="form-control" placeholder="Descrição da empresa*" ngModel required></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="col-6  vertical">
+            <div class="container">
+              <div class="row">
+                <div class="mb-4">
+                  <input type="text" class="form-control" placeholder="CNPJ*" ngModel required>
+                </div>
+                <div class="mb-4">
+                  <input type="text" class="form-control" placeholder="Razão social*" ngModel required>
+                </div>
+                <div class="mb-4">
+                  <input type="text" class="form-control" placeholder="Ramo*" ngModel required>
+                </div>
+                <div class="mb-4">
+                  <input type="text" class="form-control" placeholder="Número de funcionários*" ngModel required>
+                </div>
+                <div class="col-12 p-2 mt-3 d-flex justify-content-center flex-column align-items-center">
+                  <button class="btn btn-color form-control alinhar-centro" type="submit">Cadastrar-se</button>
+                </div>
+                <div class="mb-4 mt-2">
+                  <p>Já tem sua conta? 
+                    <a href="login" class="cor-text"><b>Entrar em sua conta</b></a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2 alinhar-centro"></div>
+  </div>
+</div>

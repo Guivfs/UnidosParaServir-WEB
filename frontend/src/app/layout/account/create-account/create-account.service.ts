@@ -20,5 +20,4 @@ export class CreateAccountService {
 
     return this.http.post(`${enviroment.baseUrlBackend}/registro`, body);
   }
-
 }

@@ -1,123 +1,118 @@
 .container {
-    display: flex;
-    flex-direction: column;
-  }
+  display: flex;
+  flex-direction: column;
+}
+
+.div-logo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: start;
+}
+
+.div-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login {
+  width: 40%;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0.4, 0.4);
+}
+
+.div-login-texto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 8%;
   
-  .div-logo {
-    display: flex;
-    align-items: flex-start;
-    justify-content: start;
-  }
-  .logo {
-  }
-  
-  .div-login {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .login {
-    width: 40%;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0.4, 0.4);
-  }
-  
-  
-  
-  .div-login-texto {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-top: 8%;
-    padding-bottom: 8%;
-  }
-  .div-login-botoes{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin: 5%;
-  }
-  .escrita{
-    color: #747474;
-  }
-  
-  
-  .input-login{
-    width:80%;
-    margin-left: 10%; 
-    margin-right: 10%;
-    margin-bottom: 5%;
-    margin-top: 2.5%; 
-  }
-  
-  .div-checkbox{
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    margin-left: 10%;
-    margin-right: 10%;
-    color: #747474;
-    margin-bottom: 5%;
-  }
-  .div-criar-conta{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 8%;
-    margin-right: 10%;
-    margin-left: 10%;
-  }
-  .link{
-    text-decoration: none;
-    color: #747474;
-  }
-  .div-botao-login{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 5%;
-  }
-  .botao-login{
-    background-color: #ffffff;
-    border-radius: 8px;
-    border: 0.1px solid #747474;
-    width: 40px;
-    height: 40px;
-    margin: 1%;
-  }
-  .btn-color{
-    background-color: #c16747;
-    color: white;
-    width: 80%;
-  }
-  .line-text {
-    display: flex;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .line-text:before,
-  .line-text:after {
-    content: '';
-    flex-grow: 1;
-    background-color: #747474;
-    height: 1px;
-    position: relative;
-    top: 0.5em;
-  }
-  
-  .line-text:before {
-    margin-right: 2%;
-    margin-left: 10%;
-  }
-  
-  .line-text:after {
-    margin-right: 10%;
-    margin-left: 2%;
-  }
+}
+.div-login-botoes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 5%;
+}
+.escrita {
+  color: #747474;
+}
+
+.input-login {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 5%;
+  margin-top: 2.5%;
+}
+
+.div-checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  margin-left: 10%;
+  margin-right: 10%;
+  color: #747474;
+  margin-bottom: 5%;
+}
+.div-criar-conta {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8%;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+.link {
+  text-decoration: none;
+  color: #747474;
+}
+.div-botao-login {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5%;
+}
+.botao-login {
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 0.1px solid #747474;
+  width: 40px;
+  height: 40px;
+  margin: 1%;
+}
+.btn-color {
+  background-color: #c16747;
+  color: white;
+  width: 80%;
+}
+.line-text {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.line-text:before,
+.line-text:after {
+  content: "";
+  flex-grow: 1;
+  background-color: #747474;
+  height: 1px;
+  position: relative;
+  top: 0.5em;
+}
+
+.line-text:before {
+  margin-right: 2%;
+  margin-left: 10%;
+}
+
+.line-text:after {
+  margin-right: 10%;
+  margin-left: 2%;
+}

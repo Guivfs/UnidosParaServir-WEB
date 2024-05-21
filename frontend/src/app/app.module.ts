@@ -14,7 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CreateAccountComponent } from './layout/account/create-account/create-account.component';
 import { LogoutConfirmationComponent } from './layout/navbar/logout-confirmation/logout-confirmation.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'; // Importe o MatDialogModule
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { CreateAccountCompanyComponent } from './layout/account/create-account-company/create-account-company.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     AuthenticationComponent,
     NavbarComponent,
     CreateAccountComponent,
-    LogoutConfirmationComponent
+    LogoutConfirmationComponent,
+    CreateAccountCompanyComponent
   ],
   imports: [
     BrowserModule,
