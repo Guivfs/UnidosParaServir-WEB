@@ -6,9 +6,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HomeService {
-
+  
   constructor(private http: HttpClient) { }
-
+  
+  //Metodo no qual trás a lista do tipo any, utilizando a lib do http client
   getVagas(): Observable<any[]> {
     return this.http.get<any[]>('http://localhost:8080/vagas');
   }
