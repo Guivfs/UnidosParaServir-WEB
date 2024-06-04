@@ -3,3 +3,10 @@
     background-position:bottom;
     background-size: contain;
 }
+
+.btn-color{
+    background-color: #c16747;
+    color: white;
+    width: 40%;
+    border-radius: 10px;
+  }
