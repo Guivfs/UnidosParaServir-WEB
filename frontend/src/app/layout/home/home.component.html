@@ -2,16 +2,19 @@
   <img src="../../../assets/background.png" width="100%" />
 </div>
 <div class="container-fluid-md background-white pt-5 pb-5">
-  <h5><p class="text-decoration-underline" style="padding-left: 7%; color: #747474;">Vagas em destaque</p></h5>
-
-<div *ngFor="let vaga of vagas" class="card" style="width: 18rem;">
-  <img [src]="vaga.fotoVaga" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{ vaga.tituloVaga }}</h5>
-    <p class="card-text">{{ vaga.descVaga }}</p>
-    <a href="#" class="btn btn-primary">Saiba mais</a>
+  <h2>
+    <p class="text-decoration-underline" style="padding-left: 7%; color: #747474">
+      <b>Vagas</b> em destaque
+    </p>
+  </h2>
+  <div class="slider">
+    <div *ngFor="let vaga of vagas" class="card" style="width: 18rem">
+      <img [src]="vaga.fotoVaga" class="card-img-top"  />
+      <div class="card-body">
+        <h5 class="card-title">{{ vaga.tituloVaga }}</h5>
+        <p class="card-text">{{ vaga.descVaga }}</p>
+        <a href="#" class="btn btn-color">Saiba mais</a>
+      </div>
+    </div>
   </div>
-</div>
-
-  
 </div>
