@@ -16,6 +16,7 @@ import { LogoutConfirmationComponent } from './layout/navbar/logout-confirmation
 import { MatDialogModule } from '@angular/material/dialog';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { CreateAccountCompanyComponent } from './layout/account/create-account-company/create-account-company.component';
+import { SliderComponent } from './layout/slider/slider/slider.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { CreateAccountCompanyComponent } from './layout/account/create-account-c
     NavbarComponent,
     CreateAccountComponent,
     LogoutConfirmationComponent,
-    CreateAccountCompanyComponent
+    CreateAccountCompanyComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,
