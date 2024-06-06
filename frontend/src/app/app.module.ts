@@ -17,6 +17,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { CreateAccountCompanyComponent } from './layout/account/create-account-company/create-account-company.component';
 import { SliderComponent } from './layout/slider/slider/slider.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { ScrollToTopDirective } from './directive/scroll-to-top.directive';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { SliderComponent } from './layout/slider/slider/slider.component';
     CreateAccountComponent,
     LogoutConfirmationComponent,
     CreateAccountCompanyComponent,
-    SliderComponent
+    SliderComponent,
+    FooterComponent,
+    ScrollToTopDirective
   ],
   imports: [
     BrowserModule,

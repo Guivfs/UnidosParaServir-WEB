@@ -37,7 +37,7 @@ export class SliderComponent implements OnInit, AfterViewChecked {
         dots: true,
         Infinity:false,
         speed:300,
-        arrows: true,
+        arrows: false,
         responsive: [
           {
             breakpoint: 1024,
