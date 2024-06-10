@@ -18,7 +18,6 @@ class VagaController {
           .status(404)
           .json({ msg: "Não foi possivel encontrar vagas disponiveis" });
       }
-      console.log(rows);
       res.json(rows);
     } catch (error) {
       console.error("Erro ao obter vagas:", error);
@@ -28,7 +27,6 @@ class VagaController {
 
   async criarVaga(req, res) {
     const { tituloVaga, descVaga, fotoVaga } = req.body;
-    console.log(tituloVaga, descVaga, fotoVaga)
     if (!tituloVaga || !descVaga || !fotoVaga) {
       return res.status(422).json({ msg: "Todos os campos são obrigatórios!" });
     }

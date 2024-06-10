@@ -17,8 +17,6 @@ const clientDB = mysql.createPool({
 class UserController {
   async registroUsuario(req, res) {
     const {nomeUsuario, userUsuario, senhaUsuario, cepUsuario, emailUsuario} = req.body;
-
-    console.log("Dados recebidos na criação de conta: ",{nomeUsuario, userUsuario, senhaUsuario, cepUsuario, emailUsuario});
     
     if (!nomeUsuario) {
       res.status(422).json({ msg: "O nome é obrigatório" });
@@ -66,8 +64,6 @@ class UserController {
 
   async loginUsuario(req, res) {
     const { emailUsuario, senhaUsuario } = req.body;
-
-    console.log("Dados recebidos no login:", { emailUsuario, senhaUsuario });
 
     if (!emailUsuario || !senhaUsuario) {
       return res.status(422).json({ msg: "E-mail e senha são obrigatórios" });
