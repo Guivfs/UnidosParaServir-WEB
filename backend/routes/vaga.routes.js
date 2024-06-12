@@ -1,6 +1,6 @@
 const VagaController = require('../controller/vaga.controller');
-const express = require('express');
 
+const express = require('express');
 const vagaRoutes = express.Router();
 
 const vagaController = new VagaController();

@@ -13,7 +13,7 @@ export class AuthenticationService {
     const url = `${enviroment.baseUrlBackend}/login`;
 
     return this.httpClient
-      .post(url, { emailUsuario:email, senhaUsuario:senha }, { responseType: "json" })
+      .post(url, { email:email, senha:senha }, { responseType: "json" })
       .pipe(
         map((data) => this.setTokenLocalStorage(data)),
         catchError((error) => {

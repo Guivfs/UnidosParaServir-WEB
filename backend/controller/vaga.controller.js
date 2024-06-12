@@ -1,6 +1,8 @@
-// controller/VagaController.js
+const { config } = require("dotenv");
 const mysql = require("mysql2/promise");
 const VagaModel = require("../model/Vaga");
+
+config();
 
 const clientDB = mysql.createPool({
   host: process.env.DB_HOST,
