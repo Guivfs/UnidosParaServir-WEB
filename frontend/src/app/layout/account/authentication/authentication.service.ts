@@ -28,11 +28,11 @@ export class AuthenticationService {
   }
 
   public getUserId(): string | null {
-    return localStorage.getItem('id');
+    return localStorage.getItem('ID');
   }
 
   public isUser(): boolean {
-    return JSON.parse(localStorage.getItem('isUser') || 'true');
+    return JSON.parse(localStorage.getItem('IS USER') || 'true');
   }
 
   private setTokenLocalStorage(respose: any): void {
