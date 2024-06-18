@@ -12,7 +12,7 @@
 .footer{
   padding-top: 3%;
   height: 420px;
-  color: #ffff;
+  color: #ffffff;
 }
 .fila-1{
   display: flex;
@@ -22,15 +22,15 @@
   padding-left: 3%;
 }
 .white-line{
-  color: #ffff;
-  border: 1px solid #ffff;
+  color: #ffffff;
+  border: 1px solid #ffffff;
   margin-left: 3%;
   margin-right: 3%;
 }
 
 .white-line-contact{
-  color: #ffff;
-  border: 1px solid #ffff;
+  color: #ffffff;
+  border: 1px solid #ffffff;
   width: 80%;
   flex-grow: 1;
 }
@@ -50,7 +50,7 @@
   padding-top: 10%;
 }
 .text-color{
-  color: #ffff;
+  color: #ffffff;
   text-decoration: none;
 }   
 .hover:hover{

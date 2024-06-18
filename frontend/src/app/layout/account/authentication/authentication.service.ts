@@ -27,12 +27,24 @@ export class AuthenticationService {
     return localStorage.getItem(enviroment.token);
   }
 
-  private setTokenLocalStorage(respose: any): void {
-    const { type, token } = respose;
-    localStorage.setItem(enviroment.token, token);
+  public getUserId(): string | null {
+    return localStorage.getItem('id');
   }
 
+  public isUser(): boolean {
+    return JSON.parse(localStorage.getItem('isUser') || 'true');
+  }
+
+  private setTokenLocalStorage(respose: any): void {
+    const { token, id, isUser } = respose;
+    localStorage.setItem(enviroment.token, token);
+    localStorage.setItem("ID", id);
+    localStorage.setItem("IS USER:", JSON.stringify(isUser));
+  }
+  
   private removerTokenLocalStorage(): void {
     localStorage.removeItem(enviroment.token);
+    localStorage.removeItem("ID");
+    localStorage.removeItem("IS USER:");
   }
 }

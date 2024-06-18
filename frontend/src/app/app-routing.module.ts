@@ -6,13 +6,14 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { CreateAccountComponent } from './layout/account/create-account/create-account.component';
 import { CreateAccountCompanyComponent } from './layout/account/create-account-company/create-account-company.component';
 import { SliderComponent } from './layout/slider/slider/slider.component';
+import { DetailsAccountComponent } from './layout/account/details-account/details-account.component';
 
 const routes: Routes = [
   
   { path: 'login',component:AuthenticationComponent},
   { path: 'criar-conta', component: CreateAccountComponent },
   { path: 'criar-conta-empresa', component: CreateAccountCompanyComponent },
-  { path: 'slider', component:SliderComponent},
+  { path: 'perfil/detalhar/:id', component: DetailsAccountComponent},
   
   {path:'',component:NavbarComponent,
     children:[

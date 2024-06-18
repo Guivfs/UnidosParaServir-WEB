@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-11">
+      <h4 class="mb-4">Dados pessoais</h4>
+      <hr>
+      <form [formGroup]="profileForm">
+        <div class="mb-2">
+          <label class="form-label">Nome Completo</label>
+          <input type="text" class="form-control" placeholder="Nome Completo*" formControlName="nomeCompleto" required>
+        </div>
+        <div class="mb-2">
+          <label class="form-label">CEP</label>
+          <input type="text" class="form-control" placeholder="Cep*" formControlName="cep" required>
+        </div>
+        <div class="mb-2">
+          <label class="form-label">Usuário</label>
+          <input type="text" class="form-control" placeholder="Usuário*" formControlName="usuario" required>
+        </div>
+        <div class="mb-2">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" placeholder="E-mail*" formControlName="email" required>
+        </div>
+        <div class="mb-4">
+          <label class="form-label">Senha</label>
+          <input type="password" class="form-control" placeholder="Senha*" formControlName="senha" required>
+        </div>
+        <div class="justify-content-center align-items-center botoes">
+          <button type="button" class="btn btn-gray form-control">Voltar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

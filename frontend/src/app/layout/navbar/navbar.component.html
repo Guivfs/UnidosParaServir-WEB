@@ -1,43 +1,44 @@
-<nav
-  class="navbar navbar-expand-lg bg-body-tertiary dark"
-  data-bs-theme="dark"
->
+<nav class="navbar navbar-expand-lg bg-body-tertiary dark" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"
-      ><img src="../../../assets/icons/logo.png" alt="logo" width="70%"
-    /></a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <a class="navbar-brand" href="/"><img src="../../../assets/icons/logo.png" alt="logo" width="70%" /></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+          <a class="nav-link active" aria-current="page" href="/">Início</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Vagas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-disabled="true">Para empresas</a>
+          <a class="nav-link" href="#">Para empresas</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Quem somos</a>
         </li>
       </ul>
-      <div class="navbar-brand mr-5">
-        <button class="btn btn-outline btn-color"  *ngIf="!loggedIn" (click)="goToLogin()">Entrar</button>
-        <button class="btn btn-outline btn-color" *ngIf="loggedIn" (click)="openLogoutConfirmation()"><i class="fa-solid fa-right-to-bracket"></i></button>
 
+      <div class="ms-auto" *ngIf="!loggedIn">
+        <button class="btn btn-outline btn-color" (click)="goToLogin()">Entrar</button>
+      </div>
+      <div class="ms-auto" *ngIf="loggedIn">
+        <ul class="navbar-nav" *ngIf="loggedIn">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="../../../assets/icons/Avatars.png" alt="perfil" width="30px" style="padding-bottom: 2px; margin-right: 1px;" srcset=""> Perfil
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item pointer" (click)="openDetailsAccount()">Visualizar perfil <i class="fa-solid fa-eye"></i></a></li>
+              <li><a class="dropdown-item pointer" (click)="openEditAccount()">Editar Perfil <i class="fa-solid fa-pen-to-square"></i></a></li>
+              <li><a class="dropdown-item pointer" (click)="openLogoutConfirmation()">Sair <i class="fa-solid fa-right-to-bracket"></i></a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </nav>
+
 <router-outlet></router-outlet>

@@ -1,0 +1,20 @@
+.container{
+    background-color: whitesmoke;
+}
+.row{
+    height: 90vh;
+}  
+
+.btn-orange{
+    background-color: #c16747;
+}
+
+.btn-gray{
+    background-color: gray;
+}
+
+.btn{
+    width: 100%;
+    color: white;
+    text-decoration: double;
+}

@@ -19,6 +19,8 @@ import { CreateAccountCompanyComponent } from './layout/account/create-account-c
 import { SliderComponent } from './layout/slider/slider/slider.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { ScrollToTopDirective } from './directive/scroll-to-top.directive';
+import { DetailsAccountComponent } from './layout/account/details-account/details-account.component';
+import { EditAccountComponent } from './layout/account/edit-account/edit-account.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { ScrollToTopDirective } from './directive/scroll-to-top.directive';
     CreateAccountCompanyComponent,
     SliderComponent,
     FooterComponent,
-    ScrollToTopDirective
+    ScrollToTopDirective,
+    DetailsAccountComponent,
+    EditAccountComponent
   ],
   imports: [
     BrowserModule,

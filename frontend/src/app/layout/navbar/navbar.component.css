@@ -16,6 +16,10 @@
   cursor: pointer;
   transition: 0.5s all ease;
 }
+
+.pointer{
+  cursor: pointer;
+}
   
 .btn-color:hover{
   background-color: #dd7853;

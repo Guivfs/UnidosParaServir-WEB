@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { LogoutConfirmationComponent } from './logout-confirmation/logout-confirmation.component';
+import { DetailsAccountComponent } from '../account/details-account/details-account.component';
 
 
 @Component({
@@ -31,6 +32,16 @@ export class NavbarComponent {
       this.loggedIn = false;
       console.log("O usuário está deslogado");
     }
+  }
+  openDetailsAccount():void{
+    const dialogRef = this.dialog.open(DetailsAccountComponent,{
+      width: '500px',
+    })
+  }
+  openEditAccount():void{
+    const dialogRef = this.dialog.open(DetailsAccountComponent,{
+      width: '500px',
+    })
   }
 
   openLogoutConfirmation(): void {

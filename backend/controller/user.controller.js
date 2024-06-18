@@ -16,6 +16,8 @@ const clientDB = mysql.createPool({
 });
 
 class UserController {
+
+  //Post(new user)
   async registroUsuario(req, res) {
     const { nomeUsuario, userUsuario, senhaUsuario, cepUsuario, emailUsuario } =
       req.body;
@@ -69,6 +71,26 @@ class UserController {
         .status(500)
         .json({ msg: "Erro interno do servidor ao criar usuário" });
       console.log(error);
+    }
+  }
+
+
+  //Get (id)
+  async getUser(req, res) {
+    const userId = req.params.id;
+
+    try {
+      const [rows] = await clientDB.query("SELECT * FROM usuario WHERE idUsuario = ?", [userId]);
+      
+      if (rows.length === 0) {
+        return res.status(404).json({ msg: "Usuário não encontrado" });
+      }
+
+      const user = rows[0];
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json({ msg: "Erro ao buscar usuário" });
+      console.error(error);
     }
   }
 }
