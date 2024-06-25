@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LogoutConfirmationComponent } from './logout-confirmation/logout-confirmation.component';
 import { DetailsAccountComponent } from '../account/details-account/details-account.component';
 import { DetailsAcountCompanyComponent } from '../account/details-acount-company/details-acount-company.component';
+import { AuthenticationService } from '../account/authentication/authentication.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class NavbarComponent {
 
   loggedIn = false;
 
-  constructor(private router: Router, public dialog: MatDialog) {
+  constructor(private router: Router, public dialog: MatDialog, private authenticationService:AuthenticationService) {
     this.isLogged();
   }
 
@@ -34,16 +35,22 @@ export class NavbarComponent {
       console.log("O usuário está deslogado");
     }
   }
-  openDetailsAccountUser():void{
-    const dialogRef = this.dialog.open(DetailsAccountComponent,{
-      width: '500px',
-    })
+  
+  openDialogDetails() {
+    const isUser = this.authenticationService.isUser();
+    console.log("O usuário é", isUser);
+  
+    if (isUser) {  // simplificado, pois já é booleano
+      this.dialog.open(DetailsAccountComponent, {
+        width: '500px',
+      });
+    } else {  // se não for true, assume que é false
+      this.dialog.open(DetailsAcountCompanyComponent, {
+        width: '500px',
+      });
+    }
   }
-  openDetailsAccountCompany():void{
-    const dialogRef = this.dialog.open(DetailsAcountCompanyComponent,{
-      width: '500px',
-    })
-  }
+  
   openEditAccount():void{
     const dialogRef = this.dialog.open(DetailsAccountComponent,{
       width: '500px',
