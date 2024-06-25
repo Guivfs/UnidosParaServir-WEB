@@ -32,7 +32,7 @@ export class AuthenticationService {
   }
 
   public isUser(): boolean {
-    return JSON.parse(localStorage.getItem('IS USER') || 'true');
+    return (localStorage.getItem('IS USER') === 'true');
   }
 
   private setTokenLocalStorage(respose: any): void {

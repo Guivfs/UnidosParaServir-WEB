@@ -21,6 +21,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { ScrollToTopDirective } from './directive/scroll-to-top.directive';
 import { DetailsAccountComponent } from './layout/account/details-account/details-account.component';
 import { EditAccountComponent } from './layout/account/edit-account/edit-account.component';
+import { DetailsAcountCompanyComponent } from './layout/account/details-acount-company/details-acount-company.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { EditAccountComponent } from './layout/account/edit-account/edit-account
     FooterComponent,
     ScrollToTopDirective,
     DetailsAccountComponent,
-    EditAccountComponent
+    EditAccountComponent,
+    DetailsAcountCompanyComponent
   ],
   imports: [
     BrowserModule,

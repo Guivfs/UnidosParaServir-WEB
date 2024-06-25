@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { LogoutConfirmationComponent } from './logout-confirmation/logout-confirmation.component';
 import { DetailsAccountComponent } from '../account/details-account/details-account.component';
+import { DetailsAcountCompanyComponent } from '../account/details-acount-company/details-acount-company.component';
 
 
 @Component({
@@ -33,8 +34,13 @@ export class NavbarComponent {
       console.log("O usuário está deslogado");
     }
   }
-  openDetailsAccount():void{
+  openDetailsAccountUser():void{
     const dialogRef = this.dialog.open(DetailsAccountComponent,{
+      width: '500px',
+    })
+  }
+  openDetailsAccountCompany():void{
+    const dialogRef = this.dialog.open(DetailsAcountCompanyComponent,{
       width: '500px',
     })
   }

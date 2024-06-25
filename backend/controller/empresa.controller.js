@@ -78,6 +78,32 @@ class EmpresaController {
         .json({ msg: "Erro interno do servidor ao registrar empresa." });
     }
   }
+
+  async getOneEmpresa(req, res) {
+    const { idEmpresa } = req.params;
+
+    if (!idEmpresa) {
+      return res.status(422).json({ msg: "ID da empresa é obrigatório!" });
+    }
+
+    try {
+      const [rows] = await clientDB.query(
+        "SELECT * FROM empresa WHERE idEmpresa = ?",
+        [idEmpresa]
+      );
+
+      if (rows.length === 0) {
+        return res.status(404).json({ msg: "Empresa não encontrada!" });
+      }
+
+      res.status(200).json(rows[0]);
+    } catch (error) {
+      console.error("Erro ao buscar empresa:", error);
+      res
+        .status(500)
+        .json({ msg: "Erro interno do servidor ao buscar empresa." });
+    }
+  }
 }
 
 module.exports = EmpresaController;

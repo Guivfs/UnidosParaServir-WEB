@@ -9,19 +9,14 @@ import { enviroment } from '../../../../enviroments/enviroment';
 })
 export class DetailsAccountService {
   private apiUrl = enviroment.baseUrlBackend;
+  
+  constructor(private authenticationService:AuthenticationService , private httpClient:HttpClient) {}
 
-  constructor(private http: HttpClient, private authService: AuthenticationService) { }
+  getUser():Observable<any>{
+    const idUser = this.authenticationService.getUserId()
+    const url = `${this.apiUrl}/buscar-usuario/${idUser}`
 
-  getUserOrCompanyDetails(): Observable<any> {
-    const id = this.authService.getUserId();
-    const isUser = this.authService.isUser();
-
-    console.log("Id do individuo", id)
-    if (id) {
-      const url = isUser ? `${this.apiUrl}/buscar-usuario/${id}` : `${this.apiUrl}/buscar-usuario/${id}`;
-      return this.http.get<any>(url);
-    } else {
-      throw new Error('User ID not found in local storage');
-    }
+    return this.httpClient.get<any>(url)
   }
 }
+

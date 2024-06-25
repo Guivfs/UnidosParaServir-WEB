@@ -76,12 +76,13 @@ class UserController {
 
 
   //Get (id)
-  async getUser(req, res) {
+  async getOneUser(req, res) {
     const userId = req.params.id;
+    console.log(userId)
 
     try {
       const [rows] = await clientDB.query("SELECT * FROM usuario WHERE idUsuario = ?", [userId]);
-      
+      console.log([rows])
       if (rows.length === 0) {
         return res.status(404).json({ msg: "Usuário não encontrado" });
       }
