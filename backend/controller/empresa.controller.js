@@ -13,6 +13,31 @@ const clientDB = mysql.createPool({
 });
 
 class EmpresaController {
+  async getOneEmpresa(req, res) {
+    const { idEmpresa } = req.params;
+  
+    if (!idEmpresa) {
+      return res.status(422).json({ msg: "ID da empresa é obrigatório!" });
+    }
+  
+    try {
+      const [rows] = await clientDB.query(
+        "SELECT * FROM empresa WHERE idEmpresa = ?",
+        [idEmpresa]
+      );
+  
+      if (rows.length === 0) {
+        return res.status(404).json({ msg: "Empresa não encontrada!" });
+      }
+  
+      res.status(200).json(rows[0]);
+    } catch (error) {
+      console.error("Erro ao buscar empresa:", error);
+      res
+        .status(500)
+        .json({ msg: "Erro interno do servidor ao buscar empresa." });
+    }
+  }
   async registroEmpresa(req, res) {
     const {
       nomeEmpresa,
@@ -79,29 +104,59 @@ class EmpresaController {
     }
   }
 
-  async getOneEmpresa(req, res) {
+  // Atualizar Empresa (id)
+  async atualizarEmpresa(req, res) {
     const { idEmpresa } = req.params;
+    const {
+      nomeEmpresa,
+      emailEmpresa,
+      senhaEmpresa,
+      descEmpresa,
+      CNPJEmpresa,
+      razaoSocialEmpresa,
+      areaAtuacaoEmpresa,
+      numeroFuncionariosEmpresa,
+      ramoEmpresa,
+    } = req.body;
 
-    if (!idEmpresa) {
-      return res.status(422).json({ msg: "ID da empresa é obrigatório!" });
+    if (!nomeEmpresa && !emailEmpresa && !senhaEmpresa && !descEmpresa && !CNPJEmpresa && !razaoSocialEmpresa && !areaAtuacaoEmpresa && !numeroFuncionariosEmpresa && !ramoEmpresa) {
+      return res.status(422).json({ msg: "Nenhum dado para atualizar" });
+    }
+
+    let updateFields = {};
+    if (nomeEmpresa) updateFields.nomeEmpresa = nomeEmpresa;
+    if (emailEmpresa) updateFields.emailEmpresa = emailEmpresa;
+    if (descEmpresa) updateFields.descEmpresa = descEmpresa;
+    if (CNPJEmpresa) updateFields.CNPJEmpresa = CNPJEmpresa;
+    if (razaoSocialEmpresa) updateFields.razaoSocialEmpresa = razaoSocialEmpresa;
+    if (areaAtuacaoEmpresa) updateFields.areaAtuacaoEmpresa = areaAtuacaoEmpresa;
+    if (numeroFuncionariosEmpresa) updateFields.numeroFuncionariosEmpresa = numeroFuncionariosEmpresa;
+    if (ramoEmpresa) updateFields.ramoEmpresa = ramoEmpresa;
+
+    if (senhaEmpresa) {
+      const salt = await bcrypt.genSalt(12);
+      const passwordHash = await bcrypt.hash(senhaEmpresa, salt);
+      updateFields.senhaEmpresa = passwordHash;
     }
 
     try {
-      const [rows] = await clientDB.query(
-        "SELECT * FROM empresa WHERE idEmpresa = ?",
-        [idEmpresa]
-      );
-
-      if (rows.length === 0) {
-        return res.status(404).json({ msg: "Empresa não encontrada!" });
-      }
-
-      res.status(200).json(rows[0]);
+      await clientDB.query("UPDATE empresa SET ? WHERE idEmpresa = ?", [updateFields, idEmpresa]);
+      res.status(200).json({ msg: "Empresa atualizada com sucesso" });
     } catch (error) {
-      console.error("Erro ao buscar empresa:", error);
-      res
-        .status(500)
-        .json({ msg: "Erro interno do servidor ao buscar empresa." });
+      res.status(500).json({ msg: "Erro interno do servidor ao atualizar empresa" });
+      console.log(error);
+    }
+  }
+
+  // Deletar Empresa (id)
+  async deletarEmpresa(req, res) {
+    const { idEmpresa } = req.params;
+    try {
+      await clientDB.query("DELETE FROM empresa WHERE idEmpresa = ?", [idEmpresa]);
+      res.status(200).json({ msg: "Empresa deletada com sucesso" });
+    } catch (error) {
+      res.status(500).json({ msg: "Erro interno do servidor ao deletar empresa" });
+      console.log(error);
     }
   }
 }
