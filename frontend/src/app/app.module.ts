@@ -20,8 +20,9 @@ import { SliderComponent } from './layout/slider/slider/slider.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { ScrollToTopDirective } from './directive/scroll-to-top.directive';
 import { DetailsAccountComponent } from './layout/account/details-account/details-account.component';
-import { EditAccountComponent } from './layout/account/edit-account/edit-account.component';
 import { DetailsAcountCompanyComponent } from './layout/account/details-acount-company/details-acount-company.component';
+import { DeleteConfirmationDialogComponent } from './layout/account/details-account/dialog/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { UpdateAccountComponent } from './layout/account/details-account/dialog/update/update-account/update-account.component';
 
 
 @NgModule({
@@ -37,8 +38,9 @@ import { DetailsAcountCompanyComponent } from './layout/account/details-acount-c
     FooterComponent,
     ScrollToTopDirective,
     DetailsAccountComponent,
-    EditAccountComponent,
-    DetailsAcountCompanyComponent
+    DetailsAcountCompanyComponent,
+    DeleteConfirmationDialogComponent,
+    UpdateAccountComponent
   ],
   imports: [
     BrowserModule,

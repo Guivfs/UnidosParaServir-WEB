@@ -15,6 +15,7 @@ import { AuthenticationService } from '../account/authentication/authentication.
 export class NavbarComponent {
 
   loggedIn = false;
+  dialogRef: any;
 
   constructor(private router: Router, public dialog: MatDialog, private authenticationService:AuthenticationService) {
     this.isLogged();

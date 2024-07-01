@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row justify-content-center align-items-center">
     <div class="col-md-11">
-      <h4 class="mb-4">Dados pessoais</h4>
+      <h4 class="mb-4">Dados Pessoais</h4>
       <hr>
       <form [formGroup]="profileFormUser">
         <div class="mb-2">
@@ -25,7 +25,8 @@
           <input type="password" class="form-control" placeholder="Senha*" formControlName="senha" required>
         </div>
         <div class="justify-content-center align-items-center botoes">
-          <button type="button" class="btn btn-gray form-control">Voltar</button>
+          <button type="button" class="btn btn-gray form-control mb-1" (click)="openEditAccount()">Editar Conta <i class="fa-solid fa-pen-to-square"></i></button>
+          <button type="button" class="btn btn-orange form-control" (click)="openDeleteConfirmationDialog()">Excluir Conta <i class="fa-solid fa-trash"></i></button>
         </div>
       </form>
     </div>

@@ -84,7 +84,7 @@ class UserController {
 async atualizarUsuario(req, res) {
   const userId = req.params.id;
   const { nomeUsuario, userUsuario, cepUsuario, emailUsuario, senhaUsuario } = req.body;
-
+  console.log(nomeUsuario, userUsuario, cepUsuario, emailUsuario, senhaUsuario)
   if (!nomeUsuario && !userUsuario && !cepUsuario && !emailUsuario && !senhaUsuario) {
     return res.status(422).json({ msg: "Nenhum dado para atualizar" });
   }

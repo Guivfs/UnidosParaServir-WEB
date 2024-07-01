@@ -1,0 +1,18 @@
+.container {
+    padding: 20px;
+  }
+  
+  .background {
+    background-color: white;
+  }
+  
+  .confirm {
+    background-color: gray;
+    color: white;
+  }
+  
+  .cancel {
+    background-color: #c16747;
+    color: white;
+  }
+  
