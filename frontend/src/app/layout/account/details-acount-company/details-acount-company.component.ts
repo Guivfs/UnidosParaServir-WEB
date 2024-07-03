@@ -1,6 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { DetailsAcountCompanyService } from "./details-acount-company.service";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { Router } from "@angular/router";
+import { NavbarComponent } from "../../navbar/navbar.component";
+import { DeleteConfirmationDialogComponent } from "./dialog/delete-confirmation-dialog/delete-confirmation-dialog.component";
+import { UpdateConfirmationDialogComponent } from "./dialog/update-confirmation-dialog/update-confirmation-dialog.component";
 
 @Component({
   selector: "app-details-acount-company",
@@ -12,6 +17,9 @@ export class DetailsAcountCompanyComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private dialog: MatDialog,
+    private router: Router,
+    private dialogRef: MatDialogRef<NavbarComponent>,
     private detailsAccontCompanyService: DetailsAcountCompanyService
   ) {
     this.profileFormCompany = this.fb.group({
@@ -42,5 +50,41 @@ export class DetailsAcountCompanyComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+
+  openEditDialog():void {
+    this.dialogRef.close()
+    const dialogRef = this.dialog.open(UpdateConfirmationDialogComponent,{
+      width:'500px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Recarregar dados do usuário
+        this.ngOnInit();
+      }
+    });
+  }
+
+
+  openDeleteConfirmationDialog():void {
+    const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent)
+    dialogRef.afterClosed().subscribe(result =>{
+      if(result){
+        this.deleteAccount();
+      }
+    });
+  }
+  deleteAccount():void{
+    this.detailsAccontCompanyService.deleteCompany().subscribe(
+      response =>{
+        localStorage.clear();    
+        this.dialogRef.close();
+        this.router.navigate(['/login'])
+      },
+      error=>{
+        console.error('Erro ao excluir a conta:', error);
+      }
+    )
   }
 }

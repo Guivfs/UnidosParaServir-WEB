@@ -33,7 +33,8 @@
           <input type="password" class="form-control" placeholder="Senha*" formControlName="senhaEmpresa" required>
         </div>
         <div class="justify-content-center align-items-center botoes">
-          <button type="button" class="btn btn-gray form-control">Voltar</button>
+          <button type="button" class="btn btn-gray form-control mb-1" (click)="openEditDialog()">Editar Conta <i class="fa-solid fa-pen-to-square"></i></button>
+          <button type="button" class="btn btn-orange form-control" (click)="openDeleteConfirmationDialog()">Excluir Conta <i class="fa-solid fa-trash"></i></button>
         </div>
       </form>
     </div>

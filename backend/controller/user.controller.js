@@ -80,7 +80,6 @@ class UserController {
   }
 
   // Atualizar(id)
-  // Atualizar(id)
 async atualizarUsuario(req, res) {
   const userId = req.params.id;
   const { nomeUsuario, userUsuario, cepUsuario, emailUsuario, senhaUsuario } = req.body;

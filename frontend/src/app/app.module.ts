@@ -23,6 +23,7 @@ import { DetailsAccountComponent } from './layout/account/details-account/detail
 import { DetailsAcountCompanyComponent } from './layout/account/details-acount-company/details-acount-company.component';
 import { DeleteConfirmationDialogComponent } from './layout/account/details-account/dialog/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { UpdateAccountComponent } from './layout/account/details-account/dialog/update/update-account/update-account.component';
+import { UpdateConfirmationDialogComponent } from './layout/account/details-acount-company/dialog/update-confirmation-dialog/update-confirmation-dialog.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { UpdateAccountComponent } from './layout/account/details-account/dialog/
     DetailsAccountComponent,
     DetailsAcountCompanyComponent,
     DeleteConfirmationDialogComponent,
-    UpdateAccountComponent
+    UpdateAccountComponent,
+    UpdateConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,

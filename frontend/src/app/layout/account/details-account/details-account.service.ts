@@ -9,6 +9,7 @@ import { enviroment } from '../../../../enviroments/enviroment';
 })
 export class DetailsAccountService {
   private apiUrl = enviroment.baseUrlBackend;
+  private idUser = this.authenticationService.getUserId();
 
   constructor(
     private authenticationService: AuthenticationService, 
@@ -16,20 +17,16 @@ export class DetailsAccountService {
   ) {}
 
   getUser(): Observable<any> {
-    const idUser = this.authenticationService.getUserId();
-    const url = `${this.apiUrl}/buscar-usuario/${idUser}`;
+    const url = `${this.apiUrl}/buscar-usuario/${this.idUser}`;
     return this.httpClient.get<any>(url);
   }
 
   deleteAccount(): Observable<any> {
-    const idUser = this.authenticationService.getUserId();
-    const url = `${this.apiUrl}/apagar-usuario/${idUser}`;
+    const url = `${this.apiUrl}/apagar-usuario/${this.idUser}`;
     return this.httpClient.delete<any>(url);
   }
   updateAccount(userData: any): Observable<any> {
-    const idUser = this.authenticationService.getUserId();
-    const url = `${this.apiUrl}/atualizar-usuario/${idUser}`;
-    console.log("Dado enviado no service",userData)
+    const url = `${this.apiUrl}/atualizar-usuario/${this.idUser}`;
     return this.httpClient.put<any>(url, userData);
   }
 }

@@ -34,18 +34,13 @@ export class UpdateAccountComponent implements OnInit {
         cep: user.cepUsuario,
         usuario: user.userUsuario,
         email: user.emailUsuario,
-        senha: user.senhaUsuario
+        senha: ""
       });
+    },
+    (error) => {
+      console.log(error);
     });
   }
-
-  goToLogin():void {
-    this.dialogRef.close();
-    this.dialog.open(DetailsAccountComponent, {
-      width: '500px'
-    })
-  }
-
 
   updateAccount(): void {
     const userData = {
@@ -59,7 +54,7 @@ export class UpdateAccountComponent implements OnInit {
     this.detailsAccountService.updateAccount(userData).subscribe(
       response => {
         console.log('Usuário atualizado com sucesso');
-        // Adicione qualquer outra lógica após a atualização
+        this.dialogRef.close(true);
       },
       error => {
         console.error('Erro ao atualizar a conta:', error);

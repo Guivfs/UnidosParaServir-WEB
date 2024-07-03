@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { DetailsAccountService } from './details-account.service';
 import { DeleteConfirmationDialogComponent } from './dialog/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { UpdateAccountComponent } from './dialog/update/update-account/update-account.component';
-import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-details-account',
@@ -19,7 +18,7 @@ export class DetailsAccountComponent implements OnInit {
     private fb: FormBuilder,
     private dialog: MatDialog,
     private router: Router,
-    private dialogRef: MatDialogRef<NavbarComponent>,
+    private dialogRef: MatDialogRef<DetailsAccountComponent>,
     private detailsAccountService: DetailsAccountService
   ) {
     this.profileFormUser = this.fb.group({
@@ -32,6 +31,10 @@ export class DetailsAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadUserDetails();
+  }
+
+  loadUserDetails(): void {
     this.detailsAccountService.getUser().subscribe((data) => {
       console.log('user:', data);
       this.profileFormUser.patchValue({
@@ -47,9 +50,23 @@ export class DetailsAccountComponent implements OnInit {
     });
   }
 
+  openEditDialog(): void {
+    this.dialogRef.close();
+    const dialogRef = this.dialog.open(UpdateAccountComponent, {
+      width: '500px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadUserDetails();
+        const dialogRef = this.dialog.open(DetailsAccountComponent, {
+          width: '500px'
+        });
+      }
+    });
+  }
+
   openDeleteConfirmationDialog(): void {
     const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent);
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.deleteAccount();
@@ -68,19 +85,5 @@ export class DetailsAccountComponent implements OnInit {
         console.error('Erro ao excluir a conta:', error);
       }
     );
-  }
-
-  openEditAccount(): void {
-    this.dialogRef.close();
-    const dialogRef = this.dialog.open(UpdateAccountComponent, {
-      width: '500px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        // Recarregar dados do usuário
-        this.ngOnInit();
-      }
-    });
   }
 }

@@ -119,6 +119,15 @@ class EmpresaController {
       ramoEmpresa,
     } = req.body;
 
+    console.log("Dados recebidos", nomeEmpresa,
+      emailEmpresa,
+      senhaEmpresa,
+      descEmpresa,
+      CNPJEmpresa,
+      razaoSocialEmpresa,
+      areaAtuacaoEmpresa,
+      numeroFuncionariosEmpresa,
+      ramoEmpresa,)
     if (!nomeEmpresa && !emailEmpresa && !senhaEmpresa && !descEmpresa && !CNPJEmpresa && !razaoSocialEmpresa && !areaAtuacaoEmpresa && !numeroFuncionariosEmpresa && !ramoEmpresa) {
       return res.status(422).json({ msg: "Nenhum dado para atualizar" });
     }

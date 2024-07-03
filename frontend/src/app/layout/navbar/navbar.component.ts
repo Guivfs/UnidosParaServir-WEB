@@ -13,7 +13,7 @@ import { AuthenticationService } from '../account/authentication/authentication.
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-
+  isUser = this.authenticationService.isUser();
   loggedIn = false;
   dialogRef: any;
 
@@ -38,16 +38,15 @@ export class NavbarComponent {
   }
   
   openDialogDetails() {
-    const isUser = this.authenticationService.isUser();
-    console.log("O usuário é", isUser);
+    console.log("O usuário é", this.isUser);
   
-    if (isUser) {  // simplificado, pois já é booleano
+    if (this.isUser) {  // simplificado, pois já é booleano
       this.dialog.open(DetailsAccountComponent, {
         width: '500px',
       });
     } else {  // se não for true, assume que é false
       this.dialog.open(DetailsAcountCompanyComponent, {
-        width: '500px',
+        width: '500px'
       });
     }
   }
