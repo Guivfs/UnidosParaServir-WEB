@@ -33,6 +33,26 @@ export class DetailsAcountCompanyComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    this.loadDetailsAccountCompany();
+  }
+
+
+  openEditDialog():void {
+    this.dialogRef.close()
+    const dialogRef = this.dialog.open(UpdateConfirmationDialogComponent,{
+      width:'500px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadDetailsAccountCompany()
+        this.dialog.open(DetailsAcountCompanyComponent,{
+          width:'500px'
+        });
+      }
+    });
+  }
+
+  loadDetailsAccountCompany():void{
     this.detailsAccontCompanyService.getCompany().subscribe(
       (data) => {
         console.log("empresa:", data);
@@ -51,21 +71,6 @@ export class DetailsAcountCompanyComponent implements OnInit {
       }
     );
   }
-
-
-  openEditDialog():void {
-    this.dialogRef.close()
-    const dialogRef = this.dialog.open(UpdateConfirmationDialogComponent,{
-      width:'500px'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        // Recarregar dados do usuário
-        this.ngOnInit();
-      }
-    });
-  }
-
 
   openDeleteConfirmationDialog():void {
     const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent)

@@ -47,13 +47,6 @@ export class UpdateConfirmationDialogComponent implements OnInit {
     });
   }
   
-  goToLogin(): void {
-    this.dialogRef.close();
-    this.dialog.open(DetailsAcountCompanyComponent, {
-      width: '500px'
-    });
-  }
-
   updateAccount(): void {
     const companyData = {
       nomeEmpresa: this.profileFormCompany.value.nomeEmpresa,
@@ -64,9 +57,8 @@ export class UpdateConfirmationDialogComponent implements OnInit {
       emailEmpresa: this.profileFormCompany.value.emailEmpresa,
       senhaEmpresa: this.profileFormCompany.value.senhaEmpresa,
       descEmpresa: this.profileFormCompany.value.descEmpresa,
-    CNPJEmpresa: this.profileFormCompany.value.CNPJEmpresa
+      CNPJEmpresa: this.profileFormCompany.value.CNPJEmpresa
     };
-    console.log("EMPRESA ATT", this.profileFormCompany.value);
 
     
     this.detailsAccountCompanyService.updateAccount(companyData).subscribe(
