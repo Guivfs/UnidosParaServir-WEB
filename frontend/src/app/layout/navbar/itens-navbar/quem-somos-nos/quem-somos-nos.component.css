@@ -1,0 +1,43 @@
+.container {
+  margin-top: 50px;
+}
+
+.background-white{
+  background-color: white;
+}
+
+.display-4 {
+  font-weight: 700;
+}
+
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.card {
+  margin-top: 20px;
+  border: none;
+}
+
+.card-body {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #6c757d;
+}

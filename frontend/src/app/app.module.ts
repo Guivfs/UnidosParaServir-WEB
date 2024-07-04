@@ -24,6 +24,7 @@ import { DetailsAcountCompanyComponent } from './layout/account/details-acount-c
 import { DeleteConfirmationDialogComponent } from './layout/account/details-account/dialog/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { UpdateAccountComponent } from './layout/account/details-account/dialog/update/update-account/update-account.component';
 import { UpdateConfirmationDialogComponent } from './layout/account/details-acount-company/dialog/update-confirmation-dialog/update-confirmation-dialog.component';
+import { QuemSomosNosComponent } from './layout/navbar/itens-navbar/quem-somos-nos/quem-somos-nos.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { UpdateConfirmationDialogComponent } from './layout/account/details-acou
     DetailsAcountCompanyComponent,
     DeleteConfirmationDialogComponent,
     UpdateAccountComponent,
-    UpdateConfirmationDialogComponent
+    UpdateConfirmationDialogComponent,
+    QuemSomosNosComponent
   ],
   imports: [
     BrowserModule,

@@ -7,23 +7,17 @@ import { CreateAccountComponent } from './layout/account/create-account/create-a
 import { CreateAccountCompanyComponent } from './layout/account/create-account-company/create-account-company.component';
 import { SliderComponent } from './layout/slider/slider/slider.component';
 import { DetailsAccountComponent } from './layout/account/details-account/details-account.component';
+import { QuemSomosNosComponent } from './layout/navbar/itens-navbar/quem-somos-nos/quem-somos-nos.component';
 
 const routes: Routes = [
-  
-  { path: 'login',component:AuthenticationComponent},
+  { path: 'login', component: AuthenticationComponent },
   { path: 'criar-conta', component: CreateAccountComponent },
   { path: 'criar-conta-empresa', component: CreateAccountCompanyComponent },
-  { path: 'perfil/detalhar/:id', component: DetailsAccountComponent},
-  
-  {path:'',component:NavbarComponent,
-    children:[
-      {path:'', component:HomeComponent}
-    ]},
-
-  //Orientando a URL de home se tornar a URL padrão
-  {path:'**',redirectTo:'login'}
-
-
+  { path: 'perfil/detalhar/:id', component: DetailsAccountComponent },
+  { path: 'quem-somos-nos', component: QuemSomosNosComponent },
+  // { path: 'para-empresas', component:},
+  { path: 'home', component: HomeComponent }, // Definindo a home como padrão
+  { path: '**', redirectTo: 'home' } // Redirecionando qualquer rota inválida para a home
 ];
 
 @NgModule({
