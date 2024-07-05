@@ -1,13 +1,15 @@
-.background{
-    background: rgb(255,255,255);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 70%, rgba(74,66,124,1) 90%, rgba(74,66,124,1) 100%);
-    background-repeat: no-repeat;
-    position: relative;
-    width: 100%;
-    height: 100%;
+/* Navbar Background */
+.background {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 70%, rgba(74, 66, 124, 1) 90%, rgba(74, 66, 124, 1) 100%);
+  background-repeat: no-repeat;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-.btn-color{
+/* Button Color */
+.btn-color {
   background-color: #c16747;
   color: white;
   width: 100%;
@@ -17,10 +19,47 @@
   transition: 0.5s all ease;
 }
 
-.pointer{
+.btn-color:hover {
+  background-color: #dd7853;
+}
+
+/* Pointer Cursor */
+.pointer {
   cursor: pointer;
 }
-  
-.btn-color:hover{
-  background-color: #dd7853;
+
+/* Navbar Adjustments */
+.navbar {
+  padding: 0.5rem 1rem;
+}
+
+.navbar-brand img {
+  width: 100px;
+}
+
+.navbar-nav .nav-item .nav-link {
+  padding: 0.5rem 1rem;
+}
+
+.navbar-nav .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    margin-top: 1rem;
+  }
+
+  .ms-auto {
+    margin-top: 1rem;
+  }
+
+  .navbar-collapse {
+    justify-content: flex-end;
+  }
 }

@@ -44,7 +44,8 @@ import { QuemSomosNosComponent } from './layout/navbar/itens-navbar/quem-somos-n
     DeleteConfirmationDialogComponent,
     UpdateAccountComponent,
     UpdateConfirmationDialogComponent,
-    QuemSomosNosComponent
+    QuemSomosNosComponent,
+  
   ],
   imports: [
     BrowserModule,
