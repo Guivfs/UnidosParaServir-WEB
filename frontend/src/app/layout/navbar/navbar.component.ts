@@ -64,7 +64,9 @@ export class NavbarComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'confirm') {
+        localStorage.clear();
         this.logout();
+        this.isUser=true
       }
     });
   }

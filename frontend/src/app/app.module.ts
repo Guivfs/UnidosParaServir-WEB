@@ -25,6 +25,13 @@ import { DeleteConfirmationDialogComponent } from './layout/account/details-acco
 import { UpdateAccountComponent } from './layout/account/details-account/dialog/update/update-account/update-account.component';
 import { UpdateConfirmationDialogComponent } from './layout/account/details-acount-company/dialog/update-confirmation-dialog/update-confirmation-dialog.component';
 import { QuemSomosNosComponent } from './layout/navbar/itens-navbar/quem-somos-nos/quem-somos-nos.component';
+import { ParaEmpresasComponent } from './layout/navbar/itens-navbar/para-empresas/para-empresas.component';
+import { VagasUsuarioComponent } from './layout/navbar/itens-navbar/vagas-usuario/vagas-usuario.component';
+import { VagasEmpresaComponent } from './layout/navbar/itens-navbar/vagas-empresa/vagas-empresa.component';
+import { NovaVagaDialogComponent } from './layout/navbar/itens-navbar/vagas-empresa/dialog/nova-vaga-dialog/nova-vaga-dialog.component';
+import { EditarVagaDialogComponent } from './layout/navbar/itens-navbar/vagas-empresa/dialog/editar-vaga-dialog/editar-vaga-dialog.component';
+import { DetalharVagaDialogComponent } from './layout/navbar/itens-navbar/vagas-empresa/dialog/detalhar-vaga-dialog/detalhar-vaga-dialog.component';
+import { ExcluirVagaDialogComponent } from './layout/navbar/itens-navbar/vagas-empresa/dialog/excluir-vaga-dialog/excluir-vaga-dialog.component';
 
 
 @NgModule({
@@ -45,6 +52,13 @@ import { QuemSomosNosComponent } from './layout/navbar/itens-navbar/quem-somos-n
     UpdateAccountComponent,
     UpdateConfirmationDialogComponent,
     QuemSomosNosComponent,
+    ParaEmpresasComponent,
+    VagasUsuarioComponent,
+    VagasEmpresaComponent,
+    NovaVagaDialogComponent,
+    EditarVagaDialogComponent,
+    DetalharVagaDialogComponent,
+    ExcluirVagaDialogComponent,
   
   ],
   imports: [

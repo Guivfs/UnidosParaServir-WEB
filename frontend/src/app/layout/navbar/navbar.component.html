@@ -9,8 +9,11 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/home" routerLinkActive="active">Início</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/vagas" routerLinkActive="active">Vagas</a>
+        <li class="nav-item" *ngIf="isUser">
+          <a class="nav-link" routerLink="/vaga-usuario" routerLinkActive="active">Vagas</a>
+        </li>
+        <li class="nav-item" *ngIf="!isUser">
+          <a class="nav-link" routerLink="/vaga-empresa" routerLinkActive="active">Vagas</a>
         </li>
         <li class="nav-item" *ngIf="!isUser">
           <a class="nav-link" routerLink="/para-empresas" routerLinkActive="active">Para empresas</a>

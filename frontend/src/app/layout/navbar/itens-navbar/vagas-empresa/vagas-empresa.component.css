@@ -1,0 +1,28 @@
+/* styles.css ou estilos específicos para vagas-empresa.component.css */
+.container-fluid {
+  padding: 20px auto;
+  background-color: white;
+}
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.list-group-item span {
+  flex-grow: 1;
+}
+
+.btn {
+  margin-left: 5px;
+}
+
+.btn-color{
+  background-color: #c16747;
+  color: white;
+}

@@ -18,6 +18,6 @@ export class CreateAccountService {
       emailUsuario: dadosUsuario.email
     };
 
-    return this.http.post(`${enviroment.baseUrlBackend}/registro`, body);
+    return this.http.post(`${enviroment.baseUrlBackend}/registro-usuario`, body);
   }
 }
