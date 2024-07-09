@@ -23,7 +23,7 @@ class LoginController {
     }
 
     try {
-      let isUser = true;
+      var role = "guest";
       let id;
       let hashedPassword;
 
@@ -33,26 +33,27 @@ class LoginController {
         [email]
       );
 
-      // Se não encontrar, tente encontrar na tabela de empresa
-      if (rows.length === 0) {
+      //Caso encontre na tabela de usuário
+      if(rows.length > 0){
+        role = "user"  
+        id = rows[0].idUsuario;
+        hashedPassword = rows[0].senhaUsuario;
+      } //Procure na tabela empresa
+      else {
         [rows] = await clientDB.query(
           "SELECT * FROM empresa WHERE emailEmpresa = ?",
           [email]
         );
-        isUser = false;
-        if (rows.length === 0) {
+        //Caso encontre na tabela de empresa...
+        if (rows.length > 0) {
+          role = "company";
+          id = rows[0].idEmpresa;
+          hashedPassword = rows[0].senhaEmpresa;
+        }
+        else{
           return res.status(422).json({ msg: "E-mail incorreto!" });
         }
       }
-
-      if (isUser) {
-        id = rows[0].idUsuario;
-        hashedPassword = rows[0].senhaUsuario;
-      } else {
-        id = rows[0].idEmpresa;
-        hashedPassword = rows[0].senhaEmpresa;
-      }
-
       // Verificação de senha
       const isPasswordValid = await bcrypt.compare(senha, hashedPassword);
 
@@ -62,7 +63,7 @@ class LoginController {
 
       const secret = process.env.SECRET;
       const token = jwt.sign({ id }, secret, { expiresIn: "1h" });
-      res.status(200).json({ msg: "Login bem sucedido!", token, id, isUser });
+      res.status(200).json({ msg: "Login bem sucedido!", token, id, role });
     } catch (error) {
       console.error(error);
       res

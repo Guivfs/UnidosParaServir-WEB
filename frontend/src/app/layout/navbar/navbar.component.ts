@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { LogoutConfirmationComponent } from './logout-confirmation/logout-confirmation.component';
@@ -6,19 +6,25 @@ import { DetailsAccountComponent } from '../account/details-account/details-acco
 import { DetailsAcountCompanyComponent } from '../account/details-acount-company/details-acount-company.component';
 import { AuthenticationService } from '../account/authentication/authentication.service';
 
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
-  isUser = this.authenticationService.isUser();
-  loggedIn = false;
-  dialogRef: any;
+export class NavbarComponent implements OnInit {
+  role: string = 'guest';
+  loggedIn: boolean = false;
 
-  constructor(private router: Router, public dialog: MatDialog, private authenticationService:AuthenticationService) {
+  constructor(
+    private router: Router, 
+    public dialog: MatDialog, 
+    private authenticationService: AuthenticationService
+  ) {}
+
+  ngOnInit(): void {
+    this.checkUserRole();
     this.isLogged();
+    console.log(localStorage)
   }
 
   goToLogin() {
@@ -26,35 +32,26 @@ export class NavbarComponent {
   }
 
   isLogged() {
-    const token = localStorage.getItem('token'); 
-    console.log(localStorage)
-    if (token) {
-      this.loggedIn = true;
-      console.log("O usuário está logado");
-    } else {
-      this.loggedIn = false;
-      console.log("O usuário está deslogado");
-    }
+    const token = this.authenticationService.getToken();
+    this.loggedIn = !!token;
+    console.log(`O usuário está ${this.loggedIn ? 'logado' : 'deslogado'}`);
   }
-  
+
+  checkUserRole() {
+    this.role = "guest"
+    this.role = this.authenticationService.getRole();
+  }
+
   openDialogDetails() {
-    console.log("O usuário é", this.isUser);
-  
-    if (this.isUser) {  // simplificado, pois já é booleano
+    if (this.role === 'user') {
       this.dialog.open(DetailsAccountComponent, {
         width: '500px',
       });
-    } else {  // se não for true, assume que é false
+    } else if (this.role === 'company') {
       this.dialog.open(DetailsAcountCompanyComponent, {
         width: '500px'
       });
     }
-  }
-  
-  openEditAccount():void{
-    const dialogRef = this.dialog.open(DetailsAccountComponent,{
-      width: '500px',
-    })
   }
 
   openLogoutConfirmation(): void {
@@ -64,17 +61,16 @@ export class NavbarComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'confirm') {
-        localStorage.clear();
         this.logout();
-        this.isUser=true
       }
     });
   }
 
   logout() {
-    localStorage.removeItem('token'); // Remover o token ao fazer logout
+    this.authenticationService.removeTokenLocalStorage();
     this.loggedIn = false;
+    this.role = 'guest';
+    this.router.navigate(['login'])
     console.log("Usuário deslogado");
   }
-
 }
