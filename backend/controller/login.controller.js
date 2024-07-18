@@ -62,7 +62,7 @@ class LoginController {
       }
 
       const secret = process.env.SECRET;
-      const token = jwt.sign({ id }, secret, { expiresIn: "1h" });
+      const token = jwt.sign({ id }, secret);
       res.status(200).json({ msg: "Login bem sucedido!", token, id, role });
     } catch (error) {
       console.error(error);

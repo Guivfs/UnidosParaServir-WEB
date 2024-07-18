@@ -26,12 +26,16 @@ import { UpdateAccountComponent } from './layout/account/details-account/dialog/
 import { UpdateConfirmationDialogComponent } from './layout/account/details-acount-company/dialog/update-confirmation-dialog/update-confirmation-dialog.component';
 import { QuemSomosNosComponent } from './layout/navbar/itens-navbar/quem-somos-nos/quem-somos-nos.component';
 import { ParaEmpresasComponent } from './layout/navbar/itens-navbar/para-empresas/para-empresas.component';
-import { VagasUsuarioComponent } from './layout/navbar/itens-navbar/vagas-usuario/vagas-usuario.component';
-import { VagasEmpresaComponent } from './layout/navbar/itens-navbar/vagas-empresa/vagas-empresa.component';
-import { NovaVagaDialogComponent } from './layout/navbar/itens-navbar/vagas-empresa/dialog/nova-vaga-dialog/nova-vaga-dialog.component';
-import { EditarVagaDialogComponent } from './layout/navbar/itens-navbar/vagas-empresa/dialog/editar-vaga-dialog/editar-vaga-dialog.component';
-import { DetalharVagaDialogComponent } from './layout/navbar/itens-navbar/vagas-empresa/dialog/detalhar-vaga-dialog/detalhar-vaga-dialog.component';
-import { ExcluirVagaDialogComponent } from './layout/navbar/itens-navbar/vagas-empresa/dialog/excluir-vaga-dialog/excluir-vaga-dialog.component';
+import { VagasUsuarioComponent } from './layout/navbar/itens-navbar/vagas/vagas-usuario/vagas-usuario.component';
+import { VagasEmpresaComponent } from './layout/navbar/itens-navbar/vagas/vagas-empresa/vagas-empresa.component';
+import { NovaVagaDialogComponent } from './layout/navbar/itens-navbar/vagas/vagas-empresa/dialog/nova-vaga-dialog/nova-vaga-dialog.component';
+import { EditarVagaDialogComponent } from './layout/navbar/itens-navbar/vagas/vagas-empresa/dialog/editar-vaga-dialog/editar-vaga-dialog.component';
+import { DetalharVagaDialogComponent } from './layout/navbar/itens-navbar/vagas/vagas-empresa/dialog/detalhar-vaga-dialog/detalhar-vaga-dialog.component';
+import { ExcluirVagaDialogComponent } from './layout/navbar/itens-navbar/vagas/vagas-empresa/dialog/excluir-vaga-dialog/excluir-vaga-dialog.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -64,6 +68,7 @@ import { ExcluirVagaDialogComponent } from './layout/navbar/itens-navbar/vagas-e
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatPaginatorModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 3000,
@@ -73,7 +78,11 @@ import { ExcluirVagaDialogComponent } from './layout/navbar/itens-navbar/vagas-e
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [
     provideAnimationsAsync()

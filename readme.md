@@ -10,6 +10,8 @@
  - **Bootstrap**
  - **Wamp**
  - **Postman**
+ - **MVC**
+ - **API RESTfull**
 
 ### Funcionalidades
 

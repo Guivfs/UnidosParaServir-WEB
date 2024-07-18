@@ -1,5 +1,6 @@
 const { config } = require("dotenv");
 const mysql = require("mysql2/promise");
+const jwt = require("jsonwebtoken");
 const VagaModel = require("../model/Vaga");
 
 config();
@@ -12,6 +13,30 @@ const clientDB = mysql.createPool({
 });
 
 class VagaController {
+  async obterVagasEmpresa(req, res) {
+    try {
+      const token = req.headers.authorization.split(" ")[1];
+      const decodedToken = jwt.verify(token, process.env.SECRET);
+      const idEmpresaLogado = decodedToken.id;
+
+      const [rows] = await clientDB.query(
+        "SELECT * FROM vaga_empresa WHERE idEmpresa = ?",
+        [idEmpresaLogado]
+      );
+
+      if (rows.length < 1) {
+        return res
+          .status(404)
+          .json({ msg: "Não foi possível encontrar vagas disponíveis" });
+      }
+
+      res.json(rows);
+    } catch (error) {
+      console.error("Erro ao obter vagas da empresa:", error);
+      res.status(500).json({ msg: "Erro interno do servidor ao obter vagas da empresa." });
+    }
+  }
+
   async obterVagas(req, res) {
     try {
       const [rows] = await clientDB.query("SELECT * FROM vaga_empresa");
@@ -52,7 +77,7 @@ class VagaController {
 
     try {
       const [result] = await clientDB.query(
-        "UPDATE vaga_empresa SET tituloVaga = ?, descVaga = ?, fotoVaga = ?, empresa_id = ? WHERE id = ?",
+        "UPDATE vaga_empresa SET tituloVaga = ?, descVaga = ?, fotoVaga = ?, idEmpresa = ? WHERE idEmpresa = ?",
         [tituloVaga, descVaga, fotoVaga, empresa_id, id]
       );
       if (result.affectedRows === 0) {
@@ -69,7 +94,7 @@ class VagaController {
     const { id } = req.params;
 
     try {
-      const [result] = await clientDB.query("DELETE FROM vaga_empresa WHERE id = ?", [id]);
+      const [result] = await clientDB.query("DELETE FROM vaga_empresa WHERE idEmpresa = ?", [id]);
       if (result.affectedRows === 0) {
         return res.status(404).json({ msg: "Vaga não encontrada." });
       }

@@ -9,8 +9,8 @@ import { SliderComponent } from './layout/slider/slider/slider.component';
 import { DetailsAccountComponent } from './layout/account/details-account/details-account.component';
 import { QuemSomosNosComponent } from './layout/navbar/itens-navbar/quem-somos-nos/quem-somos-nos.component';
 import { ParaEmpresasComponent } from './layout/navbar/itens-navbar/para-empresas/para-empresas.component';
-import { VagasEmpresaComponent } from './layout/navbar/itens-navbar/vagas-empresa/vagas-empresa.component';
-import { VagasUsuarioComponent } from './layout/navbar/itens-navbar/vagas-usuario/vagas-usuario.component';
+import { VagasEmpresaComponent } from './layout/navbar/itens-navbar/vagas/vagas-empresa/vagas-empresa.component';
+import { VagasUsuarioComponent } from './layout/navbar/itens-navbar/vagas/vagas-usuario/vagas-usuario.component';
 
 const routes: Routes = [
   { path: 'login', component: AuthenticationComponent },
