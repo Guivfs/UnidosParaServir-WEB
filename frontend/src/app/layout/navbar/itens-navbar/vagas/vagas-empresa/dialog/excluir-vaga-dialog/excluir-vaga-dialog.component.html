@@ -1,1 +1,8 @@
-<p>excluir-vaga-dialog works!</p>
+<h1 mat-dialog-title>Excluir Vaga</h1>
+<div mat-dialog-content>
+  <p>Tem certeza que deseja excluir a vaga "{{data.tituloVaga}}"?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button color="warn" (click)="confirmarExclusao()">Excluir</button>
+</div>

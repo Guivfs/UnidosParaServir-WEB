@@ -13,31 +13,34 @@ export class VagasService {
 
   // Obter todas as vagas
   getVagas(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+    return this.http.get<any>(`${this.apiUrl}`);
   }
-
+  // Obter vaga pelo id
+  getVagaById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/buscar/${id}`);
+  }
   // Criar nova vaga
   createVaga(vaga: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, vaga);
+    return this.http.post<any>(`${this.apiUrl}/registrar`, vaga);
   }
 
   // Atualizar vaga existente
   updateVaga(empresa_id: number, vaga: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${empresa_id}`, vaga);
+    return this.http.put<any>(`${this.apiUrl}/atualizar/${empresa_id}`, vaga);
   }
 
   // Deletar vaga
   deleteVaga(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/apagar/${id}`);
   }
 
   // Obter vagas por empresa
   getVagasByEmpresa(): Observable<any> {
-    const token = localStorage.getItem('token'); // Certifique-se de que o token está no localStorage
+    const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
 
-    return this.http.get<any>(`${this.apiUrl}-empresa`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/buscar-vagas-empresa`, { headers });
   }
 }

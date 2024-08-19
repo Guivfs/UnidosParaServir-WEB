@@ -1,1 +1,21 @@
-<p>detalhar-vaga-dialog works!</p>
+<h1 mat-dialog-title>Detalharcd Vaga</h1>
+<div class="detalhe-vaga-container">
+  <form [formGroup]="vagaForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Título da Vaga</mat-label>
+      <input matInput formControlName="tituloVaga" readonly>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Descrição da Vaga</mat-label>
+      <textarea matInput formControlName="descVaga" rows="5" readonly></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Foto da Vaga</mat-label>
+      <input matInput formControlName="fotoVaga" readonly>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>ID da Empresa</mat-label>
+      <input matInput formControlName="idEmpresa" readonly>
+    </mat-form-field>
+  </form>
+</div>

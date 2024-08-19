@@ -7,6 +7,8 @@ import { VagasService } from '../vagas.service';
 import { EditarVagaDialogComponent } from './dialog/editar-vaga-dialog/editar-vaga-dialog.component';
 import { timeout, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { ExcluirVagaDialogComponent } from './dialog/excluir-vaga-dialog/excluir-vaga-dialog.component';
+import { DetalharVagaDialogComponent } from './dialog/detalhar-vaga-dialog/detalhar-vaga-dialog.component';
 
 @Component({
   selector: 'app-vagas-empresa',
@@ -35,12 +37,15 @@ export class VagasEmpresaComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(NovaVagaDialogComponent, {
       width: '400px',
-      data: {}
+      data: { tituloVaga: '', descVaga: '', fotoVaga: '' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.buscarVagas();
+        this.vagasService.createVaga(result).subscribe(
+          () => this.buscarVagas(),
+          (error) => console.error('Erro ao criar vaga', error)
+        );
       }
     });
   }
@@ -69,14 +74,10 @@ export class VagasEmpresaComponent implements OnInit {
         console.error('Erro ao buscar vagas', error);
         this.isLoading = false;
         this.hasError = true;
+        return of([])
       }
     );
   }
-
-  verDetalhes(vaga: any): void {
-    console.log('Ver detalhes da vaga:', vaga);
-  }
-
   editarVaga(vaga: any): void {
     const dialogRef = this.dialog.open(EditarVagaDialogComponent, {
       width: '400px',
@@ -97,14 +98,30 @@ export class VagasEmpresaComponent implements OnInit {
     });
   }
 
+  verDetalhes(vaga: any): void {
+    this.dialog.open(DetalharVagaDialogComponent, {
+      width: '400px',
+      data: { idVaga: vaga.idVaga }
+    });
+  }
+  
   excluirVaga(vaga: any): void {
-    this.vagasService.deleteVaga(vaga.idVaga).subscribe(
-      () => {
-        this.buscarVagas();
-      },
-      (error) => {
-        console.error('Erro ao excluir vaga', error);
+    const dialogRef = this.dialog.open(ExcluirVagaDialogComponent, {
+      width: '400px',
+      data: vaga
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.vagasService.deleteVaga(vaga.idVaga).subscribe(
+          () => {
+            this.buscarVagas();
+          },
+          (error) => {
+            console.error('Erro ao excluir vaga', error);
+          }
+        );
       }
-    );
+    });
   }
 }

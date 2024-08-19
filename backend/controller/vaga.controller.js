@@ -36,7 +36,20 @@ class VagaController {
       res.status(500).json({ msg: "Erro interno do servidor ao obter vagas da empresa." });
     }
   }
+  async obterVagaPorId(req, res) {
+    const { id } = req.params;
 
+    try {
+      const [rows] = await clientDB.query("SELECT * FROM vaga_empresa WHERE idVaga = ?", [id]);
+      if (rows.length < 1) {
+        return res.status(404).json({ msg: "Vaga não encontrada." });
+      }
+      res.json(rows[0]);
+    } catch (error) {
+      console.error("Erro ao obter vaga:", error);
+      res.status(500).json({ msg: "Erro interno do servidor ao obter vaga." });
+    }
+  }
   async obterVagas(req, res) {
     try {
       const [rows] = await clientDB.query("SELECT * FROM vaga_empresa");
@@ -53,13 +66,13 @@ class VagaController {
   }
 
   async criarVaga(req, res) {
-    const { tituloVaga, descVaga, fotoVaga, empresa_id } = req.body;
-    if (!tituloVaga || !descVaga || !fotoVaga || !empresa_id) {
+    const { tituloVaga, descVaga, fotoVaga, idEmpresa } = req.body;
+    if (!tituloVaga || !descVaga || !fotoVaga || !idEmpresaA) {
       return res.status(422).json({ msg: "Todos os campos são obrigatórios!" });
     }
 
     try {
-      const novaVaga = new VagaModel(tituloVaga, descVaga, fotoVaga, empresa_id);
+      const novaVaga = new VagaModel(tituloVaga, descVaga, fotoVaga, idEmpresa);
       await clientDB.query("INSERT INTO vaga_empresa SET ?", novaVaga);
       res.status(201).json({ msg: "Vaga criada com sucesso!" });
     } catch (error) {
@@ -70,15 +83,15 @@ class VagaController {
 
   async atualizarVaga(req, res) {
     const { id } = req.params;
-    const { tituloVaga, descVaga, fotoVaga, empresa_id } = req.body;
-    if (!tituloVaga || !descVaga || !fotoVaga || !empresa_id) {
+    const { tituloVaga, descVaga, fotoVaga, idEmpresa } = req.body;
+    if (!tituloVaga || !descVaga || !fotoVaga || !idEmpresa) {
       return res.status(422).json({ msg: "Todos os campos são obrigatórios!" });
     }
 
     try {
       const [result] = await clientDB.query(
         "UPDATE vaga_empresa SET tituloVaga = ?, descVaga = ?, fotoVaga = ?, idEmpresa = ? WHERE idEmpresa = ?",
-        [tituloVaga, descVaga, fotoVaga, empresa_id, id]
+        [tituloVaga, descVaga, fotoVaga, idEmpresa, id]
       );
       if (result.affectedRows === 0) {
         return res.status(404).json({ msg: "Vaga não encontrada." });
@@ -94,7 +107,7 @@ class VagaController {
     const { id } = req.params;
 
     try {
-      const [result] = await clientDB.query("DELETE FROM vaga_empresa WHERE idEmpresa = ?", [id]);
+      const [result] = await clientDB.query("DELETE FROM vaga_empresa WHERE idVaga = ?", [id]);
       if (result.affectedRows === 0) {
         return res.status(404).json({ msg: "Vaga não encontrada." });
       }
