@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -15,7 +15,7 @@ import { DetalharVagaDialogComponent } from './dialog/detalhar-vaga-dialog/detal
   templateUrl: './vagas-empresa.component.html',
   styleUrls: ['./vagas-empresa.component.css']
 })
-export class VagasEmpresaComponent implements OnInit {
+export class VagasEmpresaComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['idVaga', 'tituloVaga', 'acoes'];
   dataSource = new MatTableDataSource<any>();
   totalVagas: number = 0;
@@ -74,10 +74,11 @@ export class VagasEmpresaComponent implements OnInit {
         console.error('Erro ao buscar vagas', error);
         this.isLoading = false;
         this.hasError = true;
-        return of([])
+        return of([]);
       }
     );
   }
+
   editarVaga(vaga: any): void {
     const dialogRef = this.dialog.open(EditarVagaDialogComponent, {
       width: '400px',

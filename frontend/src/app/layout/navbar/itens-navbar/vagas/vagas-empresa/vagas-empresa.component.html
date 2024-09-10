@@ -1,53 +1,53 @@
 <app-navbar></app-navbar>
-<div class="container-fluid pt-5 pb-5 p-4">
-  <h2 class="text-decoration-underline">Gerenciamento de Vagas</h2>
-
-  <div class="d-flex justify-content-end mb-3">
-    <button mat-raised-button class="cor-branca btn" (click)="openDialog()">Nova Vaga +</button>
-  </div>
-
-  <div *ngIf="!isLoading && !hasError" class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" class="mat-table table table-striped" matSort>
-
-      <!-- Id da Vaga Column -->
-      <ng-container matColumnDef="idVaga">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="cor-branca">Id da Vaga</th>
-        <td mat-cell *matCellDef="let vaga">{{vaga.idVaga}}</td>
-      </ng-container>
-
-      <!-- Título da Vaga Column -->
-      <ng-container matColumnDef="tituloVaga">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="cor-branca">Título da Vaga</th>
-        <td mat-cell *matCellDef="let vaga">{{vaga.tituloVaga}}</td>
-      </ng-container>
-
-      <!-- Ações Column -->
-      <ng-container matColumnDef="acoes">
-        <th mat-header-cell *matHeaderCellDef class="cor-branca">Ações</th>
-        <td mat-cell *matCellDef="let vaga">
-          <button class="btn btn-color" (click)="verDetalhes(vaga)"><i class="fa-solid fa-eye"></i></button>
-          <button class="btn btn-secondary" (click)="editarVaga(vaga)"><i class="fa-solid fa-pencil"></i></button>
-          <button class="btn btn-danger " (click)="excluirVaga(vaga)"><i class="fa-solid fa-trash"></i></button>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-
-    <mat-paginator [length]="totalVagas" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
-    </mat-paginator>
-  </div>
-
-  <ng-template #loading>
-    <div class="loading-container">
-      <img src="assets/loading.gif" alt="Carregando" class="loading-image">
-      <p>Carregando...</p>
+<div class="container-fluid">
+  <div class="row align-items-center mb-3">
+    <div class="col-md-6 col-sm-12">
+      <h2>Gerenciamento de Vagas</h2>
     </div>
-  </ng-template>
+    <div class="col-md-6 col-sm-12 text-md-end text-sm-start">
+      <button type="button" class="btn btn-dark btn-sm" (click)="openDialog()">Nova Vaga +</button>
+    </div>
+  </div>
 
-  <div *ngIf="hasError && !isLoading" class="error-message">
-    <p>Não foi possível encontrar nenhuma vaga existente.</p>
+  <div class="row">
+    <div class="col-12">
+      <div *ngIf="isLoading" class="text-center my-5">
+        <div class="spinner-border text-dark" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="hasError" class="alert alert-danger text-center" role="alert">
+        Ocorreu um erro ao carregar as vagas. Tente novamente mais tarde.
+      </div>
+
+      <div *ngIf="!isLoading && !hasError">
+        <table class="table table-responsive table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Título</th>
+              <th scope="col">Data de Criação</th>
+              <th scope="col">Status</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let vaga of dataSource.data">
+              <th scope="row">{{ vaga.idVaga }}</th>
+              <td>{{ vaga.tituloVaga }}</td>
+              <td>{{ vaga.dataCriacao | date:'dd/MM/yyyy' }}</td>
+              <td>{{ vaga.statusVaga }}</td>
+              <td>
+                <button type="button" class="btn btn-primary btn-sm me-2" (click)="verDetalhes(vaga)">Ver</button>
+                <button type="button" class="btn btn-warning btn-sm me-2" (click)="editarVaga(vaga)">Editar</button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="excluirVaga(vaga)">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 <app-footer></app-footer>

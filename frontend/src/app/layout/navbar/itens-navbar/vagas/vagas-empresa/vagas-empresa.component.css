@@ -1,59 +1,23 @@
-/* styles.css ou estilos específicos para vagas-empresa.component.css */
 .container-fluid {
-  padding: 20px auto;
+  padding-top: 20px;
   background-color: white;
 }
 
-.list-group-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  border: 1px solid #ddd;
-  margin-bottom: 10px;
-  border-radius: 5px;
+h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-.list-group-item span {
-  flex-grow: 1;
+.table-responsive {
+  margin-top: 20px;
 }
 
 .btn {
-  margin-left: 5px;
-}
-
-.btn-color {
-  background-color: #c16747;
-  color: white;
-  border-radius: 10px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transition: 0.5s all ease;
-}
-.btn-color:hover {
-  background-color: #cf623a;
-}
-
-.cor-branca{
-  color: whitesmoke;
-}
-
-.loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
-}
-
-.loading-image {
   margin-bottom: 10px;
 }
-.error-message {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  color: red;
-  font-weight: bold;
+
+@media (max-width: 768px) {
+  .btn-sm {
+    margin-top: 10px;
+  }
 }

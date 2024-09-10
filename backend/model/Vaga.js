@@ -1,11 +1,14 @@
 class VagaModel {
-    constructor(tituloVaga, descVaga, fotoVaga, empresa_id) {
-      this.tituloVaga = tituloVaga;
-      this.descVaga = descVaga;
-      this.fotoVaga = fotoVaga;
-      this.empresa_id = empresa_id;
-    }
+  constructor(tituloVaga, descVaga, fotoVaga, idEmpresa, statusVaga, dataCriacao, valorPagamento, idUsuario = null) {
+    this.tituloVaga = tituloVaga;
+    this.descVaga = descVaga;
+    this.fotoVaga = fotoVaga;
+    this.idEmpresa = idEmpresa;
+    this.statusVaga = statusVaga;
+    this.dataCriacao = dataCriacao;
+    this.valorPagamento = valorPagamento;
+    this.idUsuario = idUsuario; 
   }
-  
-  module.exports = VagaModel;
-  
+}
+
+module.exports = VagaModel;
