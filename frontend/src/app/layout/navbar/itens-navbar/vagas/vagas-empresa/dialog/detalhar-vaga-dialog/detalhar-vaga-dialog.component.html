@@ -1,21 +1,21 @@
-<h1 mat-dialog-title>Detalharcd Vaga</h1>
-<div class="detalhe-vaga-container">
-  <form [formGroup]="vagaForm">
-    <mat-form-field appearance="fill">
-      <mat-label>Título da Vaga</mat-label>
-      <input matInput formControlName="tituloVaga" readonly>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Descrição da Vaga</mat-label>
-      <textarea matInput formControlName="descVaga" rows="5" readonly></textarea>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Foto da Vaga</mat-label>
-      <input matInput formControlName="fotoVaga" readonly>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>ID da Empresa</mat-label>
-      <input matInput formControlName="idEmpresa" readonly>
-    </mat-form-field>
-  </form>
+<div class="detalhar-vaga-dialog">
+  <div *ngIf="vaga">
+    <h2>{{ vaga.tituloVaga }}</h2>
+    <p><strong>Descrição:</strong> {{ vaga.descVaga }}</p>
+    <p><strong>Localização:</strong> {{ vaga.localizacaoVaga }}</p>
+    <p><strong>Valor do Pagamento:</strong> {{ vaga.valorPagamento | currency:'BRL' }}</p>
+    <p><strong>Status da Vaga:</strong>
+      <span
+        [ngClass]="{ 'status-aberta': vaga.statusVaga === 'Aberta', 'status-preenchida': vaga.statusVaga === 'Preenchida' }">
+        {{ vaga.statusVaga }}
+      </span>
+    </p>
+    <p><strong>Data de Criação:</strong> {{ vaga.dataCriacao | date:'short' }}</p>
+    <div *ngIf="usuario && vaga.statusVaga === 'Preenchida'">
+      <h3>Informações do Candidato</h3>
+      <p><strong>Nome:</strong> {{ usuario.nomeUsuario }}</p>
+      <p><strong>Email:</strong> {{ usuario.emailUsuario }}</p>
+      <p><strong>CEP:</strong> {{ usuario.cepUsuario }}</p>
+    </div>
+  </div>
 </div>

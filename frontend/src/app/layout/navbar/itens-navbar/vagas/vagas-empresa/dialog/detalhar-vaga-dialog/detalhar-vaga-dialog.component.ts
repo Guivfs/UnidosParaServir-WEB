@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { VagasService } from '../../../vagas.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-detalhar-vaga-dialog',
@@ -9,41 +9,30 @@ import { VagasService } from '../../../vagas.service';
   styleUrls: ['./detalhar-vaga-dialog.component.css']
 })
 export class DetalharVagaDialogComponent implements OnInit {
-  vagaForm: FormGroup;
+  vaga: any;
+  usuario: any;
+  id!: number;
 
   constructor(
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private vagasService: VagasService
-  ) {
-    this.vagaForm = this.fb.group({
-      idVaga: [''],
-      tituloVaga: [''],
-      descVaga: [''],
-      fotoVaga: [''],
-      idEmpresa: ['']
-    });
-  }
+    private vagasService: VagasService,
+    private datePipe: DatePipe,
+    @Inject(MAT_DIALOG_DATA) public data: any // Recebendo os dados passados pelo matDialog
+  ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      if (id) {
-        this.getVagaDetalhe(id);
-      }
-    });
+    this.id = this.data.idVaga; // Pegando o ID da vaga a partir dos dados recebidos
+    this.obterVaga();
   }
 
-  getVagaDetalhe(id: string): void {
-    this.vagasService.getVagaById(id).subscribe(vaga => {
-      this.vagaForm.patchValue({
-        idVaga: vaga.idVaga,
-        tituloVaga: vaga.tituloVaga,
-        descVaga: vaga.descVaga,
-        fotoVaga: vaga.fotoVaga,
-        idEmpresa: vaga.idEmpresa
-      });
-      console.log(vaga);
+  obterVaga(): void {
+    this.vagasService.getVagaById(this.id.toString()).subscribe((data) => {
+      this.vaga = data.vaga;
+      this.usuario = data.usuario;
+      
+      // Formata a data no formato brasileiro
+      this.vaga.dataCriacao = this.datePipe.transform(this.vaga.dataCriacao, 'dd/MM/yyyy');
+    }, (error) => {
+      console.error('Erro ao buscar detalhes da vaga:', error);
     });
   }
 }

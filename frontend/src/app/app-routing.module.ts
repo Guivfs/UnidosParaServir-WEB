@@ -11,6 +11,7 @@ import { QuemSomosNosComponent } from './layout/navbar/itens-navbar/quem-somos-n
 import { ParaEmpresasComponent } from './layout/navbar/itens-navbar/para-empresas/para-empresas.component';
 import { VagasEmpresaComponent } from './layout/navbar/itens-navbar/vagas/vagas-empresa/vagas-empresa.component';
 import { VagasUsuarioComponent } from './layout/navbar/itens-navbar/vagas/vagas-usuario/vagas-usuario.component';
+import { DetalharVagaDialogComponent } from './layout/navbar/itens-navbar/vagas/vagas-empresa/dialog/detalhar-vaga-dialog/detalhar-vaga-dialog.component';
 
 const routes: Routes = [
   { path: 'login', component: AuthenticationComponent },
@@ -19,8 +20,9 @@ const routes: Routes = [
   { path: 'perfil/detalhar/:id', component: DetailsAccountComponent },
   { path: 'quem-somos-nos', component: QuemSomosNosComponent },
   { path: 'para-empresas', component:ParaEmpresasComponent},
-  { path: 'vaga-empresa', component:VagasEmpresaComponent},
   { path: 'vaga-usuario', component:VagasUsuarioComponent},
+  { path: 'vaga-empresa', component:VagasEmpresaComponent},
+  { path: 'detalhar-vaga/:id', component: DetalharVagaDialogComponent },
   { path: 'home', component: HomeComponent }, // Definindo a home como padrão
   { path: '**', redirectTo: 'home' } // Redirecionando qualquer rota inválida para a home
 ];

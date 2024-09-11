@@ -1,5 +1,5 @@
 class VagaModel {
-  constructor(tituloVaga, descVaga, fotoVaga, idEmpresa, statusVaga, dataCriacao, valorPagamento, idUsuario = null) {
+  constructor(tituloVaga, descVaga, fotoVaga, idEmpresa, statusVaga, dataCriacao, valorPagamento, localizacaoVaga) {
     this.tituloVaga = tituloVaga;
     this.descVaga = descVaga;
     this.fotoVaga = fotoVaga;
@@ -7,7 +7,7 @@ class VagaModel {
     this.statusVaga = statusVaga;
     this.dataCriacao = dataCriacao;
     this.valorPagamento = valorPagamento;
-    this.idUsuario = idUsuario; 
+    this.localizacaoVaga = localizacaoVaga;
   }
 }
 

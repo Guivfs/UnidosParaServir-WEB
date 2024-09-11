@@ -1,39 +1,15 @@
-/* Personalizando MatDialog */
-.mat-dialog-container {
-    background-color: #2e2e2e !important; /* Fundo cinza escuro */
-    color: #ffffff !important; /* Texto branco */
-    border: 1px solid #c16747 !important; /* Borda laranja */
-  }
-  
-  /* Personalizando MatFormField */
-  .mat-form-field {
-    color: #ffffff !important; /* Texto branco */
-  }
-  
-  .mat-form-field-label {
-    color: #c16747 !important; /* Rótulo laranja */
-  }
-  
-  .mat-form-field-underline {
-    background-color: #c16747 !important; /* Sub-linha laranja */
-  }
-  
-  .mat-form-field-ripple {
-    background-color: #c16747 !important; /* Efeito ripple laranja */
-  }
-  
-  /* Personalizando o botão do MatDialog */
-  .mat-dialog-actions .mat-button {
-    background-color: #c16747 !important; /* Fundo laranja */
-    color: #ffffff !important; /* Texto branco */
-  }
-  
-  .mat-dialog-actions .mat-button:hover {
-    background-color: #a85636 !important; /* Fundo laranja escuro no hover */
-  }
-  
-  /* Personalizando o botão de fechar do MatDialog */
-  .mat-dialog-close {
-    color: #c16747 !important; /* Cor do ícone de fechar laranja */
-  }
-  
+.status-aberta {
+  color: green;
+  font-weight: bold;
+}
+
+.status-preenchida {
+  color: red;
+  font-weight: bold;
+}
+
+.detalhar-vaga-dialog {
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
+}

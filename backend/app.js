@@ -6,7 +6,6 @@ const cors = require('cors');
 // const swaggerDocs = require('./swagger.json');
 // const outputFile = './swagger_output.json'
 
-const jwt = require('jsonwebtoken');
 const allRoutes = require('./routes/index.routes.js');
 const mysql = require('mysql2');
 const { config } = require('dotenv');
@@ -38,10 +37,11 @@ clientDB.connect((erro) => {
  app.use("/", (req, res) => {
     return res.status(200).json({ msg: "Bem-vindo à rota padrão!" })});
 
+app.use((req, res) => {
+    res.status(404).json({ msg: "Rota não encontrada!" });});
+        
 // futuramente do rota Swagger
 // app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-
-app.use(allRoutes);
 
 app.listen(8080, () => console.log("Servidor está rodando na porta: 8080 -> http://localhost:8080/"));
 

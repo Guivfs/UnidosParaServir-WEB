@@ -29,6 +29,7 @@
               <th scope="col">Título</th>
               <th scope="col">Data de Criação</th>
               <th scope="col">Status</th>
+              <th scope="col">Localização</th>
               <th scope="col">Ações</th>
             </tr>
           </thead>
@@ -38,6 +39,7 @@
               <td>{{ vaga.tituloVaga }}</td>
               <td>{{ vaga.dataCriacao | date:'dd/MM/yyyy' }}</td>
               <td>{{ vaga.statusVaga }}</td>
+              <td>{{ vaga.localizacaoVaga }}</td>
               <td>
                 <button type="button" class="btn btn-primary btn-sm me-2" (click)="verDetalhes(vaga)">Ver</button>
                 <button type="button" class="btn btn-warning btn-sm me-2" (click)="editarVaga(vaga)">Editar</button>

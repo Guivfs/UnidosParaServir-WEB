@@ -38,19 +38,70 @@ class VagaController {
   }
 
   async obterVagaPorId(req, res) {
-    const { id } = req.params;
-
+    const { id } = req.params; // ID da vaga
+  
     try {
-      const [rows] = await clientDB.query("SELECT * FROM vaga WHERE idVaga = ?", [id]);
-      if (rows.length < 1) {
-        return res.status(404).json({ msg: "Vaga não encontrada." });
+      // Busca a vaga pelo ID
+      const [vaga] = await clientDB.query('SELECT * FROM vaga WHERE idVaga = ?', [id]);
+  
+      // Verifica se a vaga foi encontrada
+      if (!vaga.length) {
+        return res.status(404).json({ msg: 'Vaga não encontrada!' });
       }
-      res.json(rows[0]);
+  
+      const vagaDetalhes = vaga[0];
+  
+      // Define o status da vaga como "Preenchida" ou "Aberta"
+      const statusDaVaga = vagaDetalhes.statusVaga === "Preenchida" ? "Preenchida" : "Aberta";
+  
+      // Se a vaga está preenchida, buscar os dados do usuário
+      if (vagaDetalhes.statusVaga === "Preenchida") {
+        const [usuario] = await clientDB.query(
+          'SELECT nomeUsuario, emailUsuario, cepUsuario FROM usuario WHERE idUsuario = ?',
+          [vagaDetalhes.idUsuario]
+        );
+  
+        return res.status(200).json({
+          vaga: {
+            idVaga: vagaDetalhes.idVaga,
+            tituloVaga: vagaDetalhes.tituloVaga,
+            descVaga: vagaDetalhes.descVaga,
+            fotoVaga: vagaDetalhes.fotoVaga,
+            localizacaoVaga: vagaDetalhes.localizacaoVaga,
+            valorPagamento: vagaDetalhes.valorPagamento,
+            statusVaga: statusDaVaga,
+            dataCriacao: vagaDetalhes.dataCriacao,
+          },
+          usuario: usuario.length
+            ? {
+                nomeUsuario: usuario[0].nomeUsuario,
+                emailUsuario: usuario[0].emailUsuario,
+                cepUsuario: usuario[0].cepUsuario,
+              }
+            : null,
+        });
+      } else {
+        // Se a vaga está aberta, retorna apenas os dados da vaga
+        return res.status(200).json({
+          vaga: {
+            idVaga: vagaDetalhes.idVaga,
+            tituloVaga: vagaDetalhes.tituloVaga,
+            descVaga: vagaDetalhes.descVaga,
+            fotoVaga: vagaDetalhes.fotoVaga,
+            localizacaoVaga: vagaDetalhes.localizacaoVaga,
+            valorPagamento: vagaDetalhes.valorPagamento,
+            statusVaga: statusDaVaga,
+            dataCriacao: vagaDetalhes.dataCriacao,
+          },
+          usuario: null,
+        });
+      }
     } catch (error) {
-      console.error("Erro ao obter vaga:", error);
-      res.status(500).json({ msg: "Erro interno do servidor ao obter vaga." });
+      console.error('Erro ao buscar vaga:', error);
+      return res.status(500).json({ msg: 'Erro ao buscar vaga!' });
     }
   }
+  
 
   async obterVagas(req, res) {
     try {
@@ -68,13 +119,14 @@ class VagaController {
   }
 
   async criarVaga(req, res) {
-    const { tituloVaga, descVaga, fotoVaga, idEmpresa, statusVaga, dataCriacao, valorPagamento } = req.body;
-    if (!tituloVaga || !descVaga || !fotoVaga || !idEmpresa || !statusVaga || !dataCriacao || !valorPagamento) {
+    const { tituloVaga, descVaga, fotoVaga, idEmpresa, statusVaga, dataCriacao, valorPagamento, localizacaoVaga } = req.body;
+  
+    if (!tituloVaga || !descVaga || !fotoVaga || !idEmpresa || !statusVaga || !dataCriacao || !valorPagamento || !localizacaoVaga) {
       return res.status(422).json({ msg: "Todos os campos são obrigatórios!" });
     }
-
+  
     try {
-      const novaVaga = new VagaModel(tituloVaga, descVaga, fotoVaga, idEmpresa, statusVaga, dataCriacao, valorPagamento);
+      const novaVaga = new VagaModel(tituloVaga, descVaga, fotoVaga, idEmpresa, statusVaga, dataCriacao, valorPagamento, localizacaoVaga);
       await clientDB.query("INSERT INTO vaga SET ?", novaVaga);
       res.status(201).json({ msg: "Vaga criada com sucesso!" });
     } catch (error) {
@@ -85,20 +137,22 @@ class VagaController {
 
   async atualizarVaga(req, res) {
     const { id } = req.params;
-    const { tituloVaga, descVaga, fotoVaga, idEmpresa, statusVaga, dataCriacao, valorPagamento, idUsuario } = req.body;
-
-    if (!tituloVaga || !descVaga || !fotoVaga || !idEmpresa || !statusVaga || !dataCriacao || !valorPagamento) {
+    const { tituloVaga, descVaga, fotoVaga, idEmpresa, statusVaga, dataCriacao, valorPagamento, localizacaoVaga, idUsuario } = req.body;
+  
+    if (!tituloVaga || !descVaga || !fotoVaga || !idEmpresa || !statusVaga || !dataCriacao || !valorPagamento || !localizacaoVaga) {
       return res.status(422).json({ msg: "Todos os campos são obrigatórios!" });
     }
-
+  
     try {
       const [result] = await clientDB.query(
-        "UPDATE vaga SET tituloVaga = ?, descVaga = ?, fotoVaga = ?, idEmpresa = ?, statusVaga = ?, dataCriacao = ?, valorPagamento = ?, idUsuario = ? WHERE idVaga = ?",
-        [tituloVaga, descVaga, fotoVaga, idEmpresa, statusVaga, dataCriacao, valorPagamento, idUsuario, id]
+        "UPDATE vaga SET tituloVaga = ?, descVaga = ?, fotoVaga = ?, idEmpresa = ?, statusVaga = ?, dataCriacao = ?, valorPagamento = ?, localizacaoVaga = ?, idUsuario = ? WHERE idVaga = ?",
+        [tituloVaga, descVaga, fotoVaga, idEmpresa, statusVaga, dataCriacao, valorPagamento, localizacaoVaga, idUsuario, id]
       );
+  
       if (result.affectedRows === 0) {
         return res.status(404).json({ msg: "Vaga não encontrada." });
       }
+  
       res.status(200).json({ msg: "Vaga atualizada com sucesso!" });
     } catch (error) {
       console.error("Erro ao atualizar vaga:", error);

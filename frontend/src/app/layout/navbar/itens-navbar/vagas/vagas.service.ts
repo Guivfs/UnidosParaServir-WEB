@@ -7,40 +7,51 @@ import { enviroment } from '../../../../../enviroments/enviroment';
   providedIn: 'root'
 })
 export class VagasService {
-  private apiUrl = `${enviroment.baseUrlBackend}/vagas`
+  private apiUrl = `${enviroment.baseUrlBackend}/vagas`;
 
   constructor(private http: HttpClient) { }
 
   // Obter todas as vagas
   getVagas(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}`);
+    return this.http.get<any>(`${this.apiUrl}/listar`);
   }
+
   // Obter vaga pelo id
   getVagaById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/buscar/${id}`);
   }
+
+  // Obter vagas por empresa
+  getVagasByEmpresa(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any>(`${this.apiUrl}/buscar-vagas-empresa/${id}`, { headers });
+  }
+
   // Criar nova vaga
   createVaga(vaga: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/registrar`, vaga);
   }
 
   // Atualizar vaga existente
-  updateVaga(empresa_id: number, vaga: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/atualizar/${empresa_id}`, vaga);
+  updateVaga(idVaga: number, vaga: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/atualizar/${idVaga}`, vaga);
   }
 
   // Deletar vaga
-  deleteVaga(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/apagar/${id}`);
+  deleteVaga(idVaga: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/apagar/${idVaga}`);
   }
 
-  // Obter vagas por empresa
-  getVagasByEmpresa(): Observable<any> {
+  // Preencher vaga (usuário logado preenche uma vaga)
+  preencherVaga(idVaga: number): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
 
-    return this.http.get<any>(`${this.apiUrl}/buscar-vagas-empresa`, { headers });
+    return this.http.put<any>(`${this.apiUrl}/preencher/${idVaga}`, {}, { headers });
   }
 }
