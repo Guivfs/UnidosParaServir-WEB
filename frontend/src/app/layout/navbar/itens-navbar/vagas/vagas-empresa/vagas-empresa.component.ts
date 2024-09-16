@@ -83,7 +83,7 @@ export class VagasEmpresaComponent implements OnInit, AfterViewInit {
   editarVaga(vaga: any): void {
     const dialogRef = this.dialog.open(EditarVagaDialogComponent, {
       width: '400px',
-      data: vaga
+      data: {vaga}  
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -91,9 +91,11 @@ export class VagasEmpresaComponent implements OnInit, AfterViewInit {
         this.vagasService.updateVaga(vaga.idVaga, result).subscribe(
           () => {
             this.buscarVagas(1); // Substitua pelo ID da empresa correto
+            this.atualizarPagina();
           },
           (error) => {
             console.error('Erro ao editar vaga', error);
+            this.atualizarPagina();
           }
         );
       }
@@ -121,5 +123,9 @@ export class VagasEmpresaComponent implements OnInit, AfterViewInit {
         );
       }
     });
+  }
+  atualizarPagina(): void {
+    // Recarregue a página ou atualize os dados conforme necessário
+    window.location.reload(); // Recarrega a página
   }
 }

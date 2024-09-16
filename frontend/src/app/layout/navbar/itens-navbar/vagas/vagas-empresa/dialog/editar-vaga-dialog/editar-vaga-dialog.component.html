@@ -1,21 +1,44 @@
-<h1 mat-dialog-title>Editar Vaga</h1>
-<div mat-dialog-content>
-  <form [formGroup]="vagaForm">
-    <mat-form-field>
+<div class="dialog-container">
+  <h2>Editar Vaga</h2>
+
+  <form [formGroup]="editarVagaForm" (ngSubmit)="atualizarVaga()">
+    <mat-form-field appearance="fill">
       <mat-label>Título da Vaga</mat-label>
       <input matInput formControlName="tituloVaga">
     </mat-form-field>
-    <mat-form-field>
+
+    <mat-form-field appearance="fill">
       <mat-label>Descrição da Vaga</mat-label>
       <textarea matInput formControlName="descVaga"></textarea>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Foto da Vaga</mat-label>
-      <input matInput formControlName="fotoVaga">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Localização</mat-label>
+      <input matInput formControlName="localizacaoVaga">
     </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Valor do Pagamento</mat-label>
+      <input matInput type="number" formControlName="valorPagamento">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Data de Criação</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dataCriacao">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    
+    <div *ngIf="vaga.statusVaga === 'Preenchida'">
+      <p>Usuário atual: {{ usuario?.nomeUsuario }}</p>
+      <button mat-raised-button color="warn" (click)="demitirUsuario()">Demitir Usuário</button>
+    </div>
+
+    <div class="button">
+      <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+    </div>
+    <div class="button">
+      <button mat-raised-button color="primary" type="submit">Salvar</button>
+    </div>
   </form>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button color="primary" (click)="salvarAlteracoes()">Salvar</button>
 </div>

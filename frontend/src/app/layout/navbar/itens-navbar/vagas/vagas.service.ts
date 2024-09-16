@@ -48,10 +48,12 @@ export class VagasService {
   // Preencher vaga (usuário logado preenche uma vaga)
   preencherVaga(idVaga: number): Observable<any> {
     const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-
+    const headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
     return this.http.put<any>(`${this.apiUrl}/preencher/${idVaga}`, {}, { headers });
   }
+
+  demitirUsuario(idVaga: number): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/demitir/${idVaga}`, {});
+  }
+  
 }

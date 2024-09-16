@@ -1,0 +1,37 @@
+/* Definir fundo branco e texto preto */
+mat-form-field {
+  background-color: white;
+  color: black;
+}
+
+mat-form-field input,
+mat-form-field textarea {
+  color: black;
+}
+
+mat-form-field .mat-form-field-label {
+  color: black;
+}
+
+/* Botões */
+button {
+  color: white;
+}
+
+button.mat-raised-button {
+  background-color: #c16747;
+}
+
+button.mat-button {
+  color: #c16747;
+}
+
+.dialog-container {
+  background-color: white;
+  color: black;
+  padding: 20px;
+}
+
+p {
+  color: black;
+}

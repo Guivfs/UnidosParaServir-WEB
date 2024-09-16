@@ -11,5 +11,6 @@ router.post('/vagas/registrar', vagaController.criarVaga);
 router.put('/vagas/atualizar/:id', vagaController.atualizarVaga);
 router.delete('/vagas/apagar/:id', vagaController.deletarVaga);
 router.put('/vagas/preencher/:id', vagaController.preencherVaga);
+router.put('/vagas/demitir/:id', vagaController.demitirUsuario);
 
 module.exports = router;

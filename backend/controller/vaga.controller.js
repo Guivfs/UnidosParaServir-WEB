@@ -2,6 +2,7 @@ const { config } = require("dotenv");
 const mysql = require("mysql2/promise");
 const jwt = require("jsonwebtoken");
 const VagaModel = require("../model/Vaga");
+const { format } = require('date-fns');
 
 config();
 
@@ -135,30 +136,44 @@ class VagaController {
     }
   }
 
-  async atualizarVaga(req, res) {
-    const { id } = req.params;
-    const { tituloVaga, descVaga, fotoVaga, idEmpresa, statusVaga, dataCriacao, valorPagamento, localizacaoVaga, idUsuario } = req.body;
-  
-    if (!tituloVaga || !descVaga || !fotoVaga || !idEmpresa || !statusVaga || !dataCriacao || !valorPagamento || !localizacaoVaga) {
-      return res.status(422).json({ msg: "Todos os campos são obrigatórios!" });
-    }
-  
-    try {
-      const [result] = await clientDB.query(
-        "UPDATE vaga SET tituloVaga = ?, descVaga = ?, fotoVaga = ?, idEmpresa = ?, statusVaga = ?, dataCriacao = ?, valorPagamento = ?, localizacaoVaga = ?, idUsuario = ? WHERE idVaga = ?",
-        [tituloVaga, descVaga, fotoVaga, idEmpresa, statusVaga, dataCriacao, valorPagamento, localizacaoVaga, idUsuario, id]
-      );
-  
-      if (result.affectedRows === 0) {
-        return res.status(404).json({ msg: "Vaga não encontrada." });
-      }
-  
-      res.status(200).json({ msg: "Vaga atualizada com sucesso!" });
-    } catch (error) {
-      console.error("Erro ao atualizar vaga:", error);
-      res.status(500).json({ msg: "Erro interno do servidor ao atualizar vaga." });
-    }
+
+
+
+
+   async atualizarVaga(req, res) {
+  const { id } = req.params;
+  let { tituloVaga, descVaga, statusVaga, dataCriacao, valorPagamento, localizacaoVaga, idEmpresa, idUsuario } = req.body;
+
+  // Se idUsuario for undefined, define como null
+  idUsuario = idUsuario !== undefined ? idUsuario : null;
+
+  console.log({tituloVaga, descVaga, statusVaga, dataCriacao, valorPagamento, localizacaoVaga, idEmpresa, idUsuario});
+
+  if (!tituloVaga || !descVaga || !statusVaga || !valorPagamento || !localizacaoVaga || !idEmpresa) {
+    return res.status(422).json({ msg: "Todos os campos são obrigatórios!" });
   }
+
+  dataCriacao = format(new Date(dataCriacao), 'yyyy-MM-dd HH:mm:ss');
+
+  try {
+    const [result] = await clientDB.query(
+      "UPDATE vaga SET tituloVaga = ?, descVaga = ?, statusVaga = ?, dataCriacao = ?, valorPagamento = ?, localizacaoVaga = ?, idEmpresa = ?, idUsuario = ? WHERE idVaga = ?",
+      [tituloVaga, descVaga, statusVaga, dataCriacao, valorPagamento, localizacaoVaga, idEmpresa, idUsuario, id]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ msg: "Vaga não encontrada." });
+    }
+
+    res.status(200).json({ msg: "Vaga atualizada com sucesso!" });
+  } catch (error) {
+    console.error("Erro ao atualizar vaga:", error);
+    res.status(500).json({ msg: "Erro interno do servidor ao atualizar vaga." });
+  }
+}
+
+  
+  
 
   async deletarVaga(req, res) {
     const { id } = req.params;
@@ -200,6 +215,20 @@ class VagaController {
     }
   }
 
+  async demitirUsuario(req, res) {
+    const { idVaga } = req.params;
+  
+    try {
+      // Atualiza o status da vaga para "Aberta" e remove o idUsuario
+      await clientDB.query('UPDATE vaga SET statusVaga = "Aberta", idUsuario = NULL WHERE idVaga = ?', [idVaga]);
+  
+      return res.status(200).json({ msg: 'Usuário demitido e vaga reaberta!' });
+    } catch (error) {
+      console.error('Erro ao demitir usuário:', error);
+      return res.status(500).json({ msg: 'Erro ao demitir usuário!' });
+    }
+  }
+  
 }
 
 module.exports = VagaController;
