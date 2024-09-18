@@ -114,16 +114,15 @@ export class VagasEmpresaComponent implements OnInit, AfterViewInit {
       width: '400px',
       data: vaga
     });
-
+  
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.vagasService.deleteVaga(vaga.idVaga).subscribe(
-          () => this.buscarVagas(1), // Substitua pelo ID da empresa correto
-          (error) => console.error('Erro ao excluir vaga', error)
-        );
+        // Após fechar o diálogo com sucesso, apenas chama buscarVagas novamente
+        this.buscarVagas(1); // Substitua pelo ID correto da empresa
       }
     });
   }
+  
   atualizarPagina(): void {
     // Recarregue a página ou atualize os dados conforme necessário
     window.location.reload(); // Recarrega a página
