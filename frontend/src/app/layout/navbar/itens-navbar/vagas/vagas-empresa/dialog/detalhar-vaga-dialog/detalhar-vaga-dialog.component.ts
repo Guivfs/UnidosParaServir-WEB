@@ -29,8 +29,10 @@ export class DetalharVagaDialogComponent implements OnInit {
       this.vaga = data.vaga;
       this.usuario = data.usuario;
       
-      // Formata a data no formato brasileiro
-      this.vaga.dataCriacao = this.datePipe.transform(this.vaga.dataCriacao, 'dd/MM/yyyy');
+      // Verifica se dataCriacao está presente e formata se necessário
+      if (this.vaga.dataCriacao) {
+        this.vaga.dataCriacao = this.datePipe.transform(new Date(this.vaga.dataCriacao), 'dd/MM/yyyy');
+      }
     }, (error) => {
       console.error('Erro ao buscar detalhes da vaga:', error);
     });
