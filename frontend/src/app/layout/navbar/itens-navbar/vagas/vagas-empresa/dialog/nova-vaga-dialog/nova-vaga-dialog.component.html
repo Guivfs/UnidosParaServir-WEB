@@ -1,21 +1,59 @@
-<h1 mat-dialog-title>Nova Vaga</h1>
-<div mat-dialog-content>
+<h1 mat-dialog-title class="dialog-title">Criar Nova Vaga</h1>
+
+<div mat-dialog-content class="dialog-content pt-3">
   <form [formGroup]="vagaForm">
-    <mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
       <mat-label>Título da Vaga</mat-label>
-      <input matInput formControlName="tituloVaga">
+      <input matInput formControlName="tituloVaga" required>
+      <mat-error *ngIf="vagaForm.get('tituloVaga')?.hasError('required')">
+        Título é obrigatório
+      </mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Descrição da Vaga</mat-label>
-      <textarea matInput formControlName="descVaga"></textarea>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput formControlName="descVaga" rows="4" required></textarea>
+      <mat-error *ngIf="vagaForm.get('descVaga')?.hasError('required')">
+        Descrição é obrigatória
+      </mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Foto da Vaga</mat-label>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Foto (URL ou nome do arquivo)</mat-label>
       <input matInput formControlName="fotoVaga">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Localização</mat-label>
+      <input matInput formControlName="localizacaoVaga" required>
+      <mat-error *ngIf="vagaForm.get('localizacaoVaga')?.hasError('required')">
+        Localização é obrigatória
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Modalidade</mat-label>
+      <mat-select formControlName="modalidadeVaga" required>
+        <mat-option value="Presencial">Presencial</mat-option>
+        <mat-option value="Remoto">Remoto</mat-option>
+        <mat-option value="Híbrido">Híbrido</mat-option>
+      </mat-select>
+      <mat-error *ngIf="vagaForm.get('modalidadeVaga')?.hasError('required')">
+        Modalidade é obrigatória
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Valor do Pagamento</mat-label>
+      <input matInput type="number" formControlName="valorPagamento" required>
+      <mat-error *ngIf="vagaForm.get('valorPagamento')?.hasError('required')">
+        Valor é obrigatório
+      </mat-error>
     </mat-form-field>
   </form>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button color="primary" (click)="criarVaga()">Criar</button>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()" class="btn-cancel">Cancelar</button>
+  <button mat-raised-button color="primary" [disabled]="vagaForm.invalid" (click)="onSubmit()">Criar</button>
 </div>

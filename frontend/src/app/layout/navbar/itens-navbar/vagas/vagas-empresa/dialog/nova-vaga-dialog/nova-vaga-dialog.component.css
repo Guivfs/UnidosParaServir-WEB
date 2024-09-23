@@ -1,0 +1,26 @@
+.full-width {
+    width: 100%;
+  }
+  
+  .mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .mat-dialog-content mat-form-field {
+    width: 100%;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .mat-dialog-content {
+      padding: 10px;
+    }
+  
+    .mat-dialog-actions {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  

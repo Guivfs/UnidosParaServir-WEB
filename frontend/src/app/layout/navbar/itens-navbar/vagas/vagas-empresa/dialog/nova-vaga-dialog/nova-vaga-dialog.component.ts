@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VagasService } from '../../../vagas.service';
 
 @Component({
@@ -8,19 +8,24 @@ import { VagasService } from '../../../vagas.service';
   templateUrl: './nova-vaga-dialog.component.html',
   styleUrls: ['./nova-vaga-dialog.component.css']
 })
-export class NovaVagaDialogComponent {
-  vagaForm: FormGroup;
+export class NovaVagaDialogComponent implements OnInit {
+  vagaForm!: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<NovaVagaDialogComponent>,
-    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private formBuilder: FormBuilder,
     private vagasService: VagasService
-  ) {
-    this.vagaForm = this.fb.group({
-      tituloVaga: [''],
-      descVaga: [''],
+  ) { }
+
+  ngOnInit(): void {
+    this.vagaForm = this.formBuilder.group({
+      tituloVaga: ['', Validators.required],
+      descVaga: ['', Validators.required],
       fotoVaga: [''],
-      idEmpresa: ['']
+      localizacaoVaga: ['', Validators.required],
+      modalidadeVaga: ['', Validators.required],
+      valorPagamento: [0, Validators.required]
     });
   }
 
@@ -28,13 +33,25 @@ export class NovaVagaDialogComponent {
     this.dialogRef.close();
   }
 
-  criarVaga(): void {
+  onSubmit(): void {
     if (this.vagaForm.valid) {
-      console.log("vaga:",this.vagaForm)
-      this.vagasService.createVaga(this.vagaForm.value).subscribe(
-        () => this.dialogRef.close(true),
-        (error) => console.error('Erro ao criar vaga', error)
-      );
+      const vaga = {
+        ...this.vagaForm.value,
+        idEmpresa: 1,  // Aqui você pode passar o id da empresa dinamicamente
+        statusVaga: 'aberta',
+        dataCriacao: new Date().toISOString().split('T')[0] // Define a data de criação atual
+      };
+      
+      this.vagasService.createVaga(vaga).subscribe(() => {
+        console.log("Vaga criada com sucesso");
+        this.dialogRef.close(true);
+      }, error => {
+        console.error('Erro ao criar vaga', error);
+        window.alert("Houve um erro interno no servidor")
+      });
+    } else {
+      console.log("Formulário inválido");
+      window.alert("O formulário inválido")
     }
   }
 }

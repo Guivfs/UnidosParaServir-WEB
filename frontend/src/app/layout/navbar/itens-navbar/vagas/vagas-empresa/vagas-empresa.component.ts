@@ -27,7 +27,7 @@ export class VagasEmpresaComponent implements OnInit, AfterViewInit {
   constructor(public dialog: MatDialog, private vagasService: VagasService) { }
 
   ngOnInit(): void {
-    const empresaId = 1; // Substitua pelo ID da empresa correto ou obtenha de forma dinâmica
+    const empresaId = 1;
     this.buscarVagas(empresaId);
   }
 
@@ -40,23 +40,19 @@ export class VagasEmpresaComponent implements OnInit, AfterViewInit {
       width: '400px',
       data: { tituloVaga: '', descVaga: '', fotoVaga: '' }
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.vagasService.createVaga(result).subscribe(
-          () => this.buscarVagas(1), // Substitua pelo ID da empresa correto
-          (error) => console.error('Erro ao criar vaga', error)
-        );
+        this.buscarVagas(1);
       }
     });
   }
 
+
   buscarVagas(empresaId: number): void {
     this.isLoading = true;
     this.hasError = false;
-
     this.vagasService.getVagasByEmpresa(empresaId).pipe(
-      timeout(10000), // 10 segundos
+      timeout(10000),
       catchError(error => {
         this.hasError = true;
         this.isLoading = false;
@@ -80,27 +76,19 @@ export class VagasEmpresaComponent implements OnInit, AfterViewInit {
     );
   }
 
+
   editarVaga(vaga: any): void {
     const dialogRef = this.dialog.open(EditarVagaDialogComponent, {
       width: '400px',
-      data: {vaga}  
+      data: { vaga }
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.vagasService.updateVaga(vaga.idVaga, result).subscribe(
-          () => {
-            this.buscarVagas(1); // Substitua pelo ID da empresa correto
-            this.atualizarPagina();
-          },
-          (error) => {
-            console.error('Erro ao editar vaga', error);
-            this.atualizarPagina();
-          }
-        );
+        this.atualizarPagina();
       }
     });
   }
+
 
   verDetalhes(vaga: any): void {
     this.dialog.open(DetalharVagaDialogComponent, {
@@ -108,23 +96,19 @@ export class VagasEmpresaComponent implements OnInit, AfterViewInit {
       data: { idVaga: vaga.idVaga }
     });
   }
-
   excluirVaga(vaga: any): void {
     const dialogRef = this.dialog.open(ExcluirVagaDialogComponent, {
       width: '400px',
       data: vaga
     });
-  
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Após fechar o diálogo com sucesso, apenas chama buscarVagas novamente
-        this.buscarVagas(1); // Substitua pelo ID correto da empresa
+        this.buscarVagas(1);
       }
     });
   }
-  
+
   atualizarPagina(): void {
-    // Recarregue a página ou atualize os dados conforme necessário
-    window.location.reload(); // Recarrega a página
+    window.location.reload();
   }
 }
