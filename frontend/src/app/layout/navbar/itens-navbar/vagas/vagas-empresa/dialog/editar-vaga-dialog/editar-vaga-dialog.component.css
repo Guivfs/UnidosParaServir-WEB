@@ -35,3 +35,8 @@ button.mat-button {
 p {
   color: black;
 }
+
+button[disabled] {
+  background-color: #ccc; /* Cor personalizada para o botão desabilitado */
+  color: #fff; /* Texto branco para melhor contraste */
+}

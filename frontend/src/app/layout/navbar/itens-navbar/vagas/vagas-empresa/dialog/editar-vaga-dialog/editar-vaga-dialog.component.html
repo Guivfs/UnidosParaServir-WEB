@@ -31,7 +31,16 @@
     
     <div *ngIf="vaga.statusVaga === 'Preenchida'">
       <p>Usuário atual: {{ usuario?.nomeUsuario }}</p>
-      <button mat-raised-button color="warn" (click)="demitirUsuario()">Demitir Usuário</button>
+      
+      <!-- Botão de demitir usuário -->
+      <button 
+      type="button"
+        mat-raised-button 
+        [color]="demitirUsuarioConfirmado ? 'accent' : 'warn'"
+        (click)="demitirUsuario()" 
+        [disabled]="demitirUsuarioConfirmado">
+        {{ demitirUsuarioConfirmado ? 'Demitido' : 'Demitir Usuário' }}
+      </button>
     </div>
 
     <div class="button">

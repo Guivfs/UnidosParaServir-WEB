@@ -14,6 +14,7 @@ export class EditarVagaDialogComponent implements OnInit {
   vaga: any;
   usuario: any;
   empresaId: number | null = null;
+  demitirUsuarioConfirmado = false; // Flag para controlar se o usuário foi demitido
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -31,7 +32,7 @@ export class EditarVagaDialogComponent implements OnInit {
     const storedId = localStorage.getItem('id');
     this.empresaId = storedId ? parseInt(storedId, 10) : null;
 
-    console.log('ID da Empresa recuperado:', this.empresaId); // Adicione este console.log
+    console.log('ID da Empresa recuperado:', this.empresaId);
 
     this.editarVagaForm = this.formBuilder.group({
       tituloVaga: [this.vaga.tituloVaga, Validators.required],
@@ -39,44 +40,31 @@ export class EditarVagaDialogComponent implements OnInit {
       localizacaoVaga: [this.vaga.localizacaoVaga, Validators.required],
       valorPagamento: [this.vaga.valorPagamento, Validators.required],
       statusVaga: [this.vaga.statusVaga, Validators.required],
-      dataCriacao: [this.vaga.dataCriacao || new Date(), Validators.required]  // Campo adicionado,
+      dataCriacao: [this.vaga.dataCriacao || new Date(), Validators.required]
     });
   }
 
   atualizarVaga(): void {
     if (this.editarVagaForm.valid) {
-      const statusVaga = this.editarVagaForm.value.statusVaga;
-  
-      // Se o status for "Aberta" e a vaga estava "Preenchida", solicite confirmação
-      if (statusVaga === 'Aberta' && this.vaga.statusVaga === 'Preenchida') {
-        const dialogRef = this.dialog.open(ConfirmacaoDemissaoDialogComponent);
-  
-        dialogRef.afterClosed().subscribe(result => {
-          if (result) {
-            this.vagasService.demitirUsuario(this.vaga.idVaga).subscribe(() => {
-              this.editarVagaForm.patchValue({ statusVaga: 'Aberta' });
-              this.salvarVaga();
-            }, error => {
-              console.error('Erro ao demitir o usuário:', error);
-            });
-          }
-        });
-      } else {
-        this.salvarVaga();
+      // Se a demissão do usuário foi confirmada, mudar o status para 'Aberta'
+      if (this.demitirUsuarioConfirmado) {
+        this.editarVagaForm.patchValue({ statusVaga: 'Aberta' });
       }
+
+      this.salvarVaga(); // Salva a vaga com o status apropriado
     }
   }
-  
+
   salvarVaga(): void {
     if (this.editarVagaForm.valid) {
       const vagaAtualizada = { 
         ...this.editarVagaForm.value, 
         idEmpresa: this.empresaId,
-        idUsuario: this.editarVagaForm.value.idUsuario || null // Define como null se não estiver definido
+        idUsuario: this.editarVagaForm.value.idUsuario || null
       };
-  
-      console.log('Dados da vaga atualizada:', vagaAtualizada); // Verifica os dados
-  
+
+      console.log('Dados da vaga atualizada:', vagaAtualizada);
+
       this.vagasService.updateVaga(this.vaga.idVaga, vagaAtualizada).subscribe(
         (response) => {
           console.log('Vaga atualizada com sucesso:', response);
@@ -91,14 +79,13 @@ export class EditarVagaDialogComponent implements OnInit {
       console.log('Formulário inválido, por favor, preencha todos os campos corretamente.');
     }
   }
-  
-  
-  
+
   demitirUsuario(): void {
     this.dialog.open(ConfirmacaoDemissaoDialogComponent).afterClosed().subscribe(result => {
-      if (result) {
+      if (result === true) {
         this.vagasService.demitirUsuario(this.vaga.idVaga).subscribe(() => {
-          this.vaga.statusVaga = 'Aberta';
+          this.demitirUsuarioConfirmado = true; // Marca como demitido
+          window.alert("É necessário salvar, para que as alterações sejam feitas!")
         }, error => {
           console.error('Erro ao demitir o usuário:', error);
         });
