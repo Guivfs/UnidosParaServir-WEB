@@ -29,12 +29,11 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     
-    <div *ngIf="vaga.statusVaga === 'Preenchida'">
-      <p>Usuário atual: {{ usuario?.nomeUsuario }}</p>
-      
-      <!-- Botão de demitir usuário -->
+    <div *ngIf="vaga?.statusVaga === 'Preenchida'">
+      <p style="color: black;">Usuário atual: {{ usuario?.nomeUsuario }}</p>
+
       <button 
-      type="button"
+        type="button"
         mat-raised-button 
         [color]="demitirUsuarioConfirmado ? 'accent' : 'warn'"
         (click)="demitirUsuario()" 
@@ -43,8 +42,8 @@
       </button>
     </div>
 
-    <div class="button">
-      <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+    <div class="button pb-2 pt-2">
+      <button mat-raised-button type="button" (click)="cancelar()">Cancelar</button>
     </div>
     <div class="button">
       <button mat-raised-button color="primary" type="submit">Salvar</button>
