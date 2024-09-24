@@ -10,7 +10,8 @@
         {{ vaga.statusVaga }}
       </span>
     </p>
-    <p><strong>Data de Criação:</strong> {{ vaga.dataCriacao | date:'short' }}</p>
+    <p><strong>Data de Criação:</strong> {{ vaga.dataCriacao }}</p> 
+    
     <div *ngIf="usuario && vaga.statusVaga === 'Preenchida'">
       <h3>Informações do Candidato</h3>
       <p><strong>Nome:</strong> {{ usuario.nomeUsuario }}</p>

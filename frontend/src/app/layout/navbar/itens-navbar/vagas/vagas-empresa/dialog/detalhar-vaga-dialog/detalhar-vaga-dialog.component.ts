@@ -6,7 +6,8 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-detalhar-vaga-dialog',
   templateUrl: './detalhar-vaga-dialog.component.html',
-  styleUrls: ['./detalhar-vaga-dialog.component.css']
+  styleUrls: ['./detalhar-vaga-dialog.component.css'],
+  providers: [DatePipe] // Certifique-se de que o DatePipe está disponível
 })
 export class DetalharVagaDialogComponent implements OnInit {
   vaga: any;
@@ -29,9 +30,9 @@ export class DetalharVagaDialogComponent implements OnInit {
       this.vaga = data.vaga;
       this.usuario = data.usuario;
       
-      // Verifica se dataCriacao está presente e formata se necessário
+      // Formata a data para o padrão brasileiro
       if (this.vaga.dataCriacao) {
-        this.vaga.dataCriacao = this.datePipe.transform(new Date(this.vaga.dataCriacao), 'dd/MM/yyyy');
+        this.vaga.dataCriacao = this.datePipe.transform(this.vaga.dataCriacao, 'dd/MM/yyyy');
       }
     }, (error) => {
       console.error('Erro ao buscar detalhes da vaga:', error);
