@@ -35,9 +35,11 @@ export class NovaVagaDialogComponent implements OnInit {
 
   onSubmit(): void {
     if (this.vagaForm.valid) {
+      const storedId = localStorage.getItem('id');
+      const empresaId = storedId ? parseInt(storedId, 10) : null;
       const vaga = {
         ...this.vagaForm.value,
-        idEmpresa: 1,  // Aqui você pode passar o id da empresa dinamicamente
+        idEmpresa: empresaId,  // Aqui você pode passar o id da empresa dinamicamente
         statusVaga: 'aberta',
         dataCriacao: new Date().toISOString().split('T')[0] // Define a data de criação atual
       };
