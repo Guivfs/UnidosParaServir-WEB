@@ -1,0 +1,55 @@
+/* Estilos básicos para o layout responsivo */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff; /* Fundo branco */
+    color: #000000; /* Texto em preto */
+  }
+  
+  .container-fluid {
+    background-color: white;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1.title {
+    text-align: center;
+    color: #000000; /* Título em laranja */
+  }
+  
+  section {
+    margin-bottom: 30px;
+  }
+  
+  h2 {
+    color: #000000; /* Subtítulos em laranja */
+  }
+  
+  ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+  p, ul {
+    line-height: 1.6;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+    
+    h1.title {
+      font-size: 1.8em;
+    }
+  
+    h2 {
+      font-size: 1.4em;
+    }
+  }
+  

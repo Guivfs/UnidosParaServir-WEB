@@ -12,6 +12,8 @@ import { ParaEmpresasComponent } from './layout/navbar/itens-navbar/para-empresa
 import { VagasEmpresaComponent } from './layout/navbar/itens-navbar/vagas/vagas-empresa/vagas-empresa.component';
 import { VagasUsuarioComponent } from './layout/navbar/itens-navbar/vagas/vagas-usuario/vagas-usuario.component';
 import { DetalharVagaDialogComponent } from './layout/navbar/itens-navbar/vagas/vagas-empresa/dialog/detalhar-vaga-dialog/detalhar-vaga-dialog.component';
+import { PrivacyPoliciesDialogComponent } from './layout/termsAndConditions/privacy-policies-dialog/privacy-policies-dialog.component';
+import { PrivacyPoliciesComponent } from './layout/termsAndConditions/privacy-policies/privacy-policies.component';
 
 const routes: Routes = [
   { path: 'login', component: AuthenticationComponent },
@@ -23,6 +25,8 @@ const routes: Routes = [
   { path: 'vaga-usuario', component:VagasUsuarioComponent},
   { path: 'vaga-empresa', component:VagasEmpresaComponent},
   { path: 'detalhar-vaga/:id', component: DetalharVagaDialogComponent },
+  { path: 'termos-condicoes', component: PrivacyPoliciesComponent },
+  { path: 'termos-condicoes-dialog', component: PrivacyPoliciesDialogComponent },
   { path: 'home', component: HomeComponent }, // Definindo a home como padrão
   { path: '**', redirectTo: 'home' } // Redirecionando qualquer rota inválida para a home
 ];

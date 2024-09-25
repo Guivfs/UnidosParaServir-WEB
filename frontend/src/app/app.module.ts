@@ -40,7 +40,9 @@ import { DatePipe } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MAT_DATE_LOCALE, MatOptionModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core'; 
+import { MatNativeDateModule } from '@angular/material/core';
+import { PrivacyPoliciesComponent } from './layout/termsAndConditions/privacy-policies/privacy-policies.component';
+import { PrivacyPoliciesDialogComponent } from './layout/termsAndConditions/privacy-policies-dialog/privacy-policies-dialog.component'; 
 
 
 
@@ -70,7 +72,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     EditarVagaDialogComponent,
     DetalharVagaDialogComponent,
     ExcluirVagaDialogComponent,
-    ConfirmacaoDemissaoDialogComponent
+    ConfirmacaoDemissaoDialogComponent,
+    PrivacyPoliciesComponent,
+    PrivacyPoliciesDialogComponent
   ],
   imports: [
     MatDatepickerModule,
