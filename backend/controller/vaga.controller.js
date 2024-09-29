@@ -38,6 +38,24 @@ class VagaController {
     }
   }
 
+  async buscarVagasPorTitulo(req, res) {
+    const { titulo } = req.query;
+  
+    try {
+      const query = "SELECT * FROM vaga WHERE tituloVaga LIKE ?";
+      const [rows] = await clientDB.query(query, [`%${titulo}%`]);
+  
+      if (rows.length < 1) {
+        return res.status(404).json({ msg: "Nenhuma vaga encontrada com esse título." });
+      }
+  
+      res.json(rows);
+    } catch (error) {
+      console.error("Erro ao buscar vagas por título:", error);
+      res.status(500).json({ msg: "Erro interno do servidor ao buscar vagas por título." });
+    }
+  }
+
   async obterVagaPorId(req, res) {
     const { id } = req.params; // ID da vaga
   
