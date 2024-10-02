@@ -19,11 +19,6 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Foto (URL ou nome do arquivo)</mat-label>
-      <input matInput formControlName="fotoVaga">
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
       <mat-label>Localização</mat-label>
       <input matInput formControlName="localizacaoVaga" required>
       <mat-error *ngIf="vagaForm.get('localizacaoVaga')?.hasError('required')">

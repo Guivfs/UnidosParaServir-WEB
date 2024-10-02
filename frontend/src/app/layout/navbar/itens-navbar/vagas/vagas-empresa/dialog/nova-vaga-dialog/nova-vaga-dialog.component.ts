@@ -22,7 +22,6 @@ export class NovaVagaDialogComponent implements OnInit {
     this.vagaForm = this.formBuilder.group({
       tituloVaga: ['', Validators.required],
       descVaga: ['', Validators.required],
-      fotoVaga: [''],
       localizacaoVaga: ['', Validators.required],
       modalidadeVaga: ['', Validators.required],
       valorPagamento: [0, Validators.required]
@@ -39,21 +38,21 @@ export class NovaVagaDialogComponent implements OnInit {
       const empresaId = storedId ? parseInt(storedId, 10) : null;
       const vaga = {
         ...this.vagaForm.value,
-        idEmpresa: empresaId,  // Aqui você pode passar o id da empresa dinamicamente
+        idEmpresa: empresaId,
         statusVaga: 'aberta',
-        dataCriacao: new Date().toISOString().split('T')[0] // Define a data de criação atual
+        dataCriacao: new Date().toISOString().split('T')[0]
       };
-      
+
       this.vagasService.createVaga(vaga).subscribe(() => {
         console.log("Vaga criada com sucesso");
         this.dialogRef.close(true);
       }, error => {
         console.error('Erro ao criar vaga', error);
-        window.alert("Houve um erro interno no servidor")
+        window.alert("Houve um erro interno no servidor");
       });
     } else {
       console.log("Formulário inválido");
-      window.alert("O formulário inválido")
+      window.alert("O formulário é inválido");
     }
   }
 }
