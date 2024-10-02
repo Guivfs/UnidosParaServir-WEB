@@ -1,8 +1,8 @@
 <div class="slider">
     <div *ngFor="let vaga of vagas" class="card">
-      <img [src]="vaga.fotoVaga" class="card-img-top" />
-      <h5 class="card-title text-decoration-underline">{{ vaga.tituloVaga }}</h5>
-      <p class="card-text">{{ vaga.descVaga }}</p>
-      <a href="#" class="btn btn-color text-decoration-underline">Saiba mais</a>
+      <h3 class="card-title text-decoration-underline" style="color: #4a427c;">{{ vaga.tituloVaga }}</h3>
+      <h5 class="card-text"><i class="fa fa-building" style="padding: 0 5px;"></i>{{ vaga.nomeEmpresa }}</h5>
+      <p class="card-text" style="padding-left: 5px;">{{ vaga.descVaga }}</p>
+      <a (click)="visualizarVaga(vaga.idVaga)" class="btn btn-color">Visualizar Vaga</a>
     </div>
   </div>

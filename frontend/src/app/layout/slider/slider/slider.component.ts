@@ -2,17 +2,18 @@ import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import $, { speed } from 'jquery';
 import 'slick-carousel/slick/slick';
 import { SliderService } from './slider.service';
+import { Router } from '@angular/router'; // Importe o Router
 
 @Component({
   selector: 'app-slider',
   templateUrl: './slider.component.html',
-  styleUrl: './slider.component.css'
+  styleUrls: ['./slider.component.css']
 })
 export class SliderComponent implements OnInit, AfterViewChecked {
   vagas: any[] = [];
   isSliderInitialized = false;
 
-  constructor(private sliderService: SliderService) {}
+  constructor(private sliderService: SliderService, private router: Router) {} // Injeção do Router
 
   ngOnInit() {
     this.sliderService.getVagas().subscribe((data: any[]) => {
@@ -35,8 +36,8 @@ export class SliderComponent implements OnInit, AfterViewChecked {
         autoplay: true,
         autoplaySpeed: 2000,
         dots: true,
-        Infinity:false,
-        speed:300,
+        Infinity: false,
+        speed: 300,
         arrows: false,
         responsive: [
           {
@@ -56,10 +57,10 @@ export class SliderComponent implements OnInit, AfterViewChecked {
             }
           },
           {
-            breakpoint:400,
-            settings:{
-              slidesToShow:1,
-              slidesToScroll:1
+            breakpoint: 400,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
             }
           }
         ]
@@ -68,4 +69,9 @@ export class SliderComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  // Método para navegar para a página de visualização da vaga
+  visualizarVaga(idVaga: number) {
+    console.log(idVaga)
+    this.router.navigate(['/visualizar-vaga', idVaga]);
+  }
 }
