@@ -42,10 +42,10 @@ import { MAT_DATE_LOCALE, MatOptionModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { PrivacyPoliciesComponent } from './layout/termsAndConditions/privacy-policies/privacy-policies.component';
-import { PrivacyPoliciesDialogComponent } from './layout/termsAndConditions/privacy-policies-dialog/privacy-policies-dialog.component'; 
-
-
-
+import { PrivacyPoliciesDialogComponent } from './layout/termsAndConditions/privacy-policies-dialog/privacy-policies-dialog.component';
+import { ResultadoPesquisaComponent } from './layout/navbar/itens-navbar/vagas/vagas-usuario/resultado-pesquisa/resultado-pesquisa.component';
+import { NavbarSearchComponent } from './layout/navbar/navbar-search/navbar-search.component';
+import { VisualizacaoIndividualVagaComponent } from './layout/navbar/itens-navbar/vagas/vagas-usuario/resultado-pesquisa/visualizacao-individual-vaga/visualizacao-individual-vaga.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +74,10 @@ import { PrivacyPoliciesDialogComponent } from './layout/termsAndConditions/priv
     ExcluirVagaDialogComponent,
     ConfirmacaoDemissaoDialogComponent,
     PrivacyPoliciesComponent,
-    PrivacyPoliciesDialogComponent
+    PrivacyPoliciesDialogComponent,
+    ResultadoPesquisaComponent,
+    NavbarSearchComponent,
+    VisualizacaoIndividualVagaComponent,
   ],
   imports: [
     MatDatepickerModule,

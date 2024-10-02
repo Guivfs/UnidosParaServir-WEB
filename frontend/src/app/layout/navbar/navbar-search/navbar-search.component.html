@@ -1,0 +1,60 @@
+<!-- navbar-search.component.html -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-body-tertiary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <!-- Logo e Toggler Button -->
+    <a class="navbar-brand" href="/">
+      <img src="../../../assets/icons/logo.png" alt="logo" />
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Links -->
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active">Início</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/vaga-usuario" routerLinkActive="active">Buscar vagas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/quem-somos-nos" routerLinkActive="active">Quem somos</a>
+      </li>
+    </ul>
+
+    <!-- Search bar and Profile Section -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <!-- Search bar -->
+      <div class="w-100 d-flex align-items-center justify-content-center">
+        <div class="search-container d-flex">
+          <input type="text" class="form-control search-input" placeholder="Pesquisar vagas..." [(ngModel)]="searchTerm">
+          <button class="btn btn-outline-light search-button" (click)="buscarVagas()">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Profile Section -->
+      <div class="col-lg-4 d-flex justify-content-end ms-auto">
+        <div class="ms-auto" *ngIf="!loggedIn">
+          <button class="btn btn-color me-2" (click)="goToLogin()">Entrar</button>
+        </div>
+        <div class="ms-auto" *ngIf="loggedIn">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="../../../assets/icons/Avatars.png" alt="perfil" width="30px"
+                  style="padding-bottom: 2px; margin-right: 5px;"> Perfil
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item pointer" (click)="openDialogDetails()">Visualizar Detalhes</a></li>
+                <li><a class="dropdown-item pointer" (click)="openLogoutConfirmation()">Sair</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

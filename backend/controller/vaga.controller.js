@@ -42,7 +42,12 @@ class VagaController {
     const { titulo } = req.query;
   
     try {
-      const query = "SELECT * FROM vaga WHERE tituloVaga LIKE ?";
+      const query = `
+        SELECT vaga.*, empresa.nomeEmpresa 
+        FROM vaga
+        JOIN empresa ON vaga.idEmpresa = empresa.idEmpresa
+        WHERE vaga.tituloVaga LIKE ?
+      `;
       const [rows] = await clientDB.query(query, [`%${titulo}%`]);
   
       if (rows.length < 1) {
@@ -55,6 +60,7 @@ class VagaController {
       res.status(500).json({ msg: "Erro interno do servidor ao buscar vagas por título." });
     }
   }
+  
 
   async obterVagaPorId(req, res) {
     const { id } = req.params; // ID da vaga

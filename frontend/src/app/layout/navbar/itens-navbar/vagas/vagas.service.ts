@@ -16,6 +16,10 @@ export class VagasService {
     return this.http.get<any>(`${this.apiUrl}/listar`);
   }
 
+  getVagasByTitulo(titulo: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/buscar-titulo?titulo=${titulo}`);
+  }
+
   // Obter vaga pelo id
   getVagaById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/buscar/${id}`);

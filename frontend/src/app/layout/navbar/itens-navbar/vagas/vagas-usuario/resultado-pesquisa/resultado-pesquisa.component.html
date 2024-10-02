@@ -1,0 +1,68 @@
+<app-navbar-search [loggedIn]="true" (searchEvent)="onSearch($event)"></app-navbar-search>
+
+<!-- Conteúdo da página de resultados de pesquisa -->
+<div class="container-fluid body mt-4">
+  <div class="row">
+    <!-- Filtro lateral (esquerda) -->
+    <div class="col-12 col-md-3 mb-4">
+      <div class="filter-container p-3 border rounded shadow-sm">
+        <h5>Filtros</h5>  
+        
+        <div class="filter-item mt-3">
+          <label for="locationFilter" class="form-label">Localização</label>
+          <select id="locationFilter" class="form-select">
+            <option value="all">Todas</option>
+            <option value="sao-paulo">São Paulo</option>
+            <option value="rio-de-janeiro">Rio de Janeiro</option>
+            <option value="belo-horizonte">Belo Horizonte</option>
+          </select>
+        </div>
+        
+        <div class="filter-item mt-3">
+          <label for="dateFilter" class="form-label">Data de Publicação</label>
+          <select id="dateFilter" class="form-select">
+            <option value="all">Todas</option>
+            <option value="last-24-hours">Últimas 24 horas</option>
+            <option value="last-week">Última semana</option>
+            <option value="last-month">Último mês</option>
+          </select>
+        </div>
+        
+        <!-- Botão de aplicar filtros -->
+        <button class="btn btn-primary mt-4 w-100">Aplicar Filtros</button>
+      </div>
+    </div>
+
+    <!-- Resultados de pesquisa (direita) -->
+    <div class="col-12 col-md-9">
+      <!-- Caixa que engloba o título de "Vagas" -->
+      <div class="results-header p-3 border rounded shadow-sm mb-4">
+        <h3 class="mb-0">Vagas</h3>
+      </div>
+
+      <!-- Lista de Vagas -->
+      <div *ngIf="vagas.length > 0">
+        <div class="result-list border rounded shadow-sm p-3">
+          <div *ngFor="let vaga of vagas" class="result-item pb-3 pt-3 mb-3">
+            <h4 class="result-title">{{ vaga.tituloVaga }}</h4>
+            <p class="result-company text-secondary"><i class="fa fa-building"></i> {{ vaga.nomeEmpresa }}</p>
+            <p class="result-location text-secondary"><i class="fa fa-map-marker-alt"></i> {{ vaga.localizacaoVaga }}</p>
+            <p class="result-date text-secondary"><i class="fa fa-calendar"></i> {{ vaga.dataCriacao | date: 'dd/MM/yyyy' }}</p>
+
+            <button class="btn btn-primary mt-2" (click)="viewVaga(vaga.idVaga)">
+              <i class="fa fa-eye"></i> Visualizar Vaga
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mensagem caso não haja resultados -->
+      <div *ngIf="vagas.length === 0" class="text-center mt-5">
+        <h4>Nenhum resultado encontrado.</h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Inclui o footer -->
+<app-footer></app-footer>

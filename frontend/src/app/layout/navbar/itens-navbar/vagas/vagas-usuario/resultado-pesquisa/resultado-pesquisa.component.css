@@ -1,0 +1,81 @@
+/* resultado-pesquisa.component.css */
+.body {
+  background-color: #fff;
+  padding: 45px;
+}
+/* Estilo para o container de filtros */
+.filter-container {
+  background-color: #f8f9fa; /* Cor de fundo */
+  border: 1px solid #ddd; /* Borda leve */
+}
+
+/* Estilo para cada item de filtro */
+.filter-item label {
+  font-weight: bold;
+}
+
+/* Caixa de título de "Vagas" */
+.results-header {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+}
+
+/* Estilo para cada vaga */
+.result-item {
+  border-bottom: 1px solid #e0e0e0; /* Linha inferior minimalista */
+}
+
+/* Remove a última linha separadora */
+.result-item:last-child {
+  border-bottom: none;
+}
+
+/* Botão */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+  
+
+h3 {
+  font-weight: bold;
+  color: #4a427c;
+}
+
+.result-list {
+  background-color: #fff; 
+}
+
+.result-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+.result-title {
+  font-size: 1.5em;
+  color: #4a427c;
+}
+
+.result-company, .result-location, .result-date {
+  margin: 5px 0;
+}
+
+.result-company i, .result-location i, .result-date i {
+  margin-right: 8px;
+}
+
+.btn-primary {
+  background-color: #4a427c;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #5a5387;
+}
+
+.text-center {
+  color: #343a40;
+}
