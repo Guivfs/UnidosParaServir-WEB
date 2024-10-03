@@ -1,3 +1,4 @@
+<!-- home.component.html -->
 <app-navbar></app-navbar>
 <div class="container-fluid-md background-white">
   <img class="img-background" src="../../../assets/background.png" alt="Background Image" />
@@ -15,47 +16,45 @@
     <app-slider class="app-slider"></app-slider>
   </div>
 
+  <!-- Buscas de Empregos mais populares -->
   <div class="div-off-box mt-5">
     <div class="white-box row">
       <div class="title-box">
         <h3 class="pb-3 text-decoration-underline"><b>Buscas de Empregos mais populares</b></h3>
       </div>
+
+      <!-- Coluna 1 - Vendas -->
       <div class="col-4">
-        <p><a class="text-decoration text-box" href="#">Vendedor</a></p>
-        <p><a class="text-decoration text-box" href="#">Auxiliar de cozinha</a></p>
-        <p><a class="text-decoration text-box" href="#">Repositor</a></p>
-        <p><a class="text-decoration text-box" href="#">Enfermeiro</a></p>
-        <p><a class="text-decoration text-box" href="#">Gerente de Loja</a></p>
-        <p><a class="text-decoration text-box" href="#">Intérprete de Libras</a></p>
-        <p><a class="text-decoration text-box" href="#">Representante Comercial</a></p>
-        <p><a class="text-decoration text-box" href="#">Analista de TI</a></p>
-        <p><a class="text-decoration text-box" href="#">Assistente Comercial</a></p>
-        <p><a class="text-decoration text-box" href="#">Vigilante</a></p>
+        <h4>Vagas em Vendas</h4>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Vendedor' }">Vendedor</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Representante Comercial' }">Representante Comercial</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Consultor de Vendas' }">Consultor de Vendas</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Gerente de Vendas' }">Gerente de Vendas</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Assistente de Vendas' }">Assistente de Vendas</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Promotor de Vendas' }">Promotor de Vendas</a></p>
       </div>
+  
+      <!-- Vagas em Saúde -->
       <div class="col-4">
-        <p><a class="text-decoration text-box" href="#">Vendedor</a></p>
-        <p><a class="text-decoration text-box" href="#">Auxiliar de cozinha</a></p>
-        <p><a class="text-decoration text-box" href="#">Repositor</a></p>
-        <p><a class="text-decoration text-box" href="#">Enfermeiro</a></p>
-        <p><a class="text-decoration text-box" href="#">Gerente de Loja</a></p>
-        <p><a class="text-decoration text-box" href="#">Intérprete de Libras</a></p>
-        <p><a class="text-decoration text-box" href="#">Representante Comercial</a></p>
-        <p><a class="text-decoration text-box" href="#">Analista de TI</a></p>
-        <p><a class="text-decoration text-box" href="#">Assistente Comercial</a></p>
-        <p><a class="text-decoration text-box" href="#">Vigilante</a></p>
+        <h4>Vagas em Saúde</h4>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Enfermeiro' }">Enfermeiro</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Vigilante' }">Vigilante</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Técnico de Enfermagem' }">Técnico de Enfermagem</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Fisioterapeuta' }">Fisioterapeuta</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Auxiliar de Enfermagem' }">Auxiliar de Enfermagem</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Farmacêutico' }">Farmacêutico</a></p>
       </div>
+  
+      <!-- Vagas em Tecnologia -->
       <div class="col-4">
-        <p><a class="text-decoration text-box" href="#">Vendedor</a></p>
-        <p><a class="text-decoration text-box" href="#">Auxiliar de cozinha</a></p>
-        <p><a class="text-decoration text-box" href="#">Repositor</a></p>
-        <p><a class="text-decoration text-box" href="#">Enfermeiro</a></p>
-        <p><a class="text-decoration text-box" href="#">Gerente de Loja</a></p>
-        <p><a class="text-decoration text-box" href="#">Intérprete de Libras</a></p>
-        <p><a class="text-decoration text-box" href="#">Representante Comercial</a></p>
-        <p><a class="text-decoration text-box" href="#">Analista de TI</a></p>
-        <p><a class="text-decoration text-box" href="#">Assistente Comercial</a></p>
-        <p><a class="text-decoration text-box" href="#">Vigilante</a></p>
-      </div>
+        <h4>Vagas em Tecnologia</h4>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Analista de TI' }">Analista de TI</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Assistente Comercial' }">Assistente Comercial</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Desenvolvedor Web' }">Desenvolvedor Web</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Suporte Técnico' }">Suporte Técnico</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Engenheiro de Software' }">Engenheiro de Software</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Analista de Dados' }">Analista de Dados</a></p>
+      </div>      
     </div>
   </div>
 </div>
