@@ -1,4 +1,3 @@
-<!-- vagas-usuario.component.html -->
 <app-navbar-search [loggedIn]="true"></app-navbar-search>
 
 <div class="container-fluid body">
@@ -12,7 +11,10 @@
       <div class="box-desempenho">
         <h5>Seu desempenho até aqui</h5>
         <h6>Referente aos últimos 90 dias</h6>
-        <h6><img src="../../../../../../assets/icons/eye.png" alt=""> Visitas ao CV</h6>
+        <h6>
+          <img src="../../../../../../assets/icons/eye.png" alt=""> 
+          {{ visitasCV }} Visitas ao CV
+        </h6>
       </div>
     </div>
 
@@ -20,9 +22,13 @@
       <div class="box-cv-enviados">
         <h5>Total de CVs enviados</h5>
         <h6>Referente aos últimos 90 dias</h6>
-        <h6><img src="../../../../../../assets/icons/enviados.png" alt=""></h6>
+        <h6>
+          <img src="../../../../../../assets/icons/enviados.png" alt=""> 
+          {{ totalCVsEnviados }} CVs Enviados
+        </h6>
       </div>
     </div>
   </div>
 </div>
+
 <app-footer></app-footer>
