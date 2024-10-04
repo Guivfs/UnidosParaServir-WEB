@@ -9,16 +9,16 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/home" routerLinkActive="active">Início</a>
         </li>
-        <!-- *ngIf="role !== 'company'" -->
-        <li class="nav-item" >
+        <!--  -->
+        <li class="nav-item" *ngIf="role !== 'company'" >
           <a class="nav-link" routerLink="/vaga-usuario" routerLinkActive="active">Buscar vagas</a>
         </li>
-        <!-- *ngIf="role === 'company'" -->
-        <li class="nav-item" >
+        <!--  -->
+        <li class="nav-item" *ngIf="role === 'company'">
           <a class="nav-link" routerLink="/vaga-empresa" routerLinkActive="active">Minhas vagas</a>
         </li>
-        <!-- *ngIf="role === 'company'" -->
-        <li class="nav-item" >
+        <!--  -->
+        <li class="nav-item" *ngIf="role === 'company'">
           <a class="nav-link" routerLink="/para-empresas" routerLinkActive="active">Para empresas</a>
         </li>
         <li class="nav-item">

@@ -8,7 +8,7 @@
   width: 100px;
 }
 
-.nav-link {
+.navbar-nav .nav-item .nav-link {
   padding: 0.5rem 1rem;
 }
 
