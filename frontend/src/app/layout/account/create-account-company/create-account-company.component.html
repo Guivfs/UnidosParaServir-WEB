@@ -47,7 +47,9 @@
                   formControlName="senhaEmpresa"
                   required
                 />
-                <div class="form-text text-danger col-12" *ngIf="isFormControlInvalid('senhaEmpresa')">A senha deve conter pelo menos 6 caracteres.</div>
+                <div class="form-text text-danger col-12" *ngIf="isFormControlInvalid('senhaEmpresa')">
+                  A senha deve conter pelo menos 6 caracteres.
+                </div>
               </div>
               <div class="mb-4">
                 <textarea
@@ -97,15 +99,13 @@
                       required
                     />
                   </div>
-                  <div
-                    class="col-12 p-2 mt-3 d-flex justify-content-center flex-column align-items-center"
-                  >
-                    <button
-                      class="btn btn-color form-control alinhar-centro"
-                      type="submit"
-                    >
-                      Cadastrar-se
-                    </button>
+                  <div class="col-12 p-2 mt-3 justify-content-center flex-column align-items-center">
+                    <input type="checkbox" class="form-check-input me-2" name="termos" [(ngModel)]="aceitouTermos" (change)="aceitouTermos = !aceitouTermos" />
+                    <span class="mb-2">
+                      Eu li e aceito os
+                      <a href="/termos-condicoes-dialog" (click)="abrirTermosCondicoes()">Termos e Condições</a>.
+                    </span>
+                    <button class="btn btn-color form-control alinhar-centro mt-2" type="submit">Cadastrar-se</button>
                   </div>
                 </div>
               </div>

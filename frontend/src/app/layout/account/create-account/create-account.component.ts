@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { CreateAccountService } from "./create-account.service";
 import { Router } from "@angular/router";
+import { MatDialog } from '@angular/material/dialog';
+import { PrivacyPoliciesDialogComponent } from "../../termsAndConditions/privacy-policies-dialog/privacy-policies-dialog.component";
 
 @Component({
   selector: "app-create-account",
@@ -11,12 +13,14 @@ import { Router } from "@angular/router";
 })
 export class CreateAccountComponent implements OnInit {
   formUsuario: FormGroup;
+  aceitouTermos: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private createAccountService: CreateAccountService,
     private route: Router,
-    private toast: ToastrService
+    private toast: ToastrService,
+    public dialog: MatDialog  // Injeção do MatDialog
   ) {
     this.formUsuario = this.fb.group({
       nomeCompleto: ["", Validators.required],
@@ -30,7 +34,8 @@ export class CreateAccountComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    if (this.formUsuario.valid) {
+    console.log('Aceitou os termos?', this.aceitouTermos); 
+    if (this.formUsuario.valid && this.aceitouTermos) {
       this.createAccountService.cadastrarUsuario(this.formUsuario.value).subscribe(
         (response) => {
           console.log("Dados enviados com sucesso:", response);
@@ -42,12 +47,20 @@ export class CreateAccountComponent implements OnInit {
           this.toast.error(error);
         }
       );
+    } else if (!this.aceitouTermos) {
+      this.toast.error("Você deve aceitar os termos e condições para continuar.");
     } else {
       console.error("Formulário inválido. Verifique os campos.");
     }
   }
+  
 
-  public isFormControlInvalid(controlName:string):boolean{
-    return !!(this.formUsuario.get(controlName)?.invalid && this.formUsuario.get(controlName)?.touched)
+  // Método para abrir o diálogo de Termos e Condições
+  abrirTermosCondicoes(): void {
+    this.dialog.open(PrivacyPoliciesDialogComponent);
+  }
+
+  public isFormControlInvalid(controlName: string): boolean {
+    return !!(this.formUsuario.get(controlName)?.invalid && this.formUsuario.get(controlName)?.touched);
   }
 }

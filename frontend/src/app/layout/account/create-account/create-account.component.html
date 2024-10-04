@@ -1,74 +1,77 @@
-<a href="/"><img
-  src="../../../../assets/icons/logo.png"
-  alt="logo"
-  class="logo"
-/>
-</a>
-<div class="container">
-  <div class="div-logo"></div>
-  <br />
-  <div class="row">
-    <div class="col-2 alinhar-centro"></div>
-    <div class="col-8 alinhar-centro caixa-branca">
-      <div class="container">
-        <div class="row">
-          <div class="col-6 alinhar-centro border-direita vertical">
-            <div class="mb-4 mt-2">
-              <h5 class="cor-text"><b>Cadastro</b></h5>
+  <a href="/"><img
+    src="../../../../assets/icons/logo.png"
+    alt="logo"
+    class="logo"
+  />
+  </a>
+  <div class="container">
+    <div class="div-logo"></div>
+    <br />
+    <div class="row">
+      <div class="col-2 alinhar-centro"></div>
+      <div class="col-8 alinhar-centro caixa-branca">
+        <div class="container">
+          <div class="row">
+            <div class="col-6 alinhar-centro border-direita vertical">
+              <div class="mb-4 mt-2">
+                <h5 class="cor-text"><b>Cadastro</b></h5>
+              </div>
+              <form style="width: 80%" [formGroup]="formUsuario" (ngSubmit)="onSubmit()">
+                <div class="mb-4">
+                  <input type="text" class="form-control" placeholder="Nome Completo*" formControlName="nomeCompleto" ngModel required>
+                </div>
+                <div class="mb-4">
+                  <input type="text" class="form-control" placeholder="Cep*" formControlName="cep" ngModel required>
+                </div>
+                <div class="mb-4">
+                  <input type="text" class="form-control" placeholder="Usuário*" formControlName="usuario" ngModel required>
+                  <div class="form-text text-danger col-12" *ngIf="isFormControlInvalid('senha')">O usuário deve conter pelo menos 6 caracteres.</div>
+                </div>
+                <div class="mb-4">
+                  <input type="email" class="form-control" placeholder="E-mail*" formControlName="email" ngModel required>
+                </div>
+                <div class="mb-4">
+                  <input type="password" class="form-control" placeholder="Senha*" formControlName="senha" ngModel required>
+                  <div class="form-text text-danger col-12" *ngIf="isFormControlInvalid('senha')">A senha deve conter pelo menos 6 caracteres.</div>
+                </div>
+                <input type="checkbox" class="form-check-input me-2" [(ngModel)]="aceitouTermos" (change)="aceitouTermos = !aceitouTermos" required name="termos">
+                <span>Eu li e aceito os <a href="/termos-condicoes-dialog" (click)="abrirTermosCondicoes()">Termos e Condições</a>.</span>
+                <div class="mb-4">
+                  <button class="btn btn-color form-control alinhar-centro" type="submit">Cadastrar-se</button>
+                </div>
+              </form>
+              
+              <div class="tem-conta mb-4">
+                <p style="color: #747474">
+                  Ja tem sua conta?
+                  <a href="login" class="cor-text"><b>Entrar em sua conta</b></a>
+                </p>
+              </div>
             </div>
-            <form style="width: 80%" [formGroup]="formUsuario" (ngSubmit)="onSubmit()">
-              <div class="mb-4">
-                <input type="text" class="form-control" placeholder="Nome Completo*" formControlName="nomeCompleto" ngModel required>
-              </div>
-              <div class="mb-4">
-                <input type="text" class="form-control" placeholder="Cep*" formControlName="cep" ngModel required>
-              </div>
-              <div class="mb-4">
-                <input type="text" class="form-control" placeholder="Usuário*" formControlName="usuario" ngModel required>
-                <div class="form-text text-danger col-12" *ngIf="isFormControlInvalid('senha')">O usuário deve conter pelo menos 6 caracteres.</div>
-              </div>
-              <div class="mb-4">
-                <input type="email" class="form-control" placeholder="E-mail*" formControlName="email" ngModel required>
-              </div>
-              <div class="mb-4">
-                <input type="password" class="form-control" placeholder="Senha*" formControlName="senha" ngModel required>
-                <div class="form-text text-danger col-12" *ngIf="isFormControlInvalid('senha')">A senha deve conter pelo menos 6 caracteres.</div>
-              </div>
-              <div class="mb-4">
-                <button class="btn btn-color form-control alinhar-centro" type="submit">Cadastrar-se</button>
-              </div>
-            </form>
-            
-            <div class="tem-conta mb-4">
-              <p style="color: #747474">
-                Ja tem sua conta?
-                <a href="login" class="cor-text"><b>Entrar em sua conta</b></a>
-              </p>
-            </div>
-          </div>
-          <div class="col-6  vertical">
-            <div class="container">
-              <div class="row">
-                <div class="col-12 p-0 d-flex justify-content-center flex-column align-items-center">
-                  <div class="mt-2 mb-4">
-                    <h5 class="cor-text align-items-center d-flex justify-content-center"><b>Continuar com</b></h5>
-                  </div>
-                  <div class="mb-4">
-                    <button class="d-flex justify-content-start btn login-button align-items-center"><img src="../../../../assets/icons/google.png" width="25px" /><span> Entrar com <b style="color: rgb(225, 0, 0);">Google</b></span></button>
-                  </div>
-                  <div class="mb-4">
-                    <button class="d-flex justify-content-start btn login-button align-items-center"><img src="../../../../assets/icons/facebook.png" width="25px" /><span> Entrar com <b style="color: rgb(0, 0, 199);">Facebook</b></span></button>
-                  </div>
-                  <div class="mb-5">
-                    <button class="d-flex justify-content-start btn login-button align-items-center"> <img src="../../../../assets/icons/apple.png" width="26px" style="padding-bottom: 1px; " /><span> Entrar com <b style="color: black;">Apple</b></span></button>
-                  </div>
-                  <div class="tem-conta mb-4">
-                    <span style="color: #747474">
-                      Você é uma empresa? 
-                      <a href="criar-conta-empresa" class="cor-text text-reset"
-                        ><b>Cadastre-se grátis aqui.</b></a
-                      >
-                    </span>
+            <div class="col-6  vertical">
+              <div class="container">
+                <div class="row">
+                  <div class="col-12 p-0 d-flex justify-content-center flex-column align-items-center">
+                    <div class="mt-2 mb-4">
+                      <h5 class="cor-text align-items-center d-flex justify-content-center"><b>Continuar com</b></h5>
+                    </div>
+                    <div class="mb-4">
+                      <button class="d-flex justify-content-start btn login-button align-items-center"><img src="../../../../assets/icons/google.png" width="25px" /><span> Entrar com <b style="color: rgb(225, 0, 0);">Google</b></span></button>
+                    </div>
+                    <div class="mb-4">
+                      <button class="d-flex justify-content-start btn login-button align-items-center"><img src="../../../../assets/icons/facebook.png" width="25px" /><span> Entrar com <b style="color: rgb(0, 0, 199);">Facebook</b></span></button>
+                    </div>
+                    <div class="mb-5">
+                      <button class="d-flex justify-content-start btn login-button align-items-center"> <img src="../../../../assets/icons/apple.png" width="26px" style="padding-bottom: 1px; " /><span> Entrar com <b style="color: black;">Apple</b></span></button>
+                    </div>
+                    <div class="tem-conta mb-4">
+                      <span style="color: #747474">
+                        Você é uma empresa? 
+                        <a href="criar-conta-empresa" class="cor-text text-reset"
+                          ><b>Cadastre-se grátis aqui.</b></a
+                        >
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -76,7 +79,7 @@
           </div>
         </div>
       </div>
+      <div class="col-2 alinhar-centro"></div>
+      
     </div>
-    <div class="col-2 alinhar-centro"></div>
   </div>
-</div>
