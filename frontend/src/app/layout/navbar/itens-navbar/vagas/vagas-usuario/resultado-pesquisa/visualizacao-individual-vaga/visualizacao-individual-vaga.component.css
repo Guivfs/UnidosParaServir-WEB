@@ -1,73 +1,89 @@
-/* Estilo para a caixa de detalhes da vaga */
+  /* Estilo para a caixa de detalhes da vaga */
 
-.container-fluid{
-  background-color: white;
-}
+  .container-fluid{
+    background-color: white;
+  }
 
-.vaga-details-container {
-  background-color: #f8f9fa;
-  border: 1px solid #ddd;
-  padding: 40px;
-  margin: 20px; /* Margem maior para a caixa */
-  width: 100%; /* Largura total */
-  max-width: 700px; /* Limitar largura máxima */
-}
+  .vaga-details-container {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 40px;
+    margin: 20px; /* Margem maior para a caixa */
+    width: 100%; /* Largura total */
+    max-width: 700px; /* Limitar largura máxima */
+  }
 
-/* Estilo para o nome da empresa */
-.vaga-company {
-  font-size: 1.2em;
-  color: #6c757d;
-  font-weight: 500;
-}
+  /* Estilo para o nome da empresa */
+  .vaga-company {
+    font-size: 1.2em;
+    color: #6c757d;
+    font-weight: 500;
+  }
 
-/* Estilo para o título da vaga */
-.vaga-title {
-  font-size: 1.8em;
-  font-weight: bold;
-  color: #333;
-  text-align: center;
-}
+  /* Estilo para o título da vaga */
+  .vaga-title {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+  }
 
-/* Estilo para os textos de localização e salário */
-.vaga-info p {
-  margin-bottom: 0; /* Remove margem inferior */
-  font-size: 1.15em;
-}
+  /* Estilo para os textos de localização e salário */
+  .vaga-info p {
+    margin-bottom: 0; /* Remove margem inferior */
+    font-size: 1.15em;
+  }
 
-/* Espaçamento vertical para a informação da vaga */
-.vaga-info {
-  margin-bottom: 30px;
-}
+  /* Espaçamento vertical para a informação da vaga */
+  .vaga-info {
+    margin-bottom: 30px;
+  }
 
-/* Estilo para o botão de candidatura menor */
-.btn-primary {
-  background-color: #4a427c; /* Cor roxa */
-  border-color: #6f42c1;
-  padding: 8px 20px;
-  font-size: 0.9em; /* Tamanho menor */
-}
+  /* Estilo para o botão de candidatura menor */
+  .btn-primary {
+    background-color: #4a427c; /* Cor roxa */
+    border-color: #6f42c1;
+    padding: 8px 20px;
+    font-size: 0.9em; /* Tamanho menor */
+  }
 
-/* Alterar cor ao passar o mouse sobre o botão */
-.btn-primary:hover {
-  background-color: #563d7c; /* Tom mais escuro de roxo */
-  border-color: #563d7c;
-}
+  /* Alterar cor ao passar o mouse sobre o botão */
+  .btn-primary:hover {
+    background-color: #563d7c; /* Tom mais escuro de roxo */
+    border-color: #563d7c;
+  }
 
-/* Estilo para a descrição da vaga */
-.vaga-description {
-  font-size: 1.15em;
-  color: #555;
-  line-height: 1.6;
-}
+  /* Estilo para a descrição da vaga */
+  .vaga-description {
+    font-size: 1.15em;
+    color: #555;
+    line-height: 1.6;
+  }
 
-/* Centralizar título "Sobre a Vaga" */
-h4 {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  font-weight: bold;
-}
+  /* Centralizar título "Sobre a Vaga" */
+  h4 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
 
-/* Ajustar espaçamento e alinhamento */
-.text-justify {
-  text-align: justify; /* Justificar o texto */
-}
+  /* Ajustar espaçamento e alinhamento */
+  .text-justify {
+    text-align: justify; /* Justificar o texto */
+  }
+  .candidatura-confirmada {
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .candidatura-confirmada i {
+    margin-right: 8px;
+  }
+  
+  .btn-primary.btn-sm {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  

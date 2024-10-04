@@ -8,6 +8,8 @@ const desempenhoController = new DesempenhoController();
 router.get('/candidaturas/obter', desempenhoController.obterCandidaturasPorUsuario); 
 router.post('/candidaturas/criar', desempenhoController.criarCandidatura); 
 router.put('/candidaturas/atualizar/:idCandidatura', desempenhoController.atualizarCandidatura); 
+router.get('/candidaturas/verificar-candidatura/:idVaga/:idUsuario', desempenhoController.verificarCandidatura.bind(desempenhoController));
+
 
 // Rotas para visitas
 router.get('/visitas/obter', desempenhoController.obterVisitasPorUsuario); 

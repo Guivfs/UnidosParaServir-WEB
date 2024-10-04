@@ -44,6 +44,7 @@ export class VagasUsuarioComponent implements OnInit {
     const token = this.authenticationService.getToken();
     this.loggedIn = !!token;
     console.log(`O usuário está ${this.loggedIn ? 'logado' : 'deslogado'}`);
+    console.log(token)
   }
 
   checkUserRole() {

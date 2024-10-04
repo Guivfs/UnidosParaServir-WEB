@@ -1,37 +1,45 @@
 <app-navbar-search [loggedIn]="true"></app-navbar-search>
 
 <!-- Container principal do componente -->
- <div class="container-fluid">
-
-   <div class="body d-flex justify-content-center">
-     <div class="vaga-details-container border rounded shadow-sm p-5 col-12 col-md-6">
-       
-       <!-- Título da Vaga -->
-       <h2 class="vaga-title mb-4 text-center">{{ vaga?.tituloVaga }}</h2>
-       
-       <!-- Localização e Salário, alinhados verticalmente no centro -->
-       <div class="vaga-info text-center mb-4">
-         <p class="vaga-company text-secondary"><i class="fa fa-building"></i> {{ vaga?.nomeEmpresa }}</p>
-         <p class="vaga-location text-secondary"><i class="fa fa-map-marker-alt"></i> {{ vaga?.localizacaoVaga }}</p>
-         <p class="vaga-date text-secondary"><i class="fa fa-calendar"></i> Publicado em: {{ vaga?.dataCriacao | date: 'dd/MM/yyyy' }}</p>
-         <p class="vaga-payment text-secondary"><i class="fa fa-money-bill"></i> Salário: R$ {{ vaga?.valorPagamento }}</p>
+<div class="container-fluid">
+  <div class="body d-flex justify-content-center">
+    <div class="vaga-details-container border rounded shadow-sm p-5 col-12 col-md-6">
+      
+      <!-- Título da Vaga -->
+      <h2 class="vaga-title mb-4 text-center">{{ vaga?.tituloVaga }}</h2>
+      
+      <!-- Localização e Salário, alinhados verticalmente no centro -->
+      <div class="vaga-info text-center mb-4">
+        <p class="vaga-company text-secondary"><i class="fa fa-building"></i> {{ vaga?.nomeEmpresa }}</p>
+        <p class="vaga-location text-secondary"><i class="fa fa-map-marker-alt"></i> {{ vaga?.localizacaoVaga }}</p>
+        <p class="vaga-date text-secondary"><i class="fa fa-calendar"></i> Publicado em: {{ vaga?.dataCriacao | date: 'dd/MM/yyyy' }}</p>
+        <p class="vaga-payment text-secondary"><i class="fa fa-money-bill"></i> Salário: R$ {{ vaga?.valorPagamento }}</p>
+      </div>
+      
+      <!-- Se o usuário já se candidatou, exibe mensagem -->
+      <div *ngIf="jaCandidatado; else naoCandidatado" class="d-flex justify-content-center mb-5">
+        <div class="candidatura-confirmada text-success text-center">
+          <i class="fa fa-check-circle fa-lg"></i> <!-- Ícone de selo -->
+          <span class="font-weight-bold">Você se candidatou para essa vaga</span>
         </div>
-        
-        <!-- Botão de Candidatar-se menor, centralizado -->
+      </div>
+      
+      <!-- Botão de Candidatar-se menor, centralizado, exibido se não se candidatou ainda -->
+      <ng-template #naoCandidatado>
         <div class="d-flex justify-content-center mb-5">
           <button class="btn btn-primary btn-sm" (click)="candidatarVaga()">
             <i class="fa fa-paper-plane"></i> Candidatar-se
           </button>
         </div>
-        
-        <hr>
-        
-        <!-- Título "Sobre a Vaga" -->
-        <h4 class="text-center">Sobre a Vaga</h4>
-        <p class="vaga-description text-justify">{{ vaga?.descVaga }}</p>
-      </div>
+      </ng-template>
+
+      <hr>
+      
+      <!-- Título "Sobre a Vaga" -->
+      <h4 class="text-center">Sobre a Vaga</h4>
+      <p class="vaga-description text-justify">{{ vaga?.descVaga }}</p>
     </div>
   </div>
-    
-    <app-footer></app-footer>
-    
+</div>
+
+<app-footer></app-footer>

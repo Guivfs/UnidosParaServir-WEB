@@ -8,8 +8,17 @@ import { enviroment } from '../../../../../enviroments/enviroment';
 })
 export class VagasService {
   private apiUrl = `${enviroment.baseUrlBackend}/vagas`;
+  private apiUrlStandart = `${enviroment.baseUrlBackend}`;
 
   constructor(private http: HttpClient) { }
+
+  // Função para criar um header com o token
+  private createAuthorizationHeader(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
 
   // Obter todas as vagas
   getVagas(): Observable<any> {
@@ -27,10 +36,7 @@ export class VagasService {
 
   // Obter vagas por empresa
   getVagasByEmpresa(id: number): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+    const headers = this.createAuthorizationHeader();
     return this.http.get<any>(`${this.apiUrl}/buscar-vagas-empresa/${id}`, { headers });
   }
 
@@ -51,8 +57,7 @@ export class VagasService {
 
   // Preencher vaga (usuário logado preenche uma vaga)
   preencherVaga(idVaga: number): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    const headers = this.createAuthorizationHeader();
     return this.http.put<any>(`${this.apiUrl}/preencher/${idVaga}`, {}, { headers });
   }
 
@@ -62,12 +67,28 @@ export class VagasService {
 
   // Obter visitas ao CV por usuário
   getVisitasCV(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/visitas/obter`);
+    const headers = this.createAuthorizationHeader();
+    return this.http.get<any>(`${this.apiUrlStandart}/visitas/obter`, { headers });
   }
 
   // Obter candidaturas por usuário
   getCandidaturas(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/candidaturas/obter`);
+    const headers = this.createAuthorizationHeader();
+    return this.http.get<any>(`${this.apiUrlStandart}/candidaturas/obter`, { headers });
   }
 
+  verificarCandidaturaUsuario(idVaga: string, idUsuario: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrlStandart}/candidaturas/verificar-candidatura/${idVaga}/${idUsuario}`);
+  }
+
+  candidatarUsuario(candidatura: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json'
+    });
+
+    // Enviar o objeto de candidatura para o backend
+    console.log("Candidatura do service:", candidatura)
+    return this.http.post<any>(`${this.apiUrlStandart}/candidaturas/criar`, candidatura, { headers });
+  }
 }

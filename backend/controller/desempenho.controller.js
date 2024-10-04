@@ -34,6 +34,25 @@ class DesempenhoController {
         }
     }
 
+    async verificarCandidatura(req, res) {
+        const { idVaga, idUsuario } = req.params;
+
+        try {
+            // Consulta no banco de dados para verificar se há uma candidatura existente para o usuário e a vaga fornecidos
+            const [rows] = await clientDB.query(
+                "SELECT * FROM candidaturas WHERE idUsuario = ? AND idVaga = ?",
+                [idUsuario, idVaga]
+            );
+
+            // Retorna um objeto com o status da candidatura
+            const jaCandidatado = rows.length > 0;
+            res.status(200).json({ jaCandidatado });
+        } catch (error) {
+            console.error("Erro ao verificar candidatura:", error);
+            res.status(500).json({ msg: "Erro interno do servidor ao verificar candidatura.", error });
+        }
+    }
+
     async criarCandidatura(req, res) {
         const { idVaga, statusCandidatura } = req.body;
         const token = req.headers.authorization.split(" ")[1];
@@ -45,8 +64,26 @@ class DesempenhoController {
         }
 
         try {
-            const novaCandidatura = { idUsuario: idUsuarioLogado, idVaga, statusCandidatura, dataCandidatura: new Date() };
+            // Verificar se o usuário já se candidatou à vaga
+            const [rows] = await clientDB.query(
+                "SELECT * FROM candidaturas WHERE idUsuario = ? AND idVaga = ?",
+                [idUsuarioLogado, idVaga]
+            );
+
+            if (rows.length > 0) {
+                return res.status(409).json({ msg: "Você já se candidatou para esta vaga!" });
+            }
+
+            // Se não houver candidaturas, criar a nova candidatura
+            const novaCandidatura = {
+                idUsuario: idUsuarioLogado,
+                idVaga,
+                statusCandidatura,
+                dataCandidatura: new Date()
+            };
+
             await clientDB.query("INSERT INTO candidaturas SET ?", novaCandidatura);
+
             res.status(201).json({ msg: "Candidatura criada com sucesso!" });
         } catch (error) {
             console.error("Erro ao criar candidatura:", error);
@@ -75,7 +112,7 @@ class DesempenhoController {
         }
     }
 
-    async   obterVisitasPorUsuario(req, res) {
+    async obterVisitasPorUsuario(req, res) {
         const token = req.headers.authorization.split(" ")[1];
         const decodedToken = jwt.verify(token, process.env.SECRET);
         const idEmpresaLogada = decodedToken.id;
