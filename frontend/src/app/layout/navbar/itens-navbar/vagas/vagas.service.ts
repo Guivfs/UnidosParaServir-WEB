@@ -33,6 +33,10 @@ export class VagasService {
   getVagaById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/buscar/${id}`);
   }
+  // Obter vaga pelo id
+  getVagaByIdEmpresa(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/buscar-vaga/${id}`);
+  }
 
   // Obter vagas por empresa
   getVagasByEmpresa(id: number): Observable<any> {

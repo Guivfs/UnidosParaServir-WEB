@@ -38,9 +38,8 @@ export class EditarVagaDialogComponent implements OnInit {
       statusVaga: [this.vaga.statusVaga, Validators.required],
       dataCriacao: [this.vaga.dataCriacao || null, Validators.required]
     });
-    this.vagasService.getVagaById(this.data.vaga.idVaga).subscribe((response) => {
-      this.usuario = response.usuario; // Pega apenas o usuário da resposta
-      console.log(this.usuario)
+    this.vagasService.getVagaByIdEmpresa(this.data.vaga.idVaga).subscribe((response) => {
+      this.vaga = response.vaga;
     });
   }
 

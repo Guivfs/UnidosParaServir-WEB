@@ -29,8 +29,8 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     
-    <div *ngIf="vaga?.statusVaga === 'Preenchida'">
-      <p style="color: black;">Usuário atual: {{ usuario?.nomeUsuario }}</p>
+    <div *ngIf="vaga.usuarioPreenchido && vaga.statusVaga === 'Preenchida'">
+      <p style="color: black;">Usuário atual: {{ vaga.usuarioPreenchido.nomeUsuario }}</p>
 
       <button 
         type="button"

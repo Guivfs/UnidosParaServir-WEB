@@ -10,9 +10,8 @@ import { DatePipe } from '@angular/common';
   providers: [DatePipe] // Certifique-se de que o DatePipe está disponível
 })
 export class DetalharVagaDialogComponent implements OnInit {
-  vaga: any;
-  usuario: any;
-  id!: number;
+  vaga: any; // Dados da vaga
+  id!: number; // ID da vaga
 
   constructor(
     private vagasService: VagasService,
@@ -26,9 +25,8 @@ export class DetalharVagaDialogComponent implements OnInit {
   }
 
   obterVaga(): void {
-    this.vagasService.getVagaById(this.id.toString()).subscribe((data) => {
+    this.vagasService.getVagaByIdEmpresa(this.id.toString()).subscribe((data) => {
       this.vaga = data.vaga;
-      this.usuario = data.usuario;
       
       // Formata a data para o padrão brasileiro
       if (this.vaga.dataCriacao) {

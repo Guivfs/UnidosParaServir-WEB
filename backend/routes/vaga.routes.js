@@ -5,7 +5,8 @@ const router = express.Router();
 const vagaController = new VagaController();
 
 router.get('/vagas/buscar', vagaController.obterVagas);
-router.get('/vagas/buscar/:id', vagaController.obterVagaPorId);
+router.get('/vagas/buscar/:id', vagaController.obterVagaAbertaPorId);
+router.get('/vagas/buscar-vaga/:id', vagaController.obterVagaPorId);
 router.get('/vagas/buscar-vagas-empresa/:id', vagaController.obterVagasEmpresa);
 router.get('/vagas/buscar-titulo', vagaController.buscarVagasPorTitulo);
 router.post('/vagas/registrar', vagaController.criarVaga);

@@ -12,11 +12,10 @@
     </p>
     <p><strong>Data de Criação:</strong> {{ vaga.dataCriacao }}</p> 
     
-    <div *ngIf="usuario && vaga.statusVaga === 'Preenchida'">
+    <div *ngIf="vaga.usuarioPreenchido && vaga.statusVaga === 'Preenchida'">
       <h3>Informações do Candidato</h3>
-      <p><strong>Nome:</strong> {{ usuario.nomeUsuario }}</p>
-      <p><strong>Email:</strong> {{ usuario.emailUsuario }}</p>
-      <p><strong>CEP:</strong> {{ usuario.cepUsuario }}</p>
+      <p><strong>Nome:</strong> {{ vaga.usuarioPreenchido.nomeUsuario }}</p>
+      <p><strong>Email:</strong> {{ vaga.usuarioPreenchido.emailUsuario }}</p>
     </div>
   </div>
 </div>

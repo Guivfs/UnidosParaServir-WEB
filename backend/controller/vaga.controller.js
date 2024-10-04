@@ -66,6 +66,57 @@
     
       try {
         const query = `
+          SELECT vaga.*, 
+                 empresa.nomeEmpresa, 
+                 usuario.nomeUsuario, 
+                 usuario.emailUsuario 
+          FROM vaga
+          JOIN empresa ON vaga.idEmpresa = empresa.idEmpresa
+          LEFT JOIN usuario ON vaga.idUsuario = usuario.idUsuario
+          WHERE vaga.idVaga = ?
+        `;
+        const [vaga] = await clientDB.query(query, [id]);
+    
+        if (!vaga.length) {
+          return res.status(404).json({ msg: 'Vaga não encontrada!' });
+        }
+    
+        const vagaDetalhes = vaga[0];
+    
+        // Criação do objeto de resposta, incluindo informações do usuário, se disponível
+        const vagaResponse = {
+          idVaga: vagaDetalhes.idVaga,
+          tituloVaga: vagaDetalhes.tituloVaga,
+          descVaga: vagaDetalhes.descVaga,
+          localizacaoVaga: vagaDetalhes.localizacaoVaga,
+          valorPagamento: vagaDetalhes.valorPagamento,
+          nomeEmpresa: vagaDetalhes.nomeEmpresa, // Incluindo o nome da empresa no retorno
+          statusVaga: vagaDetalhes.statusVaga,
+          dataCriacao: vagaDetalhes.dataCriacao,
+        };
+    
+        // Se a vaga estiver preenchida, adiciona as informações do usuário que preencheu
+        if (vagaDetalhes.statusVaga === 'Preenchida') {
+          vagaResponse.usuarioPreenchido = {
+            idUsuario: vagaDetalhes.idUsuario,
+            nomeUsuario: vagaDetalhes.nomeUsuario,
+            emailUsuario: vagaDetalhes.emailUsuario,
+          };
+        }
+    
+        return res.status(200).json({ vaga: vagaResponse });
+      } catch (error) {
+        console.error('Erro ao buscar vaga:', error);
+        return res.status(500).json({ msg: 'Erro ao buscar vaga!' });
+      }
+    }
+    
+
+    async obterVagaAbertaPorId(req, res) {
+      const { id } = req.params; // ID da vaga
+    
+      try {
+        const query = `
           SELECT vaga.*, empresa.nomeEmpresa 
           FROM vaga 
           JOIN empresa ON vaga.idEmpresa = empresa.idEmpresa 
@@ -167,13 +218,18 @@
 
     async deletarVaga(req, res) {
       const { id } = req.params;
-
+    
       try {
+        // Deletar todas as candidaturas relacionadas a essa vaga
+        await clientDB.query("DELETE FROM candidaturas WHERE idVaga = ?", [id]);
+    
+        // Deletar a vaga em si
         const [result] = await clientDB.query("DELETE FROM vaga WHERE idVaga = ?", [id]);
         if (result.affectedRows === 0) {
           return res.status(404).json({ msg: "Vaga não encontrada." });
         }
-        res.status(200).json({ msg: "Vaga deletada com sucesso!" });
+    
+        res.status(200).json({ msg: "Vaga e candidaturas associadas deletadas com sucesso!" });
       } catch (error) {
         console.error("Erro ao deletar vaga:", error);
         res.status(500).json({ msg: "Erro interno do servidor ao deletar vaga." });
