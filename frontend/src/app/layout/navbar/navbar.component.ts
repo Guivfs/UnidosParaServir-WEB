@@ -38,7 +38,6 @@ export class NavbarComponent implements OnInit {
   }
 
   checkUserRole() {
-    this.role = "guest"
     this.role = this.authenticationService.getRole();
   }
 

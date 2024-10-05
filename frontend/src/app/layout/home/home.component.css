@@ -57,3 +57,39 @@
 .footer {
   padding: 1rem;
 }
+
+.card {
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.card .card-title {
+  font-size: 1.2rem;
+}
+
+.card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.btn-outline-primary {
+  width: 100%;
+}
+
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+}
+.btn-painel:hover{
+  background-color: rgba(74,66,124,1);
+  color: #ffffff;
+}
+.btn-painel{
+  background-color: #ffffff;
+  border: 1px solid rgba(74,66,124,1);
+}
