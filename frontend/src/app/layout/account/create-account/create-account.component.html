@@ -35,7 +35,7 @@
                   <div class="form-text text-danger col-12" *ngIf="isFormControlInvalid('senha')">A senha deve conter pelo menos 6 caracteres.</div>
                 </div>
                 <input type="checkbox" class="form-check-input me-2" [(ngModel)]="aceitouTermos" (change)="aceitouTermos = !aceitouTermos" required name="termos">
-                <span>Eu li e aceito os <a href="/termos-condicoes-dialog" (click)="abrirTermosCondicoes()">Termos e Condições</a>.</span>
+                <span>Eu li e aceito os <a class="link cor-text" style="font-weight: bold; cursor: pointer;" (click)="abrirTermosCondicoes()">Termos e Condições</a>.</span>
                 <div class="mb-4">
                   <button class="btn btn-color form-control alinhar-centro" type="submit">Cadastrar-se</button>
                 </div>

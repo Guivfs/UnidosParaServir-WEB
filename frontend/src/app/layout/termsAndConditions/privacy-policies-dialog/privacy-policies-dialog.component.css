@@ -1,4 +1,9 @@
 /* Estilos básicos para o layout responsivo */
+.dialog-content {
+  max-height: 70vh; /* Ajusta a altura máxima para 70% da altura da janela */
+  overflow-y: auto; /* Habilita a rolagem vertical */
+  padding: 16px; /* Ajuste de padding opcional */
+}
 body {
     font-family: Arial, sans-serif;
     margin: 0;

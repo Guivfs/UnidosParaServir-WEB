@@ -103,7 +103,7 @@
                     <input type="checkbox" class="form-check-input me-2" name="termos" [(ngModel)]="aceitouTermos" (change)="aceitouTermos = !aceitouTermos" />
                     <span class="mb-2">
                       Eu li e aceito os
-                      <a href="/termos-condicoes-dialog" (click)="abrirTermosCondicoes()">Termos e Condições</a>.
+                      <a class="link cor-text" style="font-weight: bold; cursor: pointer;" (click)="abrirTermosCondicoes()">Termos e Condições</a>.
                     </span>
                     <button class="btn btn-color form-control alinhar-centro mt-2" type="submit">Cadastrar-se</button>
                   </div>
@@ -113,7 +113,7 @@
             <div class="mb-4 mt-2 text-end">
               <p>
                 Já tem sua conta?
-                <a href="login" class="cor-text"><b>Entrar em sua conta</b></a>
+                <a href="login" class="link cor-text"><b>Entrar em sua conta</b></a>
               </p>
             </div>
           </div>

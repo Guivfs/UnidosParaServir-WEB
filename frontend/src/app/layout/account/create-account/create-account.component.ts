@@ -57,7 +57,9 @@ export class CreateAccountComponent implements OnInit {
 
   // Método para abrir o diálogo de Termos e Condições
   abrirTermosCondicoes(): void {
-    this.dialog.open(PrivacyPoliciesDialogComponent);
+    const dialogRef = this.dialog.open(PrivacyPoliciesDialogComponent,{
+      width:'800px'
+    });
   }
 
   public isFormControlInvalid(controlName: string): boolean {
