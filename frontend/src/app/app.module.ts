@@ -22,7 +22,6 @@ import { DeleteConfirmationDialogComponent } from './layout/account/details-acco
 import { UpdateAccountComponent } from './layout/account/details-account/dialog/update/update-account/update-account.component';
 import { UpdateConfirmationDialogComponent } from './layout/account/details-acount-company/dialog/update-confirmation-dialog/update-confirmation-dialog.component';
 import { QuemSomosNosComponent } from './layout/navbar/itens-navbar/quem-somos-nos/quem-somos-nos.component';
-import { ParaEmpresasComponent } from './layout/navbar/itens-navbar/para-empresas/para-empresas.component';
 import { VagasUsuarioComponent } from './layout/navbar/itens-navbar/vagas/vagas-usuario/vagas-usuario.component';
 import { VagasEmpresaComponent } from './layout/navbar/itens-navbar/vagas/vagas-empresa/vagas-empresa.component';
 import { NovaVagaDialogComponent } from './layout/navbar/itens-navbar/vagas/vagas-empresa/dialog/nova-vaga-dialog/nova-vaga-dialog.component';
@@ -46,6 +45,10 @@ import { PrivacyPoliciesDialogComponent } from './layout/termsAndConditions/priv
 import { ResultadoPesquisaComponent } from './layout/navbar/itens-navbar/vagas/vagas-usuario/resultado-pesquisa/resultado-pesquisa.component';
 import { NavbarSearchComponent } from './layout/navbar/navbar-search/navbar-search.component';
 import { VisualizacaoIndividualVagaComponent } from './layout/navbar/itens-navbar/vagas/vagas-usuario/resultado-pesquisa/visualizacao-individual-vaga/visualizacao-individual-vaga.component';
+import { PerfilUsuarioDialogComponent } from './layout/navbar/itens-navbar/vagas/vagas-empresa/dialog/candidatura/perfil-usuario-dialog/perfil-usuario-dialog.component';
+import { CandidaturasDialogComponent } from './layout/navbar/itens-navbar/vagas/vagas-empresa/dialog/candidatura/candidaturas-dialog/candidaturas-dialog.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,6 @@ import { VisualizacaoIndividualVagaComponent } from './layout/navbar/itens-navba
     UpdateAccountComponent,
     UpdateConfirmationDialogComponent,
     QuemSomosNosComponent,
-    ParaEmpresasComponent,
     VagasUsuarioComponent,
     VagasEmpresaComponent,
     NovaVagaDialogComponent,
@@ -78,6 +80,8 @@ import { VisualizacaoIndividualVagaComponent } from './layout/navbar/itens-navba
     ResultadoPesquisaComponent,
     NavbarSearchComponent,
     VisualizacaoIndividualVagaComponent,
+    PerfilUsuarioDialogComponent,
+    CandidaturasDialogComponent,
   ],
   imports: [
     MatDatepickerModule,
@@ -97,6 +101,8 @@ import { VisualizacaoIndividualVagaComponent } from './layout/navbar/itens-navba
     MatSelectModule,
     MatOptionModule,
     MatIconModule,
+    MatCardModule,
+    MatDividerModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

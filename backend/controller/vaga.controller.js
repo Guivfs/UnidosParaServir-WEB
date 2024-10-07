@@ -237,28 +237,39 @@
     }
 
     async preencherVaga(req, res) {
-      const { id } = req.params;
-
+      const { id } = req.params; // ID da vaga que será preenchida
+      const { idUsuario } = req.body; // ID do usuário que a empresa escolheu para preencher a vaga
+    
+      // Verificar se o `idUsuario` foi fornecido
+      if (!idUsuario) {
+        return res.status(400).json({ msg: "ID do usuário é obrigatório para preencher a vaga." });
+      }
+    
       try {
-        const token = req.headers.authorization.split(" ")[1];
-        const decodedToken = jwt.verify(token, process.env.SECRET);
-        const idUsuarioLogado = decodedToken.id;
-
+        // Verificar se o idUsuario existe na tabela `usuario`
+        const [usuario] = await clientDB.query("SELECT * FROM usuario WHERE idUsuario = ?", [idUsuario]);
+        if (usuario.length === 0) {
+          return res.status(400).json({ msg: "Usuário não encontrado." });
+        }
+    
+        // Atualizar a vaga com o `idUsuario` e alterar o status para 'preenchida'
         const [result] = await clientDB.query(
           "UPDATE vaga SET idUsuario = ?, statusVaga = 'preenchida' WHERE idVaga = ? AND statusVaga = 'aberta'",
-          [idUsuarioLogado, id]
+          [idUsuario, id]
         );
-
+    
         if (result.affectedRows === 0) {
           return res.status(404).json({ msg: "Vaga não encontrada ou já preenchida." });
         }
-
+    
         res.status(200).json({ msg: "Vaga preenchida com sucesso!" });
       } catch (error) {
         console.error("Erro ao preencher vaga:", error);
         res.status(500).json({ msg: "Erro interno do servidor ao preencher vaga." });
       }
     }
+    
+    
 
     async demitirUsuario(req, res) {
       const { idVaga } = req.params;

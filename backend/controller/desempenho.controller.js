@@ -12,7 +12,7 @@ const clientDB = mysql.createPool({
 });
 
 class DesempenhoController {
-    async obterCandidaturasPorUsuario(req, res) {
+    async obterCandidaturasPorIdUsuario(req, res) {
         const token = req.headers.authorization.split(" ")[1];
         const decodedToken = jwt.verify(token, process.env.SECRET);
         const idUsuarioLogado = decodedToken.id;
@@ -31,6 +31,61 @@ class DesempenhoController {
         } catch (error) {
             console.error("Erro ao obter candidaturas do usuário:", error);
             res.status(500).json({ msg: "Erro interno do servidor ao obter candidaturas." });
+        }
+    }
+
+    async obterCandidaturasPorVaga(req, res) {
+        const { idVaga } = req.params;
+
+        try {
+            const [rows] = await clientDB.query(
+                "SELECT c.idUsuario, u.nomeUsuario, u.emailUsuario FROM candidaturas c INNER JOIN usuario u ON c.idUsuario = u.idUsuario WHERE c.idVaga = ?",
+                [idVaga]
+            );
+
+            if (rows.length < 1) {
+                return res.status(404).json({ msg: "Nenhuma candidatura encontrada para essa vaga." });
+            }
+
+            res.json(rows);
+        } catch (error) {
+            console.error("Erro ao obter candidaturas da vaga:", error);
+            res.status(500).json({ msg: "Erro interno do servidor ao obter candidaturas." });
+        }
+    }
+
+    async obterQuantidadeNovasCandidaturas(req, res) {
+        try {
+            // Verificar se o cabeçalho Authorization está presente
+            const authHeader = req.headers.authorization;
+            if (!authHeader) {
+                return res.status(401).json({ msg: "Token de autenticação não fornecido." });
+            }
+    
+            // Extrair o token do cabeçalho Authorization
+            const token = authHeader.split(" ")[1]; // O token está após "Bearer"
+            if (!token) {
+                return res.status(401).json({ msg: "Formato do token de autenticação inválido." });
+            }
+    
+            // Decodificar o token JWT
+            const decodedToken = jwt.verify(token, process.env.SECRET);
+            const idEmpresaLogado = decodedToken.id;
+    
+            // Consultar a quantidade de candidaturas para vagas dessa empresa
+            const query = `
+                SELECT COUNT(*) AS novasCandidaturas
+                FROM candidaturas c
+                INNER JOIN vaga v ON c.idVaga = v.idVaga
+                WHERE v.idEmpresa = ? AND c.dataCandidatura > NOW() - INTERVAL 1 DAY
+            `;
+            const [rows] = await clientDB.query(query, [idEmpresaLogado]);
+            const quantidadeNovasCandidaturas = rows[0].novasCandidaturas;
+    
+            res.status(200).json({ novasCandidaturas: quantidadeNovasCandidaturas });
+        } catch (error) {
+            console.error("Erro ao obter quantidade de novas candidaturas:", error);
+            res.status(500).json({ msg: "Erro interno do servidor ao obter quantidade de novas candidaturas." });
         }
     }
 

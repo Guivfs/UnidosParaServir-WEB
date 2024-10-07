@@ -9,6 +9,7 @@ import { timeout, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ExcluirVagaDialogComponent } from './dialog/excluir-vaga-dialog/excluir-vaga-dialog.component';
 import { DetalharVagaDialogComponent } from './dialog/detalhar-vaga-dialog/detalhar-vaga-dialog.component';
+import { CandidaturasDialogComponent } from './dialog/candidatura/candidaturas-dialog/candidaturas-dialog.component';
 
 @Component({
   selector: 'app-vagas-empresa',
@@ -105,6 +106,16 @@ export class VagasEmpresaComponent implements OnInit, AfterViewInit {
       if (result) {
         this.buscarVagas(1);
       }
+    });
+  }
+
+  openCandidaturasDialog(vaga: any): void {
+    const dialogRef = this.dialog.open(CandidaturasDialogComponent, {
+      width: '600px',
+      data: { idVaga: vaga.idVaga }
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.buscarVagas(1); // Atualiza a lista de vagas após ver candidaturas
     });
   }
 

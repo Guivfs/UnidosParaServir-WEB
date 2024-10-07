@@ -1,0 +1,16 @@
+<h1 class="text-center" mat-dialog-title>Perfil de {{ usuario?.nomeUsuario }}</h1>
+<div mat-dialog-content class="dialog-content">
+  <mat-card class="usuario-card">
+    <mat-card-title class="text-center" style="color: black;">Informações do Usuário</mat-card-title>
+    <mat-card-content>
+      <p><b>Nome:</b> {{ usuario?.nomeUsuario }}</p>
+      <p><b>Email:</b> {{ usuario?.emailUsuario }}</p>
+      <p><b>Telefone:</b> {{ usuario?.telefoneUsuario }}</p>
+      <p><b>Experiência:</b> {{ usuario?.experienciaUsuario }}</p>
+      <p><b>Educação:</b> {{ usuario?.educacaoUsuario }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button mat-dialog-close>Fechar</button>
+</div>

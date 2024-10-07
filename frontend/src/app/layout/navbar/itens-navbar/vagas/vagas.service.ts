@@ -59,10 +59,10 @@ export class VagasService {
     return this.http.delete<any>(`${this.apiUrl}/apagar/${idVaga}`);
   }
 
-  // Preencher vaga (usuário logado preenche uma vaga)
-  preencherVaga(idVaga: number): Observable<any> {
+  // Ajuste no método preencherVaga para receber um objeto com idUsuario e statusVaga.
+  preencherVaga(idVaga: number, preenchimentoData: { idUsuario: number, statusVaga: string }): Observable<any> {
     const headers = this.createAuthorizationHeader();
-    return this.http.put<any>(`${this.apiUrl}/preencher/${idVaga}`, {}, { headers });
+    return this.http.put<any>(`${this.apiUrl}/preencher/${idVaga}`, preenchimentoData, { headers });
   }
 
   demitirUsuario(idVaga: number): Observable<any> {
@@ -94,5 +94,27 @@ export class VagasService {
     // Enviar o objeto de candidatura para o backend
     console.log("Candidatura do service:", candidatura)
     return this.http.post<any>(`${this.apiUrlStandart}/candidaturas/criar`, candidatura, { headers });
+  }
+
+  obterQuantidadeNovasCandidaturas(): Observable<any> {
+    const headers = this.createAuthorizationHeader(); 
+    return this.http.get(`${this.apiUrlStandart}/candidatura/quantidade-novas-candidaturas`, { headers });
+  }
+
+  // Obter candidaturas por vaga
+  getCandidaturasByVaga(idVaga: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrlStandart}/candidaturas/obter/${idVaga}`);
+  }
+
+  // Registrar visita ao perfil do usuário
+  registrarVisitaPerfil(idUsuario: number): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.post<any>(`${this.apiUrlStandart}/visitas/criar`, { idUsuario }, { headers });
+  }
+
+  // Obter detalhes de um usuário pelo ID
+  getUsuarioById(idUsuario: number): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get<any>(`${this.apiUrlStandart}/buscar-usuario/${idUsuario}`, { headers });
   }
 }

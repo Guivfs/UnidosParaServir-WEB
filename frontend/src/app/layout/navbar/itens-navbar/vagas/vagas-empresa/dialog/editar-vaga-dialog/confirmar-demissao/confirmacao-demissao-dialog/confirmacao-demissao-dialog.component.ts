@@ -13,6 +13,7 @@
     ) {}
 
     confirmar(): void {
+      window.alert("Salve a vaga para demitir o usuário!  ")
       this.dialogRef.close(true);
     }
 

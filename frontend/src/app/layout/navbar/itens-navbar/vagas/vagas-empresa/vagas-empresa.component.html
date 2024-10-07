@@ -43,7 +43,8 @@
               <td>
                 <button type="button" class="btn btn-primary btn-sm me-2" (click)="verDetalhes(vaga)">Ver</button>
                 <button type="button" class="btn btn-warning btn-sm me-2" (click)="editarVaga(vaga)">Editar</button>
-                <button type="button" class="btn btn-danger btn-sm" (click)="excluirVaga(vaga)">Excluir</button>
+                <button type="button" class="btn btn-danger btn-sm me-2" (click)="excluirVaga(vaga)">Excluir</button>
+                <button *ngIf="vaga.statusVaga === 'Aberta'" type="button" class="btn btn-dark btn-sm me-2" (click)="openCandidaturasDialog(vaga)">Candidaturas</button>
               </td>
             </tr>
           </tbody>

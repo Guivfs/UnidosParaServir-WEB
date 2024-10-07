@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Candidaturas</h1>
+<div mat-dialog-content>
+  <div *ngIf="candidaturas.length === 0" class="text-center">
+    <p>Nenhuma candidatura por enquanto! </p>
+  </div>
+
+
+  <div *ngFor="let candidatura of candidaturas" class="candidatura-card">
+    <mat-card class="card-content">
+      <div class="candidatura-info">
+        <h3 style="color: black;">{{ candidatura.nomeUsuario }}</h3>
+      </div>
+
+      <!-- Div com classe "button-group" para agrupar os botões -->
+      <div class="button-group">
+        <button mat-raised-button color="primary" (click)="visualizarPerfil(data.idVaga, candidatura.idUsuario)">
+          Visualizar Perfil
+        </button>
+        <button mat-raised-button color="accent" (click)="preencherVaga(data.idVaga, candidatura.idUsuario)">
+          Preencher Vaga
+        </button>
+      </div>
+
+    </mat-card>
+    <mat-divider>-</mat-divider>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Fechar</button>
+</div>

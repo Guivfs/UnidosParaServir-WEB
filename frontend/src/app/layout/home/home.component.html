@@ -15,8 +15,8 @@
         <div class="card-body text-center">
           <h5 class="card-title text-decoration-underline"><b>Análise das Candidaturas</b></h5>
           <p class="card-text mt-4">Veja quem se candidatou às suas vagas e analise os perfis.</p>
-          <p><b>Novas Candidaturas:</b> 15</p>
-          <a [routerLink]="['/candidaturas']" class="btn btn-painel mt-4">Ver Candidaturas</a>
+          <p><b>Novas Candidaturas:</b> {{quantidadeNovasCandidaturas}}</p>
+          <a href="/vaga-empresa" class="btn btn-painel mt-4">Ver Candidaturas</a>
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
         <div class="card-body text-center">
           <h5 class="card-title text-decoration-underline"><b>Gerenciar Vagas</b></h5>
           <p class="card-text mt-4">Adicione novas vagas ou edite vagas existentes.</p>
-          <a [routerLink]="['/vaga-empresa']" class="btn btn-painel mt-4">Gerenciar</a>
+          <a href="/vaga-empresa" class="btn btn-painel mt-4">Gerenciar</a>
         </div>
       </div>
     </div>
@@ -68,6 +68,41 @@
   <div class="div-off-box mt-5">
     <div class="white-box row">
       <!-- As colunas de vagas em destaque continuam aqui -->
+      <div class="title-box">
+        <h3 class="pb-3 text-decoration-underline"><b>Buscas de Empregos mais populares</b></h3>
+      </div>
+      <!-- Coluna 1 - Vendas -->
+      <div class="col-4">
+        <h4>Vagas em Vendas</h4>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Vendedor' }">Vendedor</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Representante Comercial' }">Representante Comercial</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Consultor de Vendas' }">Consultor de Vendas</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Gerente de Vendas' }">Gerente de Vendas</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Assistente de Vendas' }">Assistente de Vendas</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Promotor de Vendas' }">Promotor de Vendas</a></p>
+      </div>
+  
+      <!-- Vagas em Saúde -->
+      <div class="col-4">
+        <h4>Vagas em Saúde</h4>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Enfermeiro' }">Enfermeiro</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Vigilante' }">Vigilante</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Técnico de Enfermagem' }">Técnico de Enfermagem</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Fisioterapeuta' }">Fisioterapeuta</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Auxiliar de Enfermagem' }">Auxiliar de Enfermagem</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Farmacêutico' }">Farmacêutico</a></p>
+      </div>
+  
+      <!-- Vagas em Tecnologia -->
+      <div class="col-4">
+        <h4>Vagas em Tecnologia</h4>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Analista de TI' }">Analista de TI</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Assistente Comercial' }">Assistente Comercial</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Desenvolvedor Web' }">Desenvolvedor Web</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Suporte Técnico' }">Suporte Técnico</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Engenheiro de Software' }">Engenheiro de Software</a></p>
+        <p><a class="text-decoration text-box" [routerLink]="['/resultados-pesquisa']" [queryParams]="{ search: 'Analista de Dados' }">Analista de Dados</a></p>
+      </div>      
     </div>
   </div>
 </div>
